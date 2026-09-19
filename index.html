@@ -79,7 +79,7 @@ body{
   font-weight:700;
   letter-spacing:1px;
   text-transform:uppercase;
-  color:var(--gold-signal, #C99A12);
+  color:#C99A12;
 }
 .rig-copy h1{
   font-size:19px;
@@ -224,8 +224,10 @@ button{font-family:inherit;}
   padding:16px;
   cursor:pointer;
   min-height:48px;
+  transition:transform .1s ease, filter .1s ease, opacity .15s ease;
 }
-.btn-primary:active{filter:brightness(0.96);}
+.btn-primary:active{transform:scale(0.98); filter:brightness(0.96);}
+.btn-primary:disabled{opacity:0.45; cursor:not-allowed;}
 .btn-ghost{
   width:100%;
   background:none;
@@ -238,8 +240,9 @@ button{font-family:inherit;}
   margin-top:10px;
   cursor:pointer;
   min-height:48px;
+  transition:transform .1s ease, background .1s ease;
 }
-.btn-ghost:active{background:var(--navy-800);}
+.btn-ghost:active{background:var(--navy-800); transform:scale(0.98);}
 
 /* ---------- Logo ---------- */
 .logo-mark{width:100%;height:100%;display:block;}
@@ -324,7 +327,9 @@ button{font-family:inherit;}
   cursor:pointer;
   box-shadow:0 14px 28px -14px rgba(201,154,18,0.5);
   text-align:left;
+  transition:transform .1s ease;
 }
+.cta-btn:active{transform:scale(0.98);}
 .cta-icon{
   width:42px;height:42px;border-radius:13px;
   background:rgba(31,42,68,0.18);
@@ -352,7 +357,9 @@ button{font-family:inherit;}
   border:1px solid var(--navy-700);
   cursor:pointer;
   min-height:48px;
+  transition:transform .1s ease, background .1s ease;
 }
+.quick-card:active{transform:scale(0.97); background:var(--navy-700);}
 .quick-card svg{width:19px;height:19px; stroke:var(--gold-400);}
 .quick-card span{font-size:calc(0.72em); font-weight:700; color:var(--ink-300); text-align:center;}
 
@@ -389,8 +396,14 @@ button{font-family:inherit;}
   padding:0 6.5% 12px;
   flex-shrink:0;
 }
-.progress-dot{flex:1; height:4px; border-radius:2px; background:var(--navy-700);}
+.progress-dot{flex:1; height:4px; border-radius:2px; background:var(--navy-700); transition:background .3s ease;}
 .progress-dot.done{background:var(--gold-400);}
+
+@keyframes stepEnter{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+.step-enter{animation:stepEnter .28s ease;}
 
 .q-card{
   background:var(--navy-800);
@@ -414,9 +427,23 @@ button{font-family:inherit;}
   margin-bottom:9px;
   cursor:pointer;
   min-height:48px;
+  transition:transform .08s ease, background .1s ease, border-color .1s ease;
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
+.opt-btn:active{transform:scale(0.985);}
 .opt-btn:last-child{margin-bottom:0;}
 .opt-btn.selected{border-color:var(--gold-400); background:rgba(201,154,18,0.14); color:var(--gold-400);}
+.opt-icon{
+  width:34px; height:34px; border-radius:10px;
+  background:var(--navy-800);
+  display:flex; align-items:center; justify-content:center;
+  font-size:17px;
+  flex-shrink:0;
+}
+.opt-btn.selected .opt-icon{background:rgba(201,154,18,0.22);}
+.opt-text{flex:1;}
 
 .back-link{
   background:none;border:none;color:var(--ink-500);font-size:calc(0.78em);font-weight:700;
@@ -466,6 +493,7 @@ button{font-family:inherit;}
   flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   margin-top:1px;
+  transition:background .15s ease, border-color .15s ease;
 }
 .check-item.checked .check-box{background:var(--gold-400); border-color:var(--gold-400);}
 .check-item.checked .check-box svg{width:13px;height:13px; stroke:#1F2A44;}
@@ -527,7 +555,9 @@ button{font-family:inherit;}
   display:flex; align-items:center; justify-content:center; gap:8px;
   cursor:pointer;
   min-height:48px;
+  transition:transform .1s ease;
 }
+.wa-btn:active{transform:scale(0.98);}
 .wa-btn svg{width:16px;height:16px; stroke:#04210F;}
 
 .info-card{
@@ -567,6 +597,153 @@ button{font-family:inherit;}
 }
 .toast.show{opacity:1; transform:translateY(0);}
 
+/* ---------- Contrato (gerar procuração + assinatura) ---------- */
+.contract-topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 6.5% 6px;
+  flex-shrink:0;
+}
+.cancel-link{
+  background:none;border:none;color:var(--ink-500);font-size:calc(0.78em);font-weight:700;
+  cursor:pointer; padding:4px 0;
+}
+.form-field{margin-bottom:12px;}
+.form-label{display:block; font-size:calc(0.78em); font-weight:700; color:var(--ink-300); margin-bottom:6px;}
+.form-input, .form-textarea{
+  width:100%;
+  background:var(--navy-900);
+  border:1.5px solid var(--navy-700);
+  border-radius:12px;
+  padding:12px 14px;
+  color:var(--ink-050);
+  font-size:calc(0.9em);
+  font-family:inherit;
+}
+.form-input:focus, .form-textarea:focus{border-color:var(--gold-400); outline:none;}
+.form-textarea{resize:vertical; min-height:72px;}
+.form-hint{font-size:calc(0.7em); color:var(--ink-500); margin-top:4px;}
+
+.doc-choice-btn{
+  width:100%;
+  background:var(--navy-800);
+  border:1.5px solid var(--navy-700);
+  border-radius:14px;
+  padding:14px 15px;
+  color:var(--ink-050);
+  text-align:left;
+  cursor:pointer;
+  margin-bottom:10px;
+  min-height:48px;
+  transition:border-color .1s ease, background .1s ease;
+}
+.doc-choice-btn.selected{border-color:var(--gold-400); background:rgba(201,154,18,0.12);}
+.doc-choice-title{font-size:calc(0.88em); font-weight:700; margin-bottom:2px;}
+.doc-choice-sub{font-size:calc(0.72em); color:var(--ink-500);}
+
+.file-input-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--navy-700);
+  border:1.5px dashed var(--navy-600);
+  border-radius:12px;
+  padding:11px 14px;
+  color:var(--ink-050);
+  font-weight:700;
+  font-size:calc(0.82em);
+  cursor:pointer;
+  margin-top:8px;
+}
+.file-list{margin-top:10px; display:flex; flex-direction:column; gap:6px;}
+.file-chip{
+  display:flex; align-items:center; gap:8px;
+  background:var(--navy-900);
+  border:1px solid var(--navy-700);
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:calc(0.76em);
+  color:var(--ink-300);
+}
+.file-chip svg{width:14px;height:14px; stroke:var(--gold-400); flex-shrink:0;}
+
+.review-card{
+  background:var(--navy-800);
+  border:1px solid var(--navy-700);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:14px;
+}
+.review-row{display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-bottom:1px solid var(--navy-700); font-size:calc(0.8em);}
+.review-row:last-child{border-bottom:none;}
+.review-label{color:var(--ink-500); font-weight:700;}
+.review-value{color:var(--ink-050); font-weight:700; text-align:right;}
+
+.contract-text{
+  background:var(--navy-900);
+  border:1px solid var(--navy-700);
+  border-radius:14px;
+  padding:14px;
+  max-height:130px;
+  overflow-y:auto;
+  font-size:calc(0.76em);
+  color:var(--ink-300);
+  line-height:1.55;
+  margin-bottom:12px;
+}
+.contract-text p{margin:0 0 8px;}
+.contract-text p:last-child{margin-bottom:0;}
+
+.agree-row{
+  display:flex; align-items:flex-start; gap:10px;
+  padding:10px 0;
+  cursor:pointer;
+}
+.agree-box{
+  width:22px;height:22px;border-radius:6px;
+  border:1.5px solid var(--navy-600);
+  flex-shrink:0; margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+}
+.agree-row.checked .agree-box{background:var(--gold-400); border-color:var(--gold-400);}
+.agree-row.checked .agree-box svg{width:13px;height:13px;stroke:#1F2A44;}
+.agree-text{font-size:calc(0.8em); color:var(--ink-300); line-height:1.4;}
+
+.sig-label-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+.sig-wrap{
+  background:#F8FAFC;
+  border-radius:14px;
+  border:1.5px solid var(--navy-700);
+  overflow:hidden;
+  touch-action:none;
+}
+.sig-wrap canvas{width:100%; height:120px; display:block;}
+.sig-clear{background:none;border:none;color:var(--gold-400); font-size:calc(0.76em); font-weight:700; cursor:pointer; padding:0;}
+
+.success-wrap{
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:8% 9%;
+}
+.success-icon{
+  width:76px; height:76px; border-radius:50%;
+  background:rgba(34,197,94,0.16);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:18px;
+}
+.success-icon svg{width:38px;height:38px; stroke:var(--green-500);}
+.success-wrap h2{font-size:calc(1.25em); font-weight:700; color:var(--ink-050); margin-bottom:8px;}
+.success-wrap p{font-size:calc(0.88em); color:var(--ink-300); line-height:1.5; max-width:270px; margin-bottom:6px;}
+.protocol-badge{
+  display:inline-block;
+  background:var(--navy-800);
+  border:1px solid var(--navy-700);
+  color:var(--gold-400);
+  font-weight:700;
+  font-size:calc(0.8em);
+  padding:6px 14px;
+  border-radius:10px;
+  margin:10px 0 20px;
+  font-variant-numeric:tabular-nums;
+}
+.success-actions{width:100%; max-width:280px;}
+
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important; animation:none !important;}
 }
@@ -595,7 +772,7 @@ button{font-family:inherit;}
   <div class="rig-copy">
     <div class="eyebrow">Protótipo funcional</div>
     <h1>Direito Certo</h1>
-    <p>Núcleo de Orientação Previdenciária Popular. Toque nas abas e nos botões abaixo — o guia, o checklist e a navegação já funcionam de ponta a ponta neste arquivo.</p>
+    <p>Núcleo de Orientação Previdenciária Popular. Toque nas abas e nos botões abaixo — o guia, o checklist, a geração de contrato e a navegação já funcionam de ponta a ponta neste arquivo.</p>
   </div>
 
   <div class="phone-wrap">
@@ -766,7 +943,8 @@ button{font-family:inherit;}
             </div>
 
             <div class="footer-btn-zone">
-              <button class="btn-primary" onclick="DC.goTo('whatsapp')">Levar esta lista ao atendimento</button>
+              <button class="btn-primary" onclick="DC.startContract()">Quero gerar contrato para me representar</button>
+              <button class="btn-ghost" onclick="DC.goTo('whatsapp')">Levar esta lista ao atendimento</button>
               <button class="reset-link" onclick="DC.restartFromChecklist()">Refazer o guia de triagem</button>
             </div>
           </div>
@@ -828,6 +1006,22 @@ button{font-family:inherit;}
           </div>
         </div>
 
+        <!-- ===================== CONTRATO (gerar procuração + assinatura) ===================== -->
+        <div class="view" id="view-contract">
+          <div class="status-bar"><span>9:45</span>
+            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
+              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
+              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
+            </div>
+          </div>
+          <div class="contract-topbar">
+            <h1 class="page-title" style="margin:0;">Gerar contrato</h1>
+            <button class="cancel-link" onclick="DC.cancelContract()">Cancelar</button>
+          </div>
+          <div class="progress-track" id="contract-progress"></div>
+          <div class="content" id="contract-body" style="padding-top:0;"></div>
+        </div>
+
         <div class="toast" id="toast"></div>
       </div>
     </div>
@@ -845,11 +1039,17 @@ button{font-family:inherit;}
     seen: "dc_seen_onboarding",
     fontScale: "dc_font_scale",
     category: "dc_category",
-    checklistPrefix: "dc_checklist_"
+    checklistPrefix: "dc_checklist_",
+    contractDraft: "dc_contract_draft"
   };
 
   function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
   function safeSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
 
   /* ---------------- Categorias e checklists (dados reais do fluxo previdenciário) ---------------- */
   var CATEGORIES = {
@@ -923,6 +1123,19 @@ button{font-family:inherit;}
         {id:"senha_gov", label:"Senha do GOV"}
       ]
     },
+    salario_maternidade: {
+      title: "Salário-Maternidade",
+      body: "Pelas suas respostas, você pode ter direito ao salário-maternidade. O valor e o prazo dependem do seu tipo de contribuição — a confirmação final é sempre do INSS.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"certidao_crianca", label:"Certidão de nascimento da criança", note:"Ou termo de guarda/adoção, se for o caso"},
+        {id:"ctps", label:"CTPS completa"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"carne", label:"Carnê de contribuição", note:"Se você é MEI, autônoma ou contribuinte individual"},
+        {id:"notas_produtor", label:"Notas de produtor rural", note:"Se você trabalha na área rural"},
+        {id:"senha_gov", label:"Senha do GOV"}
+      ]
+    },
     generico: {
       title: "Vamos te orientar com calma",
       body: "Seu caso tem detalhes que um formulário simples não resolve sozinho. Nossa equipe consegue te ouvir e apontar o caminho certo.",
@@ -934,6 +1147,16 @@ button{font-family:inherit;}
     }
   };
 
+  var RESULT_ICONS = {
+    aposentadoria_urbana: '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+    aposentadoria_rural: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+    bpc_loas: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>',
+    auxilio_doenca: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>',
+    pensao_morte: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    salario_maternidade: '<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5"/><line x1="9" y1="9.5" x2="9" y2="9.51"/><line x1="15" y1="9.5" x2="15" y2="9.51"/>',
+    generico: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+  };
+
   /* ---------------- Árvore de decisão da triagem ---------------- */
   // Cada nó: pergunta + opções. Cada opção leva a outro nó (next) ou fecha com uma categoria (result).
   var TREE = {
@@ -941,10 +1164,11 @@ button{font-family:inherit;}
       label: "PERGUNTA 1",
       title: "O que te trouxe até aqui?",
       options: [
-        {text:"Estou ficando mais velho(a) e quero saber se posso me aposentar", set:{motivo:"idade"}, next:"idade_area"},
-        {text:"Tive uma doença ou acidente que me impede de trabalhar", set:{motivo:"saude"}, next:"saude_acidente"},
-        {text:"Um familiar que nos sustentava faleceu", set:{motivo:"obito"}, next:"obito_parentesco"},
-        {text:"Não sei bem, quero conversar com alguém", result:"generico"}
+        {icon:"👴", text:"Estou ficando mais velho(a) e quero saber se posso me aposentar", set:{motivo:"idade"}, next:"idade_area"},
+        {icon:"🩺", text:"Tive uma doença ou acidente que me impede de trabalhar", set:{motivo:"saude"}, next:"saude_acidente"},
+        {icon:"👪", text:"Um familiar que nos sustentava faleceu", set:{motivo:"obito"}, next:"obito_parentesco"},
+        {icon:"👶", text:"Tive ou vou ter um bebê e quero saber meus direitos", set:{motivo:"maternidade"}, next:"maternidade_situacao"},
+        {icon:"💬", text:"Não sei bem, quero conversar com alguém", result:"generico"}
       ]
     },
     idade_area: {
@@ -979,7 +1203,6 @@ button{font-family:inherit;}
           if(a.faixa === "menos55"){ return "generico"; }
           return "aposentadoria_rural";
         }
-        // urbano
         if(a.faixa === "65mais"){
           return a.contrib === "nunca" ? "bpc_loas" : "aposentadoria_urbana";
         }
@@ -1033,6 +1256,16 @@ button{font-family:inherit;}
         {text:"Não sei dizer", set:{contribuia:"talvez"}, result:"pensao_morte"},
         {text:"Não, nunca contribuiu", set:{contribuia:"nao"}, result:"generico"}
       ]
+    },
+    maternidade_situacao: {
+      label: "PERGUNTA 2",
+      title: "Qual é a sua situação de trabalho?",
+      options: [
+        {text:"Trabalho com carteira assinada (CLT)", set:{mat:"clt"}, result:"salario_maternidade"},
+        {text:"Sou MEI, autônoma ou contribuinte individual", set:{mat:"individual"}, result:"salario_maternidade"},
+        {text:"Trabalho na área rural", set:{mat:"rural"}, result:"salario_maternidade"},
+        {text:"Não trabalho e nunca contribuí", set:{mat:"nenhum"}, result:"generico"}
+      ]
     }
   };
 
@@ -1041,7 +1274,12 @@ button{font-family:inherit;}
     view: "onboard",
     guideNode: "start",
     guideAnswers: {},
-    guideHistory: []
+    guideHistory: [],
+    contract: {
+      step: 0,
+      data: { nome:"", cpf:"", telefone:"", nascimento:"", dataOcorrido:"", resumo:"", docModo:"", arquivos:[], concordo:false },
+      sigHasStroke:false
+    }
   };
 
   var els = {};
@@ -1063,6 +1301,8 @@ button{font-family:inherit;}
     els.toast = qs("toast");
     els.waOpenBtn = qs("wa-open-btn");
     els.clock = qs("clock");
+    els.contractBody = qs("contract-body");
+    els.contractProgress = qs("contract-progress");
 
     var savedScale = parseFloat(safeGet(LS.fontScale) || "1");
     applyFontScale(savedScale);
@@ -1104,6 +1344,7 @@ button{font-family:inherit;}
     if(name){
       els.homeGreeting.textContent = name;
       els.homeAvatar.textContent = name.trim().charAt(0).toUpperCase();
+      els.homeAvatar.style.fontSize = "";
     } else {
       els.homeGreeting.textContent = "tudo bem?";
       els.homeAvatar.textContent = "😊";
@@ -1173,7 +1414,6 @@ button{font-family:inherit;}
   function renderGuideNode(){
     var node = TREE[state.guideNode];
 
-    // Resolve nodes with compute() straight to a result
     if(node.compute){
       var cat = node.compute(state.guideAnswers);
       showGuideResult(cat);
@@ -1183,12 +1423,14 @@ button{font-family:inherit;}
     els.guideBack.style.display = state.guideHistory.length > 0 ? "flex" : "none";
     renderProgress(state.guideHistory.length);
 
-    var html = '<div class="q-card">' +
+    var html = '<div class="q-card step-enter">' +
       '<div class="q-label">' + node.label + '</div>' +
       '<div class="q-title">' + node.title + '</div>';
 
     node.options.forEach(function(opt, i){
-      html += '<button class="opt-btn" data-idx="' + i + '">' + opt.text + '</button>';
+      html += '<button class="opt-btn' + (opt.icon ? '' : '') + '" data-idx="' + i + '">' +
+        (opt.icon ? '<span class="opt-icon">' + opt.icon + '</span>' : '') +
+        '<span class="opt-text">' + opt.text + '</span></button>';
     });
     html += '</div>';
     els.guideBody.innerHTML = html;
@@ -1219,21 +1461,19 @@ button{font-family:inherit;}
     renderProgress(totalStepsEstimate());
     els.guideBack.style.display = "none";
 
-    var isGeneric = catKey === "generico";
-    var html = '<div class="result-card">' +
-      '<div class="result-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-      (isGeneric
-        ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
-        : '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>') +
-      '</svg></div>' +
+    var iconPath = RESULT_ICONS[catKey] || RESULT_ICONS.generico;
+    var html = '<div class="result-card step-enter">' +
+      '<div class="result-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + iconPath + '</svg></div>' +
       '<div class="result-label">RESULTADO PROVÁVEL</div>' +
       '<div class="result-title">' + cat.title + '</div>' +
       '<div class="result-body">' + cat.body + '</div>' +
       '<button class="btn-primary" id="btn-ver-checklist">Ver checklist de documentos</button>' +
+      '<button class="btn-ghost" id="btn-gerar-contrato">Quero gerar contrato para me representar</button>' +
       '<button class="btn-ghost" onclick="DC.goTo(\'whatsapp\')">Falar com um atendente</button>' +
       '</div>';
     els.guideBody.innerHTML = html;
     qs("btn-ver-checklist").addEventListener("click", function(){ goTo("checklist"); });
+    qs("btn-gerar-contrato").addEventListener("click", function(){ startContract(); });
   }
 
   /* ---------------- Checklist ---------------- */
@@ -1291,10 +1531,312 @@ button{font-family:inherit;}
   }
 
   /* ---------------- WhatsApp ---------------- */
-  function openWhatsApp(){
+  function currentCategory(){
     var catKey = safeGet(LS.category);
-    var cat = catKey ? CATEGORIES[catKey] : null;
+    return catKey ? CATEGORIES[catKey] : null;
+  }
+
+  function openWhatsApp(){
+    var cat = currentCategory();
     var msg = "Olá! Estou usando o app Direito Certo" + (cat ? (" e meu caso provável é: " + cat.title) : "") + ".";
+    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+    window.open(url, "_blank", "noopener");
+  }
+
+  /* ---------------- Contrato: dados básicos, caso, documentos, revisão e assinatura ---------------- */
+  var CONTRACT_TOTAL_STEPS = 4;
+
+  function startContract(){
+    state.contract.step = 0;
+    goTo("contract");
+    renderContractStep();
+  }
+
+  function cancelContract(){
+    goTo(safeGet(LS.category) ? "checklist" : "home");
+  }
+
+  function renderContractProgress(){
+    els.contractProgress.innerHTML = "";
+    for(var i=0;i<CONTRACT_TOTAL_STEPS;i++){
+      var dot = document.createElement("div");
+      dot.className = "progress-dot" + (i < state.contract.step ? " done" : "");
+      els.contractProgress.appendChild(dot);
+    }
+  }
+
+  function contractGoStep(delta){
+    state.contract.step += delta;
+    renderContractStep();
+  }
+
+  function renderContractStep(){
+    renderContractProgress();
+    var d = state.contract.data;
+    var step = state.contract.step;
+
+    if(step === 0){ renderContractPessoal(d); return; }
+    if(step === 1){ renderContractCaso(d); return; }
+    if(step === 2){ renderContractDocumentos(d); return; }
+    if(step === 3){ renderContractRevisao(d); return; }
+    renderContractSucesso(d);
+  }
+
+  function renderContractPessoal(d){
+    els.contractBody.innerHTML =
+      '<p class="page-sub">Passo 1 de 4 — seus dados básicos.</p>' +
+      '<div class="q-card step-enter">' +
+        '<div class="form-field"><label class="form-label" for="c-nome">Nome completo</label>' +
+          '<input class="form-input" id="c-nome" type="text" placeholder="Seu nome completo" value="' + esc(d.nome) + '"></div>' +
+        '<div class="form-field"><label class="form-label" for="c-cpf">CPF</label>' +
+          '<input class="form-input" id="c-cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" value="' + esc(d.cpf) + '"></div>' +
+        '<div class="form-field"><label class="form-label" for="c-tel">Telefone / WhatsApp</label>' +
+          '<input class="form-input" id="c-tel" type="tel" placeholder="(00) 00000-0000" value="' + esc(d.telefone) + '"></div>' +
+        '<div class="form-field"><label class="form-label" for="c-nasc">Data de nascimento (opcional)</label>' +
+          '<input class="form-input" id="c-nasc" type="date" value="' + esc(d.nascimento) + '"></div>' +
+      '</div>' +
+      '<button class="btn-primary" id="c-continuar">Continuar</button>';
+
+    qs("c-continuar").addEventListener("click", function(){
+      d.nome = qs("c-nome").value.trim();
+      d.cpf = qs("c-cpf").value.trim();
+      d.telefone = qs("c-tel").value.trim();
+      d.nascimento = qs("c-nasc").value;
+      if(!d.nome || !d.telefone){
+        showToast("Preencha ao menos nome e telefone para continuar.");
+        return;
+      }
+      contractGoStep(1);
+    });
+  }
+
+  function renderContractCaso(d){
+    var cat = currentCategory();
+    els.contractBody.innerHTML =
+      '<p class="page-sub">Passo 2 de 4 — sobre o seu caso.</p>' +
+      '<div class="q-card step-enter">' +
+        (cat
+          ? '<div class="category-pill">' + esc(cat.title) + '</div>'
+          : '<div class="form-hint" style="margin-bottom:10px;">Você ainda não fez o guia de triagem — sem problema, nossa equipe identifica com você.</div>') +
+        '<div class="form-field"><label class="form-label" for="c-data-ocorrido">Data aproximada do ocorrido (opcional)</label>' +
+          '<input class="form-input" id="c-data-ocorrido" type="date" value="' + esc(d.dataOcorrido) + '"></div>' +
+        '<div class="form-field"><label class="form-label" for="c-resumo">Conte rapidamente o que aconteceu (opcional)</label>' +
+          '<textarea class="form-textarea" id="c-resumo" placeholder="Ex: sofri um acidente de trabalho em...">' + esc(d.resumo) + '</textarea></div>' +
+      '</div>' +
+      '<button class="back-link" style="padding-left:0;" id="c-voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Voltar</button>' +
+      '<button class="btn-primary" id="c-continuar">Continuar</button>';
+
+    qs("c-voltar").addEventListener("click", function(){ contractGoStep(-1); });
+    qs("c-continuar").addEventListener("click", function(){
+      d.dataOcorrido = qs("c-data-ocorrido").value;
+      d.resumo = qs("c-resumo").value.trim();
+      contractGoStep(1);
+    });
+  }
+
+  function renderContractDocumentos(d){
+    els.contractBody.innerHTML =
+      '<p class="page-sub">Passo 3 de 4 — seus documentos.</p>' +
+      '<button class="doc-choice-btn' + (d.docModo === "agora" ? " selected" : "") + '" id="c-doc-agora">' +
+        '<div class="doc-choice-title">Enviar meus documentos agora</div>' +
+        '<div class="doc-choice-sub">Escolha os arquivos do seu aparelho</div></button>' +
+      '<button class="doc-choice-btn' + (d.docModo === "depois" ? " selected" : "") + '" id="c-doc-depois">' +
+        '<div class="doc-choice-title">Prefiro enviar depois pelo WhatsApp</div>' +
+        '<div class="doc-choice-sub">A equipe te ajuda a reunir tudo com calma</div></button>' +
+      '<div id="c-file-zone" style="display:' + (d.docModo === "agora" ? "block" : "none") + ';">' +
+        '<label class="file-input-btn" for="c-file-input">' +
+          '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' +
+          'Escolher arquivos</label>' +
+        '<input type="file" id="c-file-input" multiple style="display:none;">' +
+        '<div class="file-list" id="c-file-list"></div>' +
+        '<div class="form-hint">Esses arquivos ficam só no seu aparelho — no próximo passo você os anexa direto na conversa do WhatsApp.</div>' +
+      '</div>' +
+      '<button class="back-link" style="padding-left:0; margin-top:10px;" id="c-voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Voltar</button>' +
+      '<button class="btn-primary" id="c-continuar">Continuar</button>';
+
+    function renderFileList(){
+      var list = qs("c-file-list");
+      list.innerHTML = "";
+      d.arquivos.forEach(function(name){
+        var chip = document.createElement("div");
+        chip.className = "file-chip";
+        chip.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>' + esc(name) + '</span>';
+        list.appendChild(chip);
+      });
+    }
+    renderFileList();
+
+    qs("c-doc-agora").addEventListener("click", function(){
+      d.docModo = "agora";
+      renderContractDocumentos(d);
+    });
+    qs("c-doc-depois").addEventListener("click", function(){
+      d.docModo = "depois";
+      d.arquivos = [];
+      renderContractDocumentos(d);
+    });
+    var fileInput = qs("c-file-input");
+    if(fileInput){
+      fileInput.addEventListener("change", function(e){
+        var names = Array.prototype.map.call(e.target.files, function(f){ return f.name; });
+        d.arquivos = names;
+        renderFileList();
+      });
+    }
+    qs("c-voltar").addEventListener("click", function(){ contractGoStep(-1); });
+    qs("c-continuar").addEventListener("click", function(){
+      if(!d.docModo){
+        showToast("Escolha uma das opções de documentos para continuar.");
+        return;
+      }
+      contractGoStep(1);
+    });
+  }
+
+  var sigCanvas, sigCtx, sigDrawing = false;
+
+  function renderContractRevisao(d){
+    var cat = currentCategory();
+    els.contractBody.innerHTML =
+      '<p class="page-sub">Passo 4 de 4 — revise e assine.</p>' +
+      '<div class="review-card step-enter">' +
+        '<div class="review-row"><span class="review-label">Nome</span><span class="review-value">' + esc(d.nome) + '</span></div>' +
+        '<div class="review-row"><span class="review-label">CPF</span><span class="review-value">' + esc(d.cpf || "—") + '</span></div>' +
+        '<div class="review-row"><span class="review-label">Telefone</span><span class="review-value">' + esc(d.telefone) + '</span></div>' +
+        '<div class="review-row"><span class="review-label">Caso</span><span class="review-value">' + esc(cat ? cat.title : "A definir com a equipe") + '</span></div>' +
+        '<div class="review-row"><span class="review-label">Documentos</span><span class="review-value">' + (d.docModo === "agora" ? (d.arquivos.length + " arquivo(s) selecionado(s)") : "Enviarei pelo WhatsApp") + '</span></div>' +
+      '</div>' +
+      '<div class="contract-text">' +
+        '<p><strong>Procuração e autorização de representação — Direito Certo</strong></p>' +
+        '<p>Pelo presente instrumento, o(a) requerente acima identificado(a) autoriza a equipe do Direito Certo / ReVive Assessoria a analisar seu caso previdenciário, reunir a documentação necessária e representá-lo(a) junto ao INSS e órgãos correlatos, conforme os termos que serão confirmados no atendimento humano.</p>' +
+        '<p>Esta assinatura eletrônica é um registro de intenção coletado neste protótipo. A formalização definitiva do contrato acontece com a equipe, pelo WhatsApp ou presencialmente.</p>' +
+      '</div>' +
+      '<div class="agree-row" id="c-agree" role="checkbox" aria-checked="' + (d.concordo ? "true" : "false") + '" tabindex="0">' +
+        '<div class="agree-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+        '<div class="agree-text">Li e estou de acordo com os termos acima.</div>' +
+      '</div>' +
+      '<div class="sig-label-row"><label class="form-label" style="margin:0;">Assine com o dedo ou o mouse</label><button class="sig-clear" id="c-sig-clear">Limpar</button></div>' +
+      '<div class="sig-wrap"><canvas id="c-sig-canvas"></canvas></div>' +
+      '<button class="back-link" style="padding-left:0; margin-top:10px;" id="c-voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Voltar</button>' +
+      '<button class="btn-primary" id="c-assinar">Assinar e enviar</button>';
+
+    var agreeRow = qs("c-agree");
+    function toggleAgree(){
+      d.concordo = !d.concordo;
+      agreeRow.classList.toggle("checked", d.concordo);
+      agreeRow.setAttribute("aria-checked", d.concordo ? "true" : "false");
+    }
+    if(d.concordo){ agreeRow.classList.add("checked"); }
+    agreeRow.addEventListener("click", toggleAgree);
+    agreeRow.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggleAgree(); } });
+
+    setupSignaturePad();
+    qs("c-sig-clear").addEventListener("click", clearSignature);
+    qs("c-voltar").addEventListener("click", function(){ contractGoStep(-1); });
+    qs("c-assinar").addEventListener("click", function(){
+      if(!d.concordo){ showToast("Marque que você concorda com os termos."); return; }
+      if(!state.contract.sigHasStroke){ showToast("Falta assinar no campo acima."); return; }
+      contractGoStep(1);
+    });
+  }
+
+  function setupSignaturePad(){
+    sigCanvas = qs("c-sig-canvas");
+    state.contract.sigHasStroke = false;
+    var wrap = sigCanvas.parentElement;
+    function resize(){
+      var rect = wrap.getBoundingClientRect();
+      var ratio = window.devicePixelRatio || 1;
+      sigCanvas.width = rect.width * ratio;
+      sigCanvas.height = 120 * ratio;
+      sigCtx = sigCanvas.getContext("2d");
+      sigCtx.scale(ratio, ratio);
+      sigCtx.lineWidth = 2.4;
+      sigCtx.lineCap = "round";
+      sigCtx.strokeStyle = "#1F2A44";
+    }
+    resize();
+
+    function pos(e){
+      var rect = sigCanvas.getBoundingClientRect();
+      var p = e.touches ? e.touches[0] : e;
+      return { x: p.clientX - rect.left, y: p.clientY - rect.top };
+    }
+    function start(e){
+      sigDrawing = true;
+      state.contract.sigHasStroke = true;
+      var p = pos(e);
+      sigCtx.beginPath();
+      sigCtx.moveTo(p.x, p.y);
+      e.preventDefault();
+    }
+    function move(e){
+      if(!sigDrawing){ return; }
+      var p = pos(e);
+      sigCtx.lineTo(p.x, p.y);
+      sigCtx.stroke();
+      e.preventDefault();
+    }
+    function end(){ sigDrawing = false; }
+
+    sigCanvas.addEventListener("mousedown", start);
+    sigCanvas.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", end);
+    sigCanvas.addEventListener("touchstart", start, {passive:false});
+    sigCanvas.addEventListener("touchmove", move, {passive:false});
+    sigCanvas.addEventListener("touchend", end);
+  }
+
+  function clearSignature(){
+    if(!sigCtx){ return; }
+    sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+    state.contract.sigHasStroke = false;
+  }
+
+  function generateProtocol(){
+    var n = Math.floor(100000 + Math.random()*899999);
+    return "DC-" + n;
+  }
+
+  function renderContractSucesso(d){
+    var protocol = generateProtocol();
+    safeSet(LS.contractDraft, JSON.stringify({ data:d, protocol: protocol, quando: new Date().toISOString() }));
+
+    els.contractBody.innerHTML =
+      '<div class="success-wrap step-enter">' +
+        '<div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+        '<h2>Deu certo! Contrato assinado.</h2>' +
+        '<p>Nossa equipe vai analisar seu caso e entrar em contato pelo WhatsApp em breve.</p>' +
+        '<div class="protocol-badge">Protocolo ' + protocol + '</div>' +
+        '<div class="success-actions">' +
+          '<button class="btn-primary" id="c-abrir-whatsapp">Abrir WhatsApp com meus dados</button>' +
+          '<button class="btn-ghost" id="c-voltar-inicio">Voltar ao início</button>' +
+        '</div>' +
+      '</div>';
+
+    qs("c-abrir-whatsapp").addEventListener("click", function(){
+      openContractWhatsApp(d, protocol);
+    });
+    qs("c-voltar-inicio").addEventListener("click", function(){
+      state.contract = { step:0, data:{ nome:"", cpf:"", telefone:"", nascimento:"", dataOcorrido:"", resumo:"", docModo:"", arquivos:[], concordo:false }, sigHasStroke:false };
+      goTo("home");
+    });
+  }
+
+  function openContractWhatsApp(d, protocol){
+    var cat = currentCategory();
+    var lines = [
+      "Olá! Assinei o contrato de representação pelo app Direito Certo.",
+      "Protocolo: " + protocol,
+      "Nome: " + d.nome,
+      d.cpf ? ("CPF: " + d.cpf) : null,
+      "Telefone: " + d.telefone,
+      cat ? ("Caso provável: " + cat.title) : null,
+      d.dataOcorrido ? ("Data do ocorrido: " + d.dataOcorrido) : null,
+      d.resumo ? ("Resumo: " + d.resumo) : null,
+      d.docModo === "agora" ? ("Vou anexar aqui " + d.arquivos.length + " documento(s).") : "Vou enviar meus documentos nesta conversa."
+    ].filter(Boolean);
+    var msg = lines.join("\n");
     var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
     window.open(url, "_blank", "noopener");
   }
@@ -1306,7 +1848,9 @@ button{font-family:inherit;}
     guideBack: guideBack,
     restartFromChecklist: restartFromChecklist,
     showToast: showToast,
-    changeFontScale: changeFontScale
+    changeFontScale: changeFontScale,
+    startContract: startContract,
+    cancelContract: cancelContract
   };
 
   if(document.readyState === "loading"){
@@ -1315,7 +1859,6 @@ button{font-family:inherit;}
     init();
   }
 
-  /* Keep state across silent hot-reloads in the artifact host, when available */
   try{
     if(window.claude && window.claude.hot){
       window.claude.hot.snapshot(function(){ return {}; });
