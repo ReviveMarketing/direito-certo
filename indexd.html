@@ -1,0 +1,1293 @@
+<title>Direito Certo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root{
+  --page-bg:#EEF0F5;
+  --page-ink:#1F2A44;
+  --page-ink-soft:#5B6580;
+  --rig-border:#D7DCE7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page-bg:#0B0E16;
+    --page-ink:#E7EAF0;
+    --page-ink-soft:#8890A6;
+    --rig-border:#232A3D;
+  }
+}
+:root[data-theme="dark"]{
+  --page-bg:#0B0E16;
+  --page-ink:#E7EAF0;
+  --page-ink-soft:#8890A6;
+  --rig-border:#232A3D;
+}
+
+/* ---- fixed brand palette for the phone UI itself (intentionally single dark theme, per accessibility brief) ---- */
+.phone-wrap{
+  --navy-950:#0B0F1A;
+  --navy-900:#141A2B;
+  --navy-800:#1B2338;
+  --navy-700:#232D48;
+  --navy-600:#2A3557;
+  --gold-500:#C99A12;
+  --gold-400:#E0B62B;
+  --green-500:#22C55E;
+  --red-500:#EF4444;
+  --ink-050:#F8FAFC;
+  --ink-300:#B9C0D4;
+  --ink-500:#7B8399;
+  --fs-scale:1;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  background:var(--page-bg);
+  color:var(--page-ink);
+  font-family:'Atkinson Hyperlegible', Arial, sans-serif;
+}
+
+.stage{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  padding-block:32px 56px;
+}
+
+.rig-copy{
+  max-width:380px;
+  text-align:center;
+  padding:0 16px;
+}
+.rig-copy .eyebrow{
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--gold-signal, #C99A12);
+}
+.rig-copy h1{
+  font-size:19px;
+  margin:6px 0 4px;
+  font-weight:700;
+}
+.rig-copy p{
+  font-size:13px;
+  line-height:1.5;
+  color:var(--page-ink-soft);
+}
+
+/* ---------- Phone frame ---------- */
+.phone-wrap{
+  position:relative;
+}
+.phone{
+  width:min(375px, calc(100vw - 32px));
+  height:min(812px, calc(100vw - 32px) * 2.1653);
+  background:var(--navy-950);
+  border-radius:9%;
+  padding:3.2%;
+  box-shadow:0 30px 60px -20px rgba(15,23,42,0.35), 0 0 0 2px var(--rig-border);
+}
+.screen{
+  width:100%;
+  height:100%;
+  background:var(--navy-900);
+  border-radius:7.2%;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  font-size:calc(15px * var(--fs-scale));
+}
+.notch{
+  position:absolute;
+  top:2.5%; left:50%; transform:translateX(-50%);
+  width:30%; height:2.6%;
+  background:var(--navy-950);
+  border-radius:0 0 14px 14px;
+  z-index:20;
+}
+.status-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:4.2% 7% 1%;
+  font-size:12px;
+  font-weight:700;
+  color:var(--ink-050);
+  flex-shrink:0;
+}
+.fs-toggle{
+  display:flex;
+  gap:4px;
+}
+.fs-btn{
+  width:22px;height:22px;
+  border-radius:7px;
+  border:1px solid var(--navy-600);
+  background:var(--navy-800);
+  color:var(--ink-300);
+  font-family:inherit;
+  font-weight:700;
+  font-size:11px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.fs-btn:active{background:var(--navy-700);}
+
+/* ---------- Shared layout ---------- */
+.view{
+  flex:1;
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  min-height:0;
+}
+.view.active{display:flex;}
+
+.content{
+  flex:1;
+  overflow-y:auto;
+  padding:2% 6.5% 6%;
+  min-height:0;
+}
+.content::-webkit-scrollbar{width:4px;}
+.content::-webkit-scrollbar-thumb{background:var(--navy-700); border-radius:4px;}
+
+h1.page-title{
+  font-size:calc(1.35em);
+  font-weight:700;
+  color:var(--ink-050);
+  margin:4px 0 3px;
+  text-wrap:balance;
+}
+p.page-sub{
+  font-size:calc(0.9em);
+  color:var(--ink-300);
+  margin-bottom:16px;
+  line-height:1.5;
+}
+
+button{font-family:inherit;}
+
+/* ---------- Bottom nav ---------- */
+.tabbar{
+  display:flex;
+  border-top:1px solid var(--navy-700);
+  background:var(--navy-950);
+  padding:8px 4px calc(10px + env(safe-area-inset-bottom, 0px));
+  flex-shrink:0;
+}
+.tab{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  background:none;
+  border:none;
+  color:var(--ink-500);
+  font-size:10.5px;
+  font-weight:700;
+  padding:5px 2px;
+  border-radius:12px;
+  cursor:pointer;
+}
+.tab svg{width:20px; height:20px;}
+.tab.active{color:var(--gold-400);}
+
+/* ---------- Buttons ---------- */
+.btn-primary{
+  width:100%;
+  background:linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  color:#1F2A0A;
+  font-weight:700;
+  font-size:calc(0.95em);
+  border:none;
+  border-radius:16px;
+  padding:16px;
+  cursor:pointer;
+  min-height:48px;
+}
+.btn-primary:active{filter:brightness(0.96);}
+.btn-ghost{
+  width:100%;
+  background:none;
+  border:1.5px solid var(--navy-600);
+  color:var(--ink-300);
+  font-weight:700;
+  font-size:calc(0.88em);
+  border-radius:16px;
+  padding:14px;
+  margin-top:10px;
+  cursor:pointer;
+  min-height:48px;
+}
+.btn-ghost:active{background:var(--navy-800);}
+
+/* ---------- Logo ---------- */
+.logo-mark{width:100%;height:100%;display:block;}
+
+/* ---------- Onboarding ---------- */
+.onboard{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8% 9%;
+  background:radial-gradient(circle at 50% 28%, var(--navy-800) 0%, var(--navy-950) 72%);
+  min-height:0;
+  overflow-y:auto;
+}
+.onboard-badge{
+  width:25%; aspect-ratio:1; margin-bottom:20px;
+  border-radius:24%;
+  background:var(--navy-700);
+  display:flex; align-items:center; justify-content:center;
+  padding:14%;
+  flex-shrink:0;
+}
+.onboard h2{font-size:calc(1.7em); font-weight:700; letter-spacing:0.2px; margin-bottom:8px;}
+.onboard h2 .accent{color:var(--gold-400);}
+.onboard .tagline{font-size:calc(0.82em); color:var(--gold-400); font-weight:700; margin-bottom:14px;}
+.onboard p{font-size:calc(0.95em); color:var(--ink-300); line-height:1.5; max-width:270px; margin-bottom:12px;}
+.onboard-actions{width:100%; max-width:280px; margin-top:14px;}
+
+.name-field{
+  width:100%; max-width:280px;
+  margin-top:6px;
+}
+.name-field input{
+  width:100%;
+  background:var(--navy-800);
+  border:1.5px solid var(--navy-600);
+  border-radius:14px;
+  padding:13px 16px;
+  color:var(--ink-050);
+  font-size:calc(0.92em);
+  font-family:inherit;
+  margin-bottom:10px;
+}
+.name-field input::placeholder{color:var(--ink-500);}
+
+/* ---------- Home ---------- */
+.home-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3.5% 6.5% 0;
+  flex-shrink:0;
+}
+.greeting-eyebrow{font-size:calc(0.8em); color:var(--ink-500); font-weight:700;}
+.greeting{font-size:calc(1.15em); font-weight:700; color:var(--ink-050);}
+.avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-400),var(--navy-700));
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:14px; color:var(--navy-950);
+  flex-shrink:0;
+}
+
+.cta-zone{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:5% 0 2%;
+}
+.cta-btn{
+  width:100%;
+  background:linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  border:none;
+  border-radius:20px;
+  padding:18px 16px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+  box-shadow:0 14px 28px -14px rgba(201,154,18,0.5);
+  text-align:left;
+}
+.cta-icon{
+  width:42px;height:42px;border-radius:13px;
+  background:rgba(31,42,68,0.18);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.cta-icon svg{width:22px;height:22px; stroke:#1F2A44;}
+.cta-title{font-size:calc(1em); font-weight:700; color:#1F2A44;}
+.cta-sub{font-size:calc(0.78em); color:#4B3E10; margin-top:2px;}
+
+.quick-row{
+  display:flex;
+  gap:8px;
+  padding:5% 0 0;
+}
+.quick-card{
+  flex:1;
+  background:var(--navy-800);
+  border-radius:15px;
+  padding:12px 6px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  border:1px solid var(--navy-700);
+  cursor:pointer;
+  min-height:48px;
+}
+.quick-card svg{width:19px;height:19px; stroke:var(--gold-400);}
+.quick-card span{font-size:calc(0.72em); font-weight:700; color:var(--ink-300); text-align:center;}
+
+.section-label{
+  font-size:calc(0.82em);
+  font-weight:700;
+  color:var(--ink-500);
+  padding:6% 0 2%;
+}
+.step-list{display:flex; flex-direction:column; gap:8px;}
+.step-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:var(--navy-800);
+  border-radius:14px;
+  padding:12px 14px;
+  border:1px solid var(--navy-700);
+}
+.step-num{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--navy-700);
+  color:var(--gold-400);
+  font-weight:700; font-size:12px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.step-name{font-size:calc(0.86em); font-weight:700; color:var(--ink-050);}
+.step-meta{font-size:calc(0.74em); color:var(--ink-500); margin-top:1px;}
+
+/* ---------- Triagem (guide) ---------- */
+.progress-track{
+  display:flex; gap:5px;
+  padding:0 6.5% 12px;
+  flex-shrink:0;
+}
+.progress-dot{flex:1; height:4px; border-radius:2px; background:var(--navy-700);}
+.progress-dot.done{background:var(--gold-400);}
+
+.q-card{
+  background:var(--navy-800);
+  border:1px solid var(--navy-700);
+  border-radius:18px;
+  padding:18px;
+  margin:0 0 14px;
+}
+.q-label{font-size:calc(0.72em); font-weight:700; color:var(--gold-400); letter-spacing:0.4px; margin-bottom:6px;}
+.q-title{font-size:calc(1.05em); font-weight:700; color:var(--ink-050); line-height:1.4; margin-bottom:14px;}
+.opt-btn{
+  width:100%;
+  background:var(--navy-900);
+  border:1.5px solid var(--navy-700);
+  border-radius:14px;
+  padding:14px 15px;
+  color:var(--ink-050);
+  font-size:calc(0.9em);
+  font-weight:700;
+  text-align:left;
+  margin-bottom:9px;
+  cursor:pointer;
+  min-height:48px;
+}
+.opt-btn:last-child{margin-bottom:0;}
+.opt-btn.selected{border-color:var(--gold-400); background:rgba(201,154,18,0.14); color:var(--gold-400);}
+
+.back-link{
+  background:none;border:none;color:var(--ink-500);font-size:calc(0.78em);font-weight:700;
+  padding:4px 0 10px; cursor:pointer; display:flex; align-items:center; gap:5px;
+}
+.back-link svg{width:14px;height:14px;}
+
+.result-card{
+  background:linear-gradient(160deg,var(--navy-800),var(--navy-950));
+  border:1px solid var(--gold-500);
+  border-radius:20px;
+  padding:22px 20px;
+  text-align:center;
+}
+.result-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(201,154,18,0.16);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;
+}
+.result-icon svg{width:26px;height:26px; stroke:var(--gold-400);}
+.result-label{font-size:calc(0.72em); color:var(--ink-500); font-weight:700; margin-bottom:6px; letter-spacing:0.4px;}
+.result-title{font-size:calc(1.15em); font-weight:700; color:var(--ink-050); margin-bottom:10px; line-height:1.35;}
+.result-body{font-size:calc(0.82em); color:var(--ink-300); line-height:1.55; margin-bottom:18px;}
+
+/* ---------- Checklist ---------- */
+.checklist-card{
+  background:var(--navy-800);
+  border:1px solid var(--navy-700);
+  border-radius:16px;
+  padding:2px 16px;
+  margin-bottom:12px;
+}
+.check-item{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  padding:13px 0;
+  border-bottom:1px solid var(--navy-700);
+  cursor:pointer;
+  min-height:48px;
+}
+.check-item:last-child{border-bottom:none;}
+.check-box{
+  width:23px;height:23px;border-radius:7px;
+  border:1.5px solid var(--navy-600);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+.check-item.checked .check-box{background:var(--gold-400); border-color:var(--gold-400);}
+.check-item.checked .check-box svg{width:13px;height:13px; stroke:#1F2A44;}
+.check-text{font-size:calc(0.86em); color:var(--ink-050); font-weight:700; line-height:1.4;}
+.check-note{font-size:calc(0.72em); color:var(--ink-500); margin-top:2px; line-height:1.4;}
+.check-item.checked .check-text{color:var(--ink-500); text-decoration:line-through;}
+
+.progress-bar-wrap{
+  padding:10px 6.5% 0;
+  flex-shrink:0;
+}
+.progress-outer{height:8px; border-radius:4px; background:var(--navy-700); overflow:hidden;}
+.progress-inner{height:100%; background:linear-gradient(90deg,var(--gold-500),var(--gold-400)); border-radius:4px; transition:width .25s ease;}
+.progress-caption{font-size:calc(0.75em); color:var(--ink-500); margin-top:5px;}
+
+.category-pill{
+  display:inline-block;
+  background:rgba(201,154,18,0.14);
+  color:var(--gold-400);
+  font-size:calc(0.68em);
+  font-weight:700;
+  padding:4px 10px;
+  border-radius:20px;
+  margin-bottom:6px;
+  letter-spacing:0.2px;
+}
+.reset-link{
+  background:none;border:none;color:var(--ink-500);font-size:calc(0.74em);font-weight:700;
+  text-decoration:underline; cursor:pointer; padding:0; margin-top:10px;
+}
+
+/* ---------- WhatsApp / contato ---------- */
+.wa-card{
+  background:var(--navy-800);
+  border:1px solid var(--navy-700);
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+  margin-bottom:12px;
+}
+.wa-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(34,197,94,0.16);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;
+}
+.wa-icon svg{width:26px;height:26px; stroke:var(--green-500);}
+.wa-title{font-size:calc(1em); font-weight:700; color:var(--ink-050); margin-bottom:6px;}
+.wa-body{font-size:calc(0.82em); color:var(--ink-300); line-height:1.5; margin-bottom:14px;}
+.wa-btn{
+  width:100%;
+  background:var(--green-500);
+  color:#04210F;
+  border:none;
+  border-radius:14px;
+  padding:14px;
+  font-weight:700;
+  font-size:calc(0.88em);
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  cursor:pointer;
+  min-height:48px;
+}
+.wa-btn svg{width:16px;height:16px; stroke:#04210F;}
+
+.info-card{
+  background:var(--navy-800);
+  border:1px solid var(--navy-700);
+  border-radius:16px;
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin-bottom:10px;
+  cursor:pointer;
+  min-height:48px;
+}
+.info-card svg{width:19px;height:19px; flex-shrink:0; stroke:var(--gold-400);}
+.info-title{font-size:calc(0.82em); font-weight:700; color:var(--ink-050);}
+.info-sub{font-size:calc(0.72em); color:var(--ink-500); margin-top:2px;}
+
+.footer-btn-zone{padding:14px 0 4px;}
+
+.toast{
+  position:absolute;
+  left:6.5%; right:6.5%; bottom:14%;
+  background:var(--navy-700);
+  border:1px solid var(--gold-500);
+  color:var(--ink-050);
+  font-size:12.5px;
+  font-weight:700;
+  padding:12px 14px;
+  border-radius:14px;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease;
+  transform:translateY(6px);
+  z-index:30;
+}
+.toast.show{opacity:1; transform:translateY(0);}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important;}
+}
+</style>
+
+<div class="stage">
+  <div class="rig-copy">
+    <div class="eyebrow">Protótipo funcional</div>
+    <h1>Direito Certo</h1>
+    <p>Núcleo de Orientação Previdenciária Popular. Toque nas abas e nos botões abaixo — o guia, o checklist e a navegação já funcionam de ponta a ponta neste arquivo.</p>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="screen" id="app-screen">
+        <div class="notch"></div>
+
+        <!-- ===================== ONBOARDING ===================== -->
+        <div class="view active" id="view-onboard">
+          <div class="onboard">
+            <div class="onboard-badge">
+              <svg class="logo-mark" viewBox="0 0 100 100" fill="none">
+                <path d="M50 14 L82 26 V50 C82 70 68 84 50 92 C32 84 18 70 18 50 V26 Z" fill="#E0B62B"/>
+                <path d="M36 51 L46 61 L66 38" stroke="#141A2B" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <h2>Direito <span class="accent">Certo</span></h2>
+            <div class="tagline">descubra, organize, garanta</div>
+            <p>Descubra em minutos qual pode ser o seu caso e saia com a lista certa de documentos — sem complicação.</p>
+
+            <div class="name-field" id="name-field">
+              <input type="text" id="name-input" maxlength="30" placeholder="Como podemos te chamar? (opcional)" aria-label="Seu nome">
+            </div>
+
+            <div class="onboard-actions">
+              <button class="btn-primary" id="btn-comecar">Começar</button>
+              <button class="btn-ghost" onclick="DC.goTo('whatsapp')">Prefiro falar no WhatsApp</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================== HOME ===================== -->
+        <div class="view" id="view-home">
+          <div class="status-bar">
+            <span id="clock">9:41</span>
+            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
+              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
+              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
+            </div>
+          </div>
+          <div class="home-header">
+            <div>
+              <div class="greeting-eyebrow">OLÁ,</div>
+              <div class="greeting" id="home-greeting">tudo bem?</div>
+            </div>
+            <div class="avatar" id="home-avatar">?</div>
+          </div>
+
+          <div class="content">
+            <div class="cta-zone">
+              <button class="cta-btn" onclick="DC.startGuide()">
+                <div class="cta-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#1F2A44" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <div>
+                  <div class="cta-title">Descobrir meu caso</div>
+                  <div class="cta-sub">Responda algumas perguntas rápidas</div>
+                </div>
+              </button>
+            </div>
+
+            <div class="quick-row">
+              <div class="quick-card" onclick="DC.goTo('checklist')" role="button" tabindex="0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <span>Checklist</span>
+              </div>
+              <div class="quick-card" onclick="DC.goTo('whatsapp')" role="button" tabindex="0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span>WhatsApp</span>
+              </div>
+              <div class="quick-card" onclick="DC.showToast('Mostrando plantões de atendimento perto de você…')" role="button" tabindex="0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Atendimento</span>
+              </div>
+            </div>
+
+            <div class="section-label">Como funciona</div>
+            <div class="step-list">
+              <div class="step-item">
+                <div class="step-num">1</div>
+                <div>
+                  <div class="step-name">Responda ao guia</div>
+                  <div class="step-meta">Perguntas simples sobre sua situação</div>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-num">2</div>
+                <div>
+                  <div class="step-name">Veja o que pode ser seu caso</div>
+                  <div class="step-meta">Categoria provável de benefício</div>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-num">3</div>
+                <div>
+                  <div class="step-name">Receba o checklist de documentos</div>
+                  <div class="step-meta">Leve pronto para o atendimento</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabbar" role="tablist">
+            <button class="tab active" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
+            <button class="tab" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
+            <button class="tab" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
+            <button class="tab" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
+          </div>
+        </div>
+
+        <!-- ===================== GUIDE / TRIAGEM ===================== -->
+        <div class="view" id="view-guide">
+          <div class="status-bar"><span>9:42</span>
+            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
+              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
+              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
+            </div>
+          </div>
+          <h1 class="page-title" style="padding:0 6.5%;">Qual pode ser o meu caso?</h1>
+          <p class="page-sub" style="padding:0 6.5%;">Responda com sinceridade — não pedimos nenhum documento agora.</p>
+
+          <div class="progress-track" id="progress-track"></div>
+
+          <div class="content" style="padding-top:0;">
+            <button class="back-link" id="guide-back" style="display:none;" onclick="DC.guideBack()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              Voltar
+            </button>
+            <div id="guide-body"></div>
+          </div>
+
+          <div class="tabbar">
+            <button class="tab" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
+            <button class="tab active" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
+            <button class="tab" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
+            <button class="tab" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
+          </div>
+        </div>
+
+        <!-- ===================== CHECKLIST ===================== -->
+        <div class="view" id="view-checklist">
+          <div class="status-bar"><span>9:43</span>
+            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
+              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
+              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
+            </div>
+          </div>
+          <div style="padding:0 6.5%;">
+            <div class="category-pill" id="checklist-pill">Sem categoria definida</div>
+            <h1 class="page-title">Checklist de documentos</h1>
+            <p class="page-sub" id="checklist-sub">Marque o que você já tem em mãos.</p>
+          </div>
+
+          <div class="progress-bar-wrap">
+            <div class="progress-outer"><div class="progress-inner" id="checklist-bar" style="width:0%;"></div></div>
+            <div class="progress-caption" id="checklist-caption">0 de 0 documentos reunidos</div>
+          </div>
+
+          <div class="content">
+            <div class="checklist-card" id="checklist-items"></div>
+
+            <div class="info-card" onclick="DC.goTo('whatsapp')" role="button" tabindex="0">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div>
+                <div class="info-title">Faltou algum documento?</div>
+                <div class="info-sub">Fale com a gente no WhatsApp que te ajudamos a encontrar</div>
+              </div>
+            </div>
+
+            <div class="footer-btn-zone">
+              <button class="btn-primary" onclick="DC.goTo('whatsapp')">Levar esta lista ao atendimento</button>
+              <button class="reset-link" onclick="DC.restartFromChecklist()">Refazer o guia de triagem</button>
+            </div>
+          </div>
+
+          <div class="tabbar">
+            <button class="tab" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
+            <button class="tab" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
+            <button class="tab active" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
+            <button class="tab" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
+          </div>
+        </div>
+
+        <!-- ===================== WHATSAPP ===================== -->
+        <div class="view" id="view-whatsapp">
+          <div class="status-bar"><span>9:44</span>
+            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
+              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
+              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
+            </div>
+          </div>
+          <h1 class="page-title" style="padding:0 6.5%;">Fale com a gente</h1>
+          <p class="page-sub" style="padding:0 6.5%;">Atendimento humano para tirar dúvidas ou confirmar o seu caso.</p>
+
+          <div class="content" style="padding-top:0;">
+            <div class="wa-card">
+              <div class="wa-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <div class="wa-title">Conversa no WhatsApp</div>
+              <div class="wa-body">Fale com o time do Direito Certo — disponível para tirar dúvidas rápidas e agendar atendimento presencial.</div>
+              <button class="wa-btn" id="wa-open-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                Abrir conversa
+              </button>
+            </div>
+
+            <div class="info-card" onclick="DC.showToast('Plantões: CRAS, sindicatos e associações parceiras — em breve com agenda no app.')" role="button" tabindex="0">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <div>
+                <div class="info-title">Agendar atendimento presencial</div>
+                <div class="info-sub">Plantões no CRAS e em parceiros locais</div>
+              </div>
+            </div>
+
+            <div class="info-card" onclick="DC.showToast('Pontos de atendimento próximos: em breve com localização.')" role="button" tabindex="0">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <div class="info-title">Pontos de atendimento próximos</div>
+                <div class="info-sub">Veja unidades parceiras na sua região</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabbar">
+            <button class="tab" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
+            <button class="tab" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
+            <button class="tab" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
+            <button class="tab active" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="toast" id="toast"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var WHATSAPP_NUMBER = "5500000000000"; // TODO: trocar pelo número real do Direito Certo (DDI+DDD+número, só dígitos)
+
+  var LS = {
+    name: "dc_name",
+    seen: "dc_seen_onboarding",
+    fontScale: "dc_font_scale",
+    category: "dc_category",
+    checklistPrefix: "dc_checklist_"
+  };
+
+  function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+  function safeSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+
+  /* ---------------- Categorias e checklists (dados reais do fluxo previdenciário) ---------------- */
+  var CATEGORIES = {
+    aposentadoria_urbana: {
+      title: "Aposentadoria por Idade Urbana",
+      body: "Pelas suas respostas, esse é o caminho mais provável. Isso não substitui uma análise oficial do INSS, mas já ajuda você a se preparar.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"ctps", label:"CTPS completa"},
+        {id:"comprovante", label:"Comprovante de residência", note:"De preferência recente, com seu nome"},
+        {id:"carne", label:"Carnê de contribuição", note:"Se você é MEI ou contribuinte individual"},
+        {id:"senha_gov", label:"Senha do GOV", note:"Para consultar o Meu INSS"}
+      ]
+    },
+    aposentadoria_rural: {
+      title: "Aposentadoria Rural por Idade",
+      body: "Pelas suas respostas, esse é o caminho mais provável para quem trabalha na terra. A confirmação final é sempre do INSS.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"ctps", label:"CTPS completa", note:"Se já trabalhou também de carteira assinada"},
+        {id:"notas_produtor", label:"Notas de produtor rural", note:"Blocos ou notas fiscais de venda da produção"},
+        {id:"itr", label:"ITR da terra", note:"Imposto Territorial Rural, se for proprietário"},
+        {id:"ppp", label:"Perfil Profissiográfico Previdenciário (PPP)", note:"Se trabalhou em atividade rural registrada"},
+        {id:"rtm", label:"RTM", note:"Comprovante de vínculo/trabalho rural, se você tiver"},
+        {id:"senha_gov", label:"Senha do GOV"}
+      ]
+    },
+    bpc_loas: {
+      title: "BPC/LOAS",
+      body: "Pelas suas respostas, você pode ter direito ao Benefício de Prestação Continuada. Ele não exige tempo de contribuição, mas depende de renda familiar e avaliação social ou médica.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"ctps", label:"CTPS completa", note:"Mesmo sem tempo de contribuição"},
+        {id:"laudos", label:"Laudos médicos", note:"Se o pedido for por deficiência"},
+        {id:"ppp", label:"Perfil Profissiográfico Previdenciário (PPP)", note:"Se aplicável ao seu histórico de trabalho"},
+        {id:"notas_agricultor", label:"Notas de agricultor", note:"Se você mora e trabalha na área rural"},
+        {id:"senha_gov", label:"Senha do GOV"}
+      ]
+    },
+    auxilio_doenca: {
+      title: "Auxílio-Doença",
+      body: "Pelas suas respostas, esse pode ser o benefício por incapacidade temporária. Reúna a documentação médica com cuidado — ela é o centro da análise.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"atestado", label:"Atestado médico"},
+        {id:"ctps", label:"CTPS completa"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"laudos", label:"Laudos médicos"},
+        {id:"prontuario", label:"Prontuário médico", note:"Do hospital ou posto onde foi atendido"},
+        {id:"raiox", label:"Raio-X ou exames de imagem", note:"Se fizer parte do seu caso"},
+        {id:"relato", label:"Relato a próprio punho", note:"Sua descrição da doença ou do acidente"},
+        {id:"cat", label:"CAT – Comunicação de Acidente de Trabalho", note:"Se foi acidente de trabalho"},
+        {id:"boletim", label:"Boletim de ocorrência", note:"Se houve acidente de trânsito ou de trabalho"},
+        {id:"bombeiro", label:"Atendimento de Bombeiro", note:"Se houve resgate no momento do acidente"},
+        {id:"senha_gov", label:"Senha do GOV"}
+      ]
+    },
+    pensao_morte: {
+      title: "Pensão por Morte",
+      body: "Pelas suas respostas, você pode ter direito à pensão por morte como dependente. O grau de parentesco e a comprovação de dependência são o centro da análise.",
+      docs: [
+        {id:"certidao_obito", label:"Certidão de óbito"},
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH", note:"Do requerente"},
+        {id:"certidao_casamento", label:"Certidão de Casamento/Nascimento", note:"Dos envolvidos"},
+        {id:"vinculo", label:"Confirmação de vínculo", note:"Certidões ou declaração de união estável, se for o caso"},
+        {id:"certidao_crianca", label:"Certidão de nascimento da criança", note:"Se houver dependente menor de idade"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"ctps_falecido", label:"CTPS completa", note:"Da pessoa falecida, se houver"},
+        {id:"senha_gov", label:"Senha do GOV"}
+      ]
+    },
+    generico: {
+      title: "Vamos te orientar com calma",
+      body: "Seu caso tem detalhes que um formulário simples não resolve sozinho. Nossa equipe consegue te ouvir e apontar o caminho certo.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"senha_gov", label:"Senha do GOV", note:"Ajuda a agilizar qualquer consulta ao Meu INSS"}
+      ]
+    }
+  };
+
+  /* ---------------- Árvore de decisão da triagem ---------------- */
+  // Cada nó: pergunta + opções. Cada opção leva a outro nó (next) ou fecha com uma categoria (result).
+  var TREE = {
+    start: {
+      label: "PERGUNTA 1",
+      title: "O que te trouxe até aqui?",
+      options: [
+        {text:"Estou ficando mais velho(a) e quero saber se posso me aposentar", set:{motivo:"idade"}, next:"idade_area"},
+        {text:"Tive uma doença ou acidente que me impede de trabalhar", set:{motivo:"saude"}, next:"saude_acidente"},
+        {text:"Um familiar que nos sustentava faleceu", set:{motivo:"obito"}, next:"obito_parentesco"},
+        {text:"Não sei bem, quero conversar com alguém", result:"generico"}
+      ]
+    },
+    idade_area: {
+      label: "PERGUNTA 2",
+      title: "Seu trabalho é feito principalmente…",
+      options: [
+        {text:"Na roça, na pesca ou lidando com a terra (rural)", set:{area:"rural"}, next:"idade_faixa"},
+        {text:"Na cidade, no comércio ou na indústria (urbano)", set:{area:"urbano"}, next:"idade_faixa"}
+      ]
+    },
+    idade_faixa: {
+      label: "PERGUNTA 3",
+      title: "Qual é a sua faixa de idade?",
+      options: [
+        {text:"Menos de 55 anos", set:{faixa:"menos55"}, next:"idade_contribuicao"},
+        {text:"Entre 55 e 64 anos", set:{faixa:"55a64"}, next:"idade_contribuicao"},
+        {text:"65 anos ou mais", set:{faixa:"65mais"}, next:"idade_contribuicao"}
+      ]
+    },
+    idade_contribuicao: {
+      label: "PERGUNTA 4",
+      title: "Você já contribuiu para o INSS — carteira assinada, carnê ou como rural?",
+      options: [
+        {text:"Sim, por muitos anos", set:{contrib:"muitos"}, next:"idade_resultado"},
+        {text:"Sim, mas por pouco tempo", set:{contrib:"pouco"}, next:"idade_resultado"},
+        {text:"Nunca contribuí", set:{contrib:"nunca"}, next:"idade_resultado"}
+      ]
+    },
+    idade_resultado: {
+      compute: function(a){
+        if(a.area === "rural"){
+          if(a.faixa === "menos55"){ return "generico"; }
+          return "aposentadoria_rural";
+        }
+        // urbano
+        if(a.faixa === "65mais"){
+          return a.contrib === "nunca" ? "bpc_loas" : "aposentadoria_urbana";
+        }
+        return "generico";
+      }
+    },
+    saude_acidente: {
+      label: "PERGUNTA 2",
+      title: "Foi um acidente de trabalho ou de trajeto?",
+      options: [
+        {text:"Sim", set:{acidente:"sim"}, next:"saude_contribuicao"},
+        {text:"Não", set:{acidente:"nao"}, next:"saude_contribuicao"}
+      ]
+    },
+    saude_contribuicao: {
+      label: "PERGUNTA 3",
+      title: "Você já contribuiu para o INSS — carteira, carnê ou MEI?",
+      options: [
+        {text:"Sim, contribuo atualmente ou contribuí recentemente", set:{contrib:"recente"}, next:"saude_resultado"},
+        {text:"Sim, mas parei de contribuir há muito tempo", set:{contrib:"antigo"}, next:"saude_resultado"},
+        {text:"Nunca contribuí", set:{contrib:"nunca"}, next:"saude_renda"}
+      ]
+    },
+    saude_renda: {
+      label: "PERGUNTA 4",
+      title: "A renda da sua família é baixa — até 1/4 de salário mínimo por pessoa?",
+      options: [
+        {text:"Sim", set:{renda:"baixa"}, result:"bpc_loas"},
+        {text:"Não", set:{renda:"outra"}, result:"generico"}
+      ]
+    },
+    saude_resultado: {
+      compute: function(a){
+        return "auxilio_doenca";
+      }
+    },
+    obito_parentesco: {
+      label: "PERGUNTA 2",
+      title: "Qual é a sua relação com a pessoa que faleceu?",
+      options: [
+        {text:"Sou cônjuge ou companheiro(a)", set:{parentesco:"conjuge"}, next:"obito_contribuia"},
+        {text:"Sou filho(a) menor de 21 anos ou inválido(a)", set:{parentesco:"filho"}, next:"obito_contribuia"},
+        {text:"Outro tipo de dependente", set:{parentesco:"outro"}, next:"obito_contribuia"}
+      ]
+    },
+    obito_contribuia: {
+      label: "PERGUNTA 3",
+      title: "A pessoa falecida contribuía para o INSS ou recebia algum benefício?",
+      options: [
+        {text:"Sim", set:{contribuia:"sim"}, result:"pensao_morte"},
+        {text:"Não sei dizer", set:{contribuia:"talvez"}, result:"pensao_morte"},
+        {text:"Não, nunca contribuiu", set:{contribuia:"nao"}, result:"generico"}
+      ]
+    }
+  };
+
+  /* ---------------- Estado do app ---------------- */
+  var state = {
+    view: "onboard",
+    guideNode: "start",
+    guideAnswers: {},
+    guideHistory: []
+  };
+
+  var els = {};
+
+  function qs(id){ return document.getElementById(id); }
+
+  function init(){
+    els.nameInput = qs("name-input");
+    els.homeGreeting = qs("home-greeting");
+    els.homeAvatar = qs("home-avatar");
+    els.progressTrack = qs("progress-track");
+    els.guideBody = qs("guide-body");
+    els.guideBack = qs("guide-back");
+    els.checklistPill = qs("checklist-pill");
+    els.checklistSub = qs("checklist-sub");
+    els.checklistItems = qs("checklist-items");
+    els.checklistBar = qs("checklist-bar");
+    els.checklistCaption = qs("checklist-caption");
+    els.toast = qs("toast");
+    els.waOpenBtn = qs("wa-open-btn");
+    els.clock = qs("clock");
+
+    var savedScale = parseFloat(safeGet(LS.fontScale) || "1");
+    applyFontScale(savedScale);
+
+    var savedName = safeGet(LS.name);
+    if(savedName){ els.nameInput.value = savedName; }
+
+    updateClock();
+    setInterval(updateClock, 30000);
+
+    qs("btn-comecar").addEventListener("click", onComecar);
+    els.waOpenBtn.addEventListener("click", openWhatsApp);
+
+    var seen = safeGet(LS.seen);
+    if(seen === "1"){
+      renderHomeGreeting();
+      goTo("home");
+    } else {
+      goTo("onboard");
+    }
+  }
+
+  function updateClock(){
+    var d = new Date();
+    var h = d.getHours(), m = d.getMinutes();
+    els.clock.textContent = h + ":" + (m < 10 ? "0"+m : m);
+  }
+
+  function onComecar(){
+    var name = (els.nameInput.value || "").trim();
+    if(name){ safeSet(LS.name, name); }
+    safeSet(LS.seen, "1");
+    renderHomeGreeting();
+    goTo("home");
+  }
+
+  function renderHomeGreeting(){
+    var name = safeGet(LS.name);
+    if(name){
+      els.homeGreeting.textContent = name;
+      els.homeAvatar.textContent = name.trim().charAt(0).toUpperCase();
+    } else {
+      els.homeGreeting.textContent = "tudo bem?";
+      els.homeAvatar.textContent = "😊";
+      els.homeAvatar.style.fontSize = "16px";
+    }
+  }
+
+  function goTo(name){
+    document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
+    qs("view-" + name).classList.add("active");
+    document.querySelectorAll(".tab").forEach(function(t){ t.classList.remove("active"); });
+    document.querySelectorAll('.tab[data-tab="' + name + '"]').forEach(function(t){ t.classList.add("active"); });
+    state.view = name;
+    if(name === "checklist"){ renderChecklist(); }
+  }
+
+  function showToast(msg){
+    els.toast.textContent = msg;
+    els.toast.classList.add("show");
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ els.toast.classList.remove("show"); }, 2600);
+  }
+
+  function changeFontScale(dir){
+    var current = parseFloat(safeGet(LS.fontScale) || "1");
+    var next = Math.min(1.3, Math.max(0.9, Math.round((current + dir*0.1) * 10) / 10));
+    applyFontScale(next);
+    safeSet(LS.fontScale, String(next));
+  }
+  function applyFontScale(v){
+    qs("app-screen").style.setProperty("--fs-scale", v);
+  }
+
+  /* ---------------- Guia / triagem ---------------- */
+  function startGuide(){
+    state.guideNode = "start";
+    state.guideAnswers = {};
+    state.guideHistory = [];
+    goTo("guide");
+    renderGuideNode();
+  }
+
+  function restartFromChecklist(){
+    startGuide();
+  }
+
+  function guideBack(){
+    if(state.guideHistory.length === 0){ return; }
+    state.guideNode = state.guideHistory.pop();
+    renderGuideNode();
+  }
+
+  function totalStepsEstimate(){
+    return 4;
+  }
+
+  function renderProgress(stepIndex){
+    var total = totalStepsEstimate();
+    els.progressTrack.innerHTML = "";
+    for(var i=0;i<total;i++){
+      var dot = document.createElement("div");
+      dot.className = "progress-dot" + (i < stepIndex ? " done" : "");
+      els.progressTrack.appendChild(dot);
+    }
+  }
+
+  function renderGuideNode(){
+    var node = TREE[state.guideNode];
+
+    // Resolve nodes with compute() straight to a result
+    if(node.compute){
+      var cat = node.compute(state.guideAnswers);
+      showGuideResult(cat);
+      return;
+    }
+
+    els.guideBack.style.display = state.guideHistory.length > 0 ? "flex" : "none";
+    renderProgress(state.guideHistory.length);
+
+    var html = '<div class="q-card">' +
+      '<div class="q-label">' + node.label + '</div>' +
+      '<div class="q-title">' + node.title + '</div>';
+
+    node.options.forEach(function(opt, i){
+      html += '<button class="opt-btn" data-idx="' + i + '">' + opt.text + '</button>';
+    });
+    html += '</div>';
+    els.guideBody.innerHTML = html;
+
+    Array.prototype.forEach.call(els.guideBody.querySelectorAll(".opt-btn"), function(btn){
+      btn.addEventListener("click", function(){
+        var opt = node.options[parseInt(btn.getAttribute("data-idx"), 10)];
+        btn.classList.add("selected");
+        if(opt.set){
+          for(var k in opt.set){ state.guideAnswers[k] = opt.set[k]; }
+        }
+        state.guideHistory.push(state.guideNode);
+        setTimeout(function(){
+          if(opt.result){
+            showGuideResult(opt.result);
+          } else {
+            state.guideNode = opt.next;
+            renderGuideNode();
+          }
+        }, 260);
+      });
+    });
+  }
+
+  function showGuideResult(catKey){
+    var cat = CATEGORIES[catKey] || CATEGORIES.generico;
+    safeSet(LS.category, catKey);
+    renderProgress(totalStepsEstimate());
+    els.guideBack.style.display = "none";
+
+    var isGeneric = catKey === "generico";
+    var html = '<div class="result-card">' +
+      '<div class="result-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      (isGeneric
+        ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+        : '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>') +
+      '</svg></div>' +
+      '<div class="result-label">RESULTADO PROVÁVEL</div>' +
+      '<div class="result-title">' + cat.title + '</div>' +
+      '<div class="result-body">' + cat.body + '</div>' +
+      '<button class="btn-primary" id="btn-ver-checklist">Ver checklist de documentos</button>' +
+      '<button class="btn-ghost" onclick="DC.goTo(\'whatsapp\')">Falar com um atendente</button>' +
+      '</div>';
+    els.guideBody.innerHTML = html;
+    qs("btn-ver-checklist").addEventListener("click", function(){ goTo("checklist"); });
+  }
+
+  /* ---------------- Checklist ---------------- */
+  function getChecklistState(catKey){
+    try {
+      var raw = localStorage.getItem(LS.checklistPrefix + catKey);
+      return raw ? JSON.parse(raw) : {};
+    } catch(e){ return {}; }
+  }
+  function setChecklistState(catKey, data){
+    safeSet(LS.checklistPrefix + catKey, JSON.stringify(data));
+  }
+
+  function renderChecklist(){
+    var catKey = safeGet(LS.category) || "aposentadoria_urbana";
+    var cat = CATEGORIES[catKey] || CATEGORIES.aposentadoria_urbana;
+    var savedState = getChecklistState(catKey);
+
+    els.checklistPill.textContent = cat.title;
+    els.checklistSub.textContent = "Marque o que você já tem em mãos.";
+    els.checklistItems.innerHTML = "";
+
+    cat.docs.forEach(function(doc){
+      var checked = !!savedState[doc.id];
+      var item = document.createElement("div");
+      item.className = "check-item" + (checked ? " checked" : "");
+      item.setAttribute("role", "checkbox");
+      item.setAttribute("aria-checked", checked ? "true" : "false");
+      item.tabIndex = 0;
+      item.innerHTML = '<div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+        '<div><div class="check-text">' + doc.label + '</div>' +
+        (doc.note ? '<div class="check-note">' + doc.note + '</div>' : '') +
+        '</div>';
+      function toggle(){
+        var isChecked = item.classList.toggle("checked");
+        item.setAttribute("aria-checked", isChecked ? "true" : "false");
+        savedState[doc.id] = isChecked;
+        setChecklistState(catKey, savedState);
+        updateChecklistProgress(cat, savedState);
+      }
+      item.addEventListener("click", toggle);
+      item.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggle(); } });
+      els.checklistItems.appendChild(item);
+    });
+
+    updateChecklistProgress(cat, savedState);
+  }
+
+  function updateChecklistProgress(cat, savedState){
+    var total = cat.docs.length;
+    var done = cat.docs.filter(function(d){ return !!savedState[d.id]; }).length;
+    var pct = total ? Math.round(done/total*100) : 0;
+    els.checklistBar.style.width = pct + "%";
+    els.checklistCaption.textContent = done + " de " + total + " documentos reunidos";
+  }
+
+  /* ---------------- WhatsApp ---------------- */
+  function openWhatsApp(){
+    var catKey = safeGet(LS.category);
+    var cat = catKey ? CATEGORIES[catKey] : null;
+    var msg = "Olá! Estou usando o app Direito Certo" + (cat ? (" e meu caso provável é: " + cat.title) : "") + ".";
+    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+    window.open(url, "_blank", "noopener");
+  }
+
+  /* ---------------- expose API used by inline handlers ---------------- */
+  window.DC = {
+    goTo: goTo,
+    startGuide: startGuide,
+    guideBack: guideBack,
+    restartFromChecklist: restartFromChecklist,
+    showToast: showToast,
+    changeFontScale: changeFontScale
+  };
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+  /* Keep state across silent hot-reloads in the artifact host, when available */
+  try{
+    if(window.claude && window.claude.hot){
+      window.claude.hot.snapshot(function(){ return {}; });
+    }
+  } catch(e){}
+})();
+</script>
