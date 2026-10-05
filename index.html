@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#141A2B">
-<title>Direito Certo</title>
-<style>
-html,body{margin:0;padding:0;}
-img{max-width:100%;}
-[hidden]{display:none!important;}
-</style>
-</head>
-<body>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#141A2B"><title>Direito Certo</title><style>html,body{margin:0;padding:0;}img{max-width:100%;}[hidden]{display:none!important;}</style></head><body>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
 
@@ -20,6 +7,7 @@ img{max-width:100%;}
   --page-ink:#1F2A44;
   --page-ink-soft:#5B6580;
   --rig-border:#D7DCE7;
+  --rig-accent:#9A740A;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -27,6 +15,7 @@ img{max-width:100%;}
     --page-ink:#E7EAF0;
     --page-ink-soft:#8890A6;
     --rig-border:#232A3D;
+    --rig-accent:#E0B62B;
   }
 }
 :root[data-theme="dark"]{
@@ -34,737 +23,368 @@ img{max-width:100%;}
   --page-ink:#E7EAF0;
   --page-ink-soft:#8890A6;
   --rig-border:#232A3D;
+  --rig-accent:#E0B62B;
 }
 
-/* ---- fixed brand palette for the phone UI itself (intentionally single dark theme, per accessibility brief) ---- */
-.phone-wrap{
-  --navy-950:#0B0F1A;
-  --navy-900:#141A2B;
-  --navy-800:#1B2338;
-  --navy-700:#232D48;
-  --navy-600:#2A3557;
-  --gold-500:#C99A12;
-  --gold-400:#E0B62B;
-  --green-500:#22C55E;
-  --red-500:#EF4444;
-  --ink-050:#F8FAFC;
-  --ink-300:#B9C0D4;
-  --ink-500:#7B8399;
-  --fs-scale:1;
-}
-
-*{box-sizing:border-box;}
-
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 body{
   background:var(--page-bg);
   color:var(--page-ink);
   font-family:'Atkinson Hyperlegible', Arial, sans-serif;
 }
+button,input,textarea{font-family:inherit;}
 
 .stage{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:18px;
+  display:flex; flex-direction:column; align-items:center; gap:18px;
   padding-block:32px 56px;
 }
+.rig-copy{max-width:380px; text-align:center; padding:0 16px;}
+.rig-copy .eyebrow{font-size:11.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--rig-accent);}
+.rig-copy h1{font-size:19px; margin:6px 0 4px; font-weight:700;}
+.rig-copy p{font-size:13px; line-height:1.5; color:var(--page-ink-soft);}
 
-.rig-copy{
-  max-width:380px;
-  text-align:center;
-  padding:0 16px;
-}
-.rig-copy .eyebrow{
-  font-size:11.5px;
-  font-weight:700;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  color:#C99A12;
-}
-.rig-copy h1{
-  font-size:19px;
-  margin:6px 0 4px;
-  font-weight:700;
-}
-.rig-copy p{
-  font-size:13px;
-  line-height:1.5;
-  color:var(--page-ink-soft);
-}
-
-/* ---------- Phone frame ---------- */
-.phone-wrap{
-  position:relative;
-}
+/* ---------- Phone frame (desktop mockup) ---------- */
+.phone-wrap{position:relative;}
 .phone{
   width:min(375px, calc(100vw - 32px));
-  height:min(812px, calc(100vw - 32px) * 2.1653);
-  background:var(--navy-950);
+  height:min(812px, calc((100vw - 32px) * 2.1653));
+  background:#080B14;
   border-radius:9%;
   padding:3.2%;
   box-shadow:0 30px 60px -20px rgba(15,23,42,0.35), 0 0 0 2px var(--rig-border);
 }
+
+/* ---------- App surface (single dark world, by accessibility brief) ---------- */
 .screen{
-  width:100%;
-  height:100%;
-  background:var(--navy-900);
+  --bg:#0E1322; --surface:#161D31; --surface-2:#1E2844; --surface-3:#2A3558;
+  --line:rgba(255,255,255,.07);
+  --gold:#E0B62B; --gold-2:#C99A12; --gold-tint:rgba(224,182,43,.14);
+  --green:#25D366; --green-tint:rgba(37,211,102,.14);
+  --red:#FF7480; --red-tint:rgba(255,116,128,.13);
+  --ink:#F4F6FB; --ink-2:#B9C1D6; --ink-3:#8791AC;
+  --on-gold:#1B1604;
+  --fs:1;
+  --t-xs:calc(11.5px*var(--fs)); --t-sm:calc(13px*var(--fs)); --t-md:calc(15.5px*var(--fs));
+  --t-lg:calc(17.5px*var(--fs)); --t-xl:calc(22px*var(--fs)); --t-2xl:calc(28px*var(--fs)); --t-3xl:calc(34px*var(--fs));
+
+  width:100%; height:100%;
+  background:var(--bg); color:var(--ink);
   border-radius:7.2%;
-  overflow:hidden;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  font-size:calc(15px * var(--fs-scale));
+  overflow:hidden; position:relative;
+  display:flex; flex-direction:column;
+  font-size:var(--t-md);
 }
 .notch{
-  position:absolute;
-  top:2.5%; left:50%; transform:translateX(-50%);
-  width:30%; height:2.6%;
-  background:var(--navy-950);
-  border-radius:0 0 14px 14px;
-  z-index:20;
+  position:absolute; top:2.5%; left:50%; transform:translateX(-50%);
+  width:30%; height:2.6%; background:#080B14; border-radius:0 0 14px 14px; z-index:50;
 }
-.status-bar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:4.2% 7% 1%;
-  font-size:12px;
-  font-weight:700;
-  color:var(--ink-050);
-  flex-shrink:0;
+.statusbar{
+  flex-shrink:0; padding:4.2% 8% 0; font-size:12px; font-weight:700; color:var(--ink);
 }
-.fs-toggle{
-  display:flex;
-  gap:4px;
-}
-.fs-btn{
-  width:22px;height:22px;
-  border-radius:7px;
-  border:1px solid var(--navy-600);
-  background:var(--navy-800);
-  color:var(--ink-300);
-  font-family:inherit;
-  font-weight:700;
-  font-size:11px;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-}
-.fs-btn:active{background:var(--navy-700);}
-
-/* ---------- Shared layout ---------- */
-.view{
-  flex:1;
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  min-height:0;
-}
+#views{flex:1; position:relative; min-height:0;}
+.view{position:absolute; inset:0; display:none; flex-direction:column; min-height:0;}
 .view.active{display:flex;}
+.view-in{animation:viewIn .25s ease;}
+.scroll{flex:1; overflow-y:auto; padding:6px 20px 28px; min-height:0; overscroll-behavior:contain;}
+.scroll::-webkit-scrollbar{width:0;}
 
-.content{
-  flex:1;
-  overflow-y:auto;
-  padding:2% 6.5% 6%;
-  min-height:0;
-}
-.content::-webkit-scrollbar{width:4px;}
-.content::-webkit-scrollbar-thumb{background:var(--navy-700); border-radius:4px;}
+.ic{width:22px; height:22px; flex-shrink:0;}
 
-h1.page-title{
-  font-size:calc(1.35em);
-  font-weight:700;
-  color:var(--ink-050);
-  margin:4px 0 3px;
-  text-wrap:balance;
-}
-p.page-sub{
-  font-size:calc(0.9em);
-  color:var(--ink-300);
-  margin-bottom:16px;
-  line-height:1.5;
-}
+/* ---------- Animations ---------- */
+@keyframes rise{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+@keyframes viewIn{from{opacity:0;} to{opacity:1;}}
+@keyframes enterRight{from{opacity:0; transform:translateX(34px);} to{opacity:1; transform:none;}}
+@keyframes enterLeft{from{opacity:0; transform:translateX(-34px);} to{opacity:1; transform:none;}}
+@keyframes popIn{0%{transform:scale(.6); opacity:0;} 60%{transform:scale(1.08); opacity:1;} 100%{transform:scale(1);}}
+@keyframes drawRing{from{stroke-dashoffset:277;} to{stroke-dashoffset:0;}}
+@keyframes pulseRing{0%{transform:scale(.7); opacity:.75;} 100%{transform:scale(1.55); opacity:0;}}
+@keyframes shimmer{from{background-position:-220px 0;} to{background-position:220px 0;}}
+.stagger > *{animation:rise .5s both; animation-delay:calc(var(--i, 0) * 55ms);}
+.rise{animation:rise .4s both;}
+.enter-right{animation:enterRight .3s cubic-bezier(.2,.8,.2,1) both;}
+.enter-left{animation:enterLeft .3s cubic-bezier(.2,.8,.2,1) both;}
 
-button{font-family:inherit;}
-
-/* ---------- Bottom nav ---------- */
-.tabbar{
-  display:flex;
-  border-top:1px solid var(--navy-700);
-  background:var(--navy-950);
-  padding:8px 4px calc(10px + env(safe-area-inset-bottom, 0px));
-  flex-shrink:0;
+/* ---------- Top bar ---------- */
+.topbar{display:flex; align-items:center; gap:10px; padding:10px 20px 6px; flex-shrink:0;}
+.tb-title{flex:1; font-size:var(--t-lg); font-weight:700; text-align:center;}
+.tb-spacer{flex:1;}
+.iconbtn{
+  width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
+  background:var(--surface); color:var(--ink); display:flex; align-items:center; justify-content:center;
+  transition:transform .1s ease, background .15s ease;
 }
-.tab{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:3px;
-  background:none;
-  border:none;
-  color:var(--ink-500);
-  font-size:10.5px;
-  font-weight:700;
-  padding:5px 2px;
-  border-radius:12px;
-  cursor:pointer;
+.iconbtn:active{transform:scale(.92); background:var(--surface-2);}
+.iconbtn .aa{font-weight:700; font-size:15px;}
+.avatar-btn{
+  width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:var(--on-gold);
+  font-weight:700; font-size:17px; display:flex; align-items:center; justify-content:center;
+  transition:transform .1s ease;
 }
-.tab svg{width:20px; height:20px;}
-.tab.active{color:var(--gold-400);}
+.avatar-btn:active{transform:scale(.92);}
+.avatar-btn .ic{width:20px; height:20px;}
 
 /* ---------- Buttons ---------- */
-.btn-primary{
-  width:100%;
-  background:linear-gradient(135deg, var(--gold-400), var(--gold-500));
-  color:#1F2A0A;
-  font-weight:700;
-  font-size:calc(0.95em);
-  border:none;
-  border-radius:16px;
-  padding:16px;
-  cursor:pointer;
-  min-height:48px;
-  transition:transform .1s ease, filter .1s ease, opacity .15s ease;
+.btn{
+  width:100%; min-height:54px; border-radius:18px; border:none; cursor:pointer;
+  font-size:var(--t-md); font-weight:700; padding:0 20px;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  transition:transform .1s ease, filter .15s ease, background .15s ease;
 }
-.btn-primary:active{transform:scale(0.98); filter:brightness(0.96);}
-.btn-primary:disabled{opacity:0.45; cursor:not-allowed;}
-.btn-ghost{
-  width:100%;
-  background:none;
-  border:1.5px solid var(--navy-600);
-  color:var(--ink-300);
-  font-weight:700;
-  font-size:calc(0.88em);
-  border-radius:16px;
-  padding:14px;
-  margin-top:10px;
-  cursor:pointer;
-  min-height:48px;
-  transition:transform .1s ease, background .1s ease;
-}
-.btn-ghost:active{background:var(--navy-800); transform:scale(0.98);}
+.btn:active{transform:scale(.98);}
+.btn + .btn{margin-top:10px;}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:var(--on-gold);}
+.btn-ghost{background:transparent; color:var(--ink-2); border:1.5px solid var(--surface-3);}
+.btn-soft{background:var(--surface-2); color:var(--ink);}
+.btn-wa{background:var(--green); color:#04210F;}
+.btn-danger{background:var(--red-tint); color:var(--red);}
+.btn.slim{min-height:48px;}
+.linkbtn{background:none; border:none; color:var(--ink-2); font-size:var(--t-sm); font-weight:700; text-decoration:underline; cursor:pointer; padding:8px 0;}
 
-/* ---------- Logo ---------- */
-.logo-mark{width:100%;height:100%;display:block;}
+/* ---------- Cards / rows ---------- */
+.card{background:var(--surface); border-radius:24px; padding:18px;}
+.sec{font-size:var(--t-lg); font-weight:700; margin:26px 0 12px;}
+.sec.sm{font-size:var(--t-md); margin:18px 0 8px;}
+.fineprint{font-size:var(--t-xs); color:var(--ink-3); line-height:1.5; margin-top:12px;}
+.row{
+  display:flex; align-items:center; gap:14px; width:100%; padding:14px 0;
+  background:none; border:none; border-bottom:1px solid var(--line); color:inherit; text-align:left; cursor:pointer;
+}
+.row:last-child{border-bottom:none;}
+.row:active{opacity:.7;}
+.r-ico{width:42px; height:42px; border-radius:14px; background:var(--surface-2); color:var(--gold); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.r-main{flex:1; min-width:0;}
+.r-title{font-size:var(--t-md); font-weight:700;}
+.r-sub{font-size:var(--t-sm); color:var(--ink-3); margin-top:2px; line-height:1.4;}
+.row .chev{color:var(--ink-3); width:20px; height:20px;}
 
 /* ---------- Onboarding ---------- */
-.onboard{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:8% 9%;
-  background:radial-gradient(circle at 50% 28%, var(--navy-800) 0%, var(--navy-950) 72%);
-  min-height:0;
-  overflow-y:auto;
+.onb{
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  padding:28px 26px; overflow-y:auto;
+  background:radial-gradient(circle at 50% 22%, #1D2745 0%, var(--bg) 62%);
 }
-.onboard-badge{
-  width:25%; aspect-ratio:1; margin-bottom:20px;
-  border-radius:24%;
-  background:var(--navy-700);
-  display:flex; align-items:center; justify-content:center;
-  padding:14%;
-  flex-shrink:0;
+.onb-badge{
+  width:92px; height:92px; border-radius:28px; background:var(--surface-2); padding:15px; margin-bottom:22px;
+  animation:popIn .6s cubic-bezier(.2,.8,.2,1) both;
 }
-.onboard h2{font-size:calc(1.7em); font-weight:700; letter-spacing:0.2px; margin-bottom:8px;}
-.onboard h2 .accent{color:var(--gold-400);}
-.onboard .tagline{font-size:calc(0.82em); color:var(--gold-400); font-weight:700; margin-bottom:14px;}
-.onboard p{font-size:calc(0.95em); color:var(--ink-300); line-height:1.5; max-width:270px; margin-bottom:12px;}
-.onboard-actions{width:100%; max-width:280px; margin-top:14px;}
-
-.name-field{
-  width:100%; max-width:280px;
-  margin-top:6px;
+.onb h1{font-size:var(--t-3xl); margin:0 0 6px; font-weight:700; animation:rise .5s .1s both;}
+.onb h1 span{color:var(--gold);}
+.onb-tag{font-size:var(--t-sm); font-weight:700; color:var(--gold); margin:0 0 14px; animation:rise .5s .16s both;}
+.onb-copy{font-size:var(--t-md); line-height:1.5; color:var(--ink-2); max-width:290px; margin:0 0 22px; animation:rise .5s .22s both;}
+.onb-form{width:100%; max-width:310px; animation:rise .5s .3s both;}
+.lbl{display:block; text-align:left; font-size:var(--t-sm); font-weight:700; color:var(--ink-2); margin:0 0 8px;}
+.inp{
+  width:100%; background:var(--surface-2); border:1.5px solid transparent; border-radius:16px;
+  padding:15px 16px; color:var(--ink); font-size:16px; margin-bottom:12px;
 }
-.name-field input{
-  width:100%;
-  background:var(--navy-800);
-  border:1.5px solid var(--navy-600);
-  border-radius:14px;
-  padding:13px 16px;
-  color:var(--ink-050);
-  font-size:calc(0.92em);
-  font-family:inherit;
-  margin-bottom:10px;
-}
-.name-field input::placeholder{color:var(--ink-500);}
+.inp:focus{outline:none; border-color:var(--gold);}
+.inp::placeholder{color:var(--ink-3);}
 
 /* ---------- Home ---------- */
-.home-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:3.5% 6.5% 0;
-  flex-shrink:0;
+.greet h1{font-size:var(--t-2xl); margin:6px 0 4px; font-weight:700; line-height:1.15;}
+.greet p{font-size:var(--t-md); color:var(--ink-2); margin:0 0 18px;}
+.hero{
+  display:flex; flex-direction:column; gap:6px; width:100%; text-align:left; border:none; cursor:pointer;
+  color:var(--on-gold); border-radius:28px; padding:22px 20px; position:relative; overflow:hidden;
+  background:linear-gradient(135deg,#F2CE50 0%,#DDAD1C 55%,#C99A12 100%);
+  box-shadow:0 18px 36px -18px rgba(224,182,43,.6);
+  transition:transform .12s ease;
 }
-.greeting-eyebrow{font-size:calc(0.8em); color:var(--ink-500); font-weight:700;}
-.greeting{font-size:calc(1.15em); font-weight:700; color:var(--ink-050);}
-.avatar{
-  width:36px;height:36px;border-radius:50%;
-  background:linear-gradient(135deg,var(--gold-400),var(--navy-700));
-  display:flex; align-items:center; justify-content:center;
-  font-weight:700; font-size:14px; color:var(--navy-950);
-  flex-shrink:0;
-}
+button.hero:active{transform:scale(.985);}
+.hero::after{content:""; position:absolute; right:-44px; top:-44px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,.2);}
+.hero::before{content:""; position:absolute; right:34px; bottom:-64px; width:120px; height:120px; border-radius:50%; background:rgba(27,22,4,.08);}
+.hero > *{position:relative; z-index:1;}
+.hero-kicker{font-size:var(--t-xs); font-weight:700; letter-spacing:1.2px; opacity:.7;}
+.hero-title{font-size:var(--t-2xl); font-weight:700; line-height:1.12; max-width:250px;}
+.hero-sub{font-size:var(--t-md); opacity:.82; line-height:1.4; max-width:240px;}
+.hero-go{margin-top:10px; width:48px; height:48px; border-radius:50%; background:var(--on-gold); color:var(--gold); display:flex; align-items:center; justify-content:center;}
+.hero-actions{display:flex; gap:10px; margin-top:12px;}
+.hero-btn{flex:1; min-height:48px; border-radius:16px; border:none; cursor:pointer; font-weight:700; font-size:var(--t-sm); background:var(--on-gold); color:#F6D96E;}
+.wa-num{margin:12px 0 0; font-size:var(--t-sm); opacity:.8; text-align:center;}
+.hero-btn.light{background:rgba(27,22,4,.13); color:var(--on-gold);}
 
-.cta-zone{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:5% 0 2%;
+.shortcuts{display:flex; gap:10px; overflow-x:auto; margin:20px -20px 0; padding:2px 20px 6px; scrollbar-width:none;}
+.shortcuts::-webkit-scrollbar{display:none;}
+.sc{
+  flex:0 0 auto; width:78px; display:flex; flex-direction:column; align-items:center; gap:8px;
+  background:none; border:none; color:var(--ink-2); font-size:var(--t-xs); font-weight:700; cursor:pointer; text-align:center;
 }
-.cta-btn{
-  width:100%;
-  background:linear-gradient(135deg, var(--gold-400), var(--gold-500));
-  border:none;
-  border-radius:20px;
-  padding:18px 16px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  cursor:pointer;
-  box-shadow:0 14px 28px -14px rgba(201,154,18,0.5);
-  text-align:left;
-  transition:transform .1s ease;
-}
-.cta-btn:active{transform:scale(0.98);}
-.cta-icon{
-  width:42px;height:42px;border-radius:13px;
-  background:rgba(31,42,68,0.18);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.cta-icon svg{width:22px;height:22px; stroke:#1F2A44;}
-.cta-title{font-size:calc(1em); font-weight:700; color:#1F2A44;}
-.cta-sub{font-size:calc(0.78em); color:#4B3E10; margin-top:2px;}
+.sc-ico{width:64px; height:64px; border-radius:22px; background:var(--surface); color:var(--gold); display:flex; align-items:center; justify-content:center; transition:transform .1s ease, background .15s ease;}
+.sc:active .sc-ico{transform:scale(.92); background:var(--surface-2);}
+.sc.wa .sc-ico{color:var(--green);}
 
-.quick-row{
-  display:flex;
-  gap:8px;
-  padding:5% 0 0;
-}
-.quick-card{
-  flex:1;
-  background:var(--navy-800);
-  border-radius:15px;
-  padding:12px 6px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
-  border:1px solid var(--navy-700);
-  cursor:pointer;
-  min-height:48px;
-  transition:transform .1s ease, background .1s ease;
-}
-.quick-card:active{transform:scale(0.97); background:var(--navy-700);}
-.quick-card svg{width:19px;height:19px; stroke:var(--gold-400);}
-.quick-card span{font-size:calc(0.72em); font-weight:700; color:var(--ink-300); text-align:center;}
+.progress-card{display:flex; align-items:center; gap:16px; width:100%; border:none; color:inherit; text-align:left; cursor:pointer; margin-top:16px;}
+.progress-card:active{opacity:.85;}
+.ring{position:relative; flex-shrink:0;}
+.ring svg{width:100%; height:100%; display:block;}
+.ring-bg{fill:none; stroke:var(--surface-3); stroke-width:7;}
+.ring-fg{fill:none; stroke:var(--gold); stroke-width:7; stroke-linecap:round; transform:rotate(-90deg); transform-origin:50% 50%; transition:stroke-dashoffset .8s cubic-bezier(.2,.8,.2,1);}
+.ring-num{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:var(--t-sm); font-weight:700;}
 
-.section-label{
-  font-size:calc(0.82em);
-  font-weight:700;
-  color:var(--ink-500);
-  padding:6% 0 2%;
+.carousel{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -20px; padding:2px 20px 10px; scrollbar-width:none;}
+.carousel::-webkit-scrollbar{display:none;}
+.bcard{
+  flex:0 0 76%; scroll-snap-align:start; background:var(--surface); border:none; border-radius:24px; padding:18px;
+  text-align:left; color:inherit; display:flex; flex-direction:column; gap:8px; min-height:176px; cursor:pointer;
+  transition:transform .12s ease;
 }
-.step-list{display:flex; flex-direction:column; gap:8px;}
-.step-item{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  background:var(--navy-800);
-  border-radius:14px;
-  padding:12px 14px;
-  border:1px solid var(--navy-700);
-}
-.step-num{
-  width:26px;height:26px;border-radius:50%;
-  background:var(--navy-700);
-  color:var(--gold-400);
-  font-weight:700; font-size:12px;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.step-name{font-size:calc(0.86em); font-weight:700; color:var(--ink-050);}
-.step-meta{font-size:calc(0.74em); color:var(--ink-500); margin-top:1px;}
+.bcard:active{transform:scale(.98);}
+.b-ico{width:46px; height:46px; border-radius:16px; background:var(--gold-tint); color:var(--gold); display:flex; align-items:center; justify-content:center; margin-bottom:4px;}
+.b-title{font-size:var(--t-lg); font-weight:700;}
+.b-sub{font-size:var(--t-sm); color:var(--ink-2); line-height:1.45; flex:1;}
+.b-more{font-size:var(--t-sm); font-weight:700; color:var(--gold); display:flex; align-items:center; gap:6px;}
+.b-more .ic{width:16px; height:16px;}
 
-/* ---------- Triagem (guide) ---------- */
-.progress-track{
-  display:flex; gap:5px;
-  padding:0 6.5% 12px;
-  flex-shrink:0;
-}
-.progress-dot{flex:1; height:4px; border-radius:2px; background:var(--navy-700); transition:background .3s ease;}
-.progress-dot.done{background:var(--gold-400);}
+.contract-card{display:flex; flex-direction:column; gap:14px; margin-top:22px;}
+.cc-top{display:flex; gap:14px; align-items:flex-start;}
+.foot{text-align:center; padding-top:18px;}
 
-@keyframes stepEnter{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
+/* ---------- Guide flow ---------- */
+.flow-top{display:flex; align-items:center; gap:12px; padding:10px 20px 8px; flex-shrink:0;}
+.flow-bar{flex:1; height:6px; border-radius:3px; background:var(--surface-2); overflow:hidden;}
+.flow-bar i{display:block; height:100%; border-radius:3px; background:linear-gradient(90deg,var(--gold-2),var(--gold)); transition:width .45s cubic-bezier(.2,.8,.2,1);}
+.q-kicker{font-size:var(--t-xs); font-weight:700; letter-spacing:1.2px; color:var(--gold); margin:14px 0 8px;}
+.q-title{font-size:var(--t-2xl); line-height:1.2; font-weight:700; margin:0 0 8px; text-wrap:balance;}
+.q-hint{font-size:var(--t-md); color:var(--ink-2); margin:0 0 20px; line-height:1.45;}
+.opt{
+  display:flex; align-items:center; gap:14px; width:100%; min-height:64px; padding:14px 16px; margin-bottom:10px;
+  background:var(--surface); border:1.5px solid transparent; border-radius:20px; color:var(--ink);
+  font-size:var(--t-md); font-weight:700; text-align:left; cursor:pointer;
+  transition:transform .1s ease, border-color .15s ease, background .15s ease;
 }
-.step-enter{animation:stepEnter .28s ease;}
+.opt:active{transform:scale(.985);}
+.opt.selected{border-color:var(--gold); background:var(--gold-tint); color:var(--gold); animation:popIn .3s ease;}
+.o-ico{width:42px; height:42px; border-radius:50%; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;}
+.o-txt{flex:1; line-height:1.35;}
+.o-chev{color:var(--ink-3); width:20px; height:20px;}
 
-.q-card{
-  background:var(--navy-800);
-  border:1px solid var(--navy-700);
-  border-radius:18px;
-  padding:18px;
-  margin:0 0 14px;
-}
-.q-label{font-size:calc(0.72em); font-weight:700; color:var(--gold-400); letter-spacing:0.4px; margin-bottom:6px;}
-.q-title{font-size:calc(1.05em); font-weight:700; color:var(--ink-050); line-height:1.4; margin-bottom:14px;}
-.opt-btn{
-  width:100%;
-  background:var(--navy-900);
-  border:1.5px solid var(--navy-700);
-  border-radius:14px;
-  padding:14px 15px;
-  color:var(--ink-050);
-  font-size:calc(0.9em);
-  font-weight:700;
-  text-align:left;
-  margin-bottom:9px;
-  cursor:pointer;
-  min-height:48px;
-  transition:transform .08s ease, background .1s ease, border-color .1s ease;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.opt-btn:active{transform:scale(0.985);}
-.opt-btn:last-child{margin-bottom:0;}
-.opt-btn.selected{border-color:var(--gold-400); background:rgba(201,154,18,0.14); color:var(--gold-400);}
-.opt-icon{
-  width:34px; height:34px; border-radius:10px;
-  background:var(--navy-800);
-  display:flex; align-items:center; justify-content:center;
-  font-size:17px;
-  flex-shrink:0;
-}
-.opt-btn.selected .opt-icon{background:rgba(201,154,18,0.22);}
-.opt-text{flex:1;}
+.analyzing{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 32px 60px; gap:10px;}
+.orb{position:relative; width:104px; height:104px; margin-bottom:18px;}
+.orb span{position:absolute; inset:0; border-radius:50%; border:2px solid var(--gold); animation:pulseRing 1.6s ease-out infinite;}
+.orb span:nth-child(2){animation-delay:.8s;}
+.orb-core{position:absolute; inset:18px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:var(--on-gold); display:flex; align-items:center; justify-content:center;}
+.orb-core .ic{width:34px; height:34px;}
+.analyzing h2{font-size:var(--t-xl); margin:0; font-weight:700;}
+.analyzing p{font-size:var(--t-md); color:var(--ink-2); margin:0;}
+.skel{width:100%; max-width:240px; display:flex; flex-direction:column; gap:10px; margin-top:22px;}
+.skel i{display:block; height:12px; border-radius:6px; background:linear-gradient(90deg,var(--surface) 0,var(--surface-2) 100px,var(--surface) 200px); background-size:440px 100%; animation:shimmer 1.2s linear infinite;}
+.skel i:nth-child(2){width:80%;} .skel i:nth-child(3){width:55%;}
 
-.back-link{
-  background:none;border:none;color:var(--ink-500);font-size:calc(0.78em);font-weight:700;
-  padding:4px 0 10px; cursor:pointer; display:flex; align-items:center; gap:5px;
-}
-.back-link svg{width:14px;height:14px;}
-
-.result-card{
-  background:linear-gradient(160deg,var(--navy-800),var(--navy-950));
-  border:1px solid var(--gold-500);
-  border-radius:20px;
-  padding:22px 20px;
-  text-align:center;
-}
-.result-icon{
-  width:52px;height:52px;border-radius:50%;
-  background:rgba(201,154,18,0.16);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 14px;
-}
-.result-icon svg{width:26px;height:26px; stroke:var(--gold-400);}
-.result-label{font-size:calc(0.72em); color:var(--ink-500); font-weight:700; margin-bottom:6px; letter-spacing:0.4px;}
-.result-title{font-size:calc(1.15em); font-weight:700; color:var(--ink-050); margin-bottom:10px; line-height:1.35;}
-.result-body{font-size:calc(0.82em); color:var(--ink-300); line-height:1.55; margin-bottom:18px;}
+.res{text-align:center; padding-top:6px;}
+.res-burst{position:relative; width:112px; height:112px; margin:6px auto 18px;}
+.res-burst svg.ringsvg{position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg);}
+.burst-ring{fill:none; stroke:var(--gold); stroke-width:3; stroke-linecap:round; stroke-dasharray:277; stroke-dashoffset:277; animation:drawRing .9s .1s ease forwards;}
+.burst-core{position:absolute; inset:14px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:var(--on-gold); display:flex; align-items:center; justify-content:center; animation:popIn .55s .35s both;}
+.burst-core .ic{width:40px; height:40px;}
+.res-kicker{font-size:var(--t-xs); font-weight:700; letter-spacing:1.2px; color:var(--gold);}
+.res-title{font-size:var(--t-2xl); line-height:1.15; font-weight:700; margin:8px 0 10px; text-wrap:balance;}
+.res-body{font-size:var(--t-md); color:var(--ink-2); line-height:1.55; margin:0 0 14px;}
+.chips{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:20px;}
+.chip{background:var(--surface-2); color:var(--ink-2); font-size:var(--t-xs); font-weight:700; padding:7px 12px; border-radius:20px;}
+.res .card{text-align:left; margin-bottom:12px;}
+.sticky-cta{padding:12px 20px calc(14px); background:linear-gradient(to top, var(--bg) 78%, transparent); flex-shrink:0;}
 
 /* ---------- Checklist ---------- */
-.checklist-card{
-  background:var(--navy-800);
-  border:1px solid var(--navy-700);
-  border-radius:16px;
-  padding:2px 16px;
-  margin-bottom:12px;
-}
-.check-item{
-  display:flex;
-  align-items:flex-start;
-  gap:13px;
-  padding:13px 0;
-  border-bottom:1px solid var(--navy-700);
-  cursor:pointer;
-  min-height:48px;
-}
-.check-item:last-child{border-bottom:none;}
-.check-box{
-  width:23px;height:23px;border-radius:7px;
-  border:1.5px solid var(--navy-600);
-  flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  margin-top:1px;
-  transition:background .15s ease, border-color .15s ease;
-}
-.check-item.checked .check-box{background:var(--gold-400); border-color:var(--gold-400);}
-.check-item.checked .check-box svg{width:13px;height:13px; stroke:#1F2A44;}
-.check-text{font-size:calc(0.86em); color:var(--ink-050); font-weight:700; line-height:1.4;}
-.check-note{font-size:calc(0.72em); color:var(--ink-500); margin-top:2px; line-height:1.4;}
-.check-item.checked .check-text{color:var(--ink-500); text-decoration:line-through;}
+.ck-hero{display:flex; align-items:center; gap:16px; margin:6px 0 18px;}
+.ck-hero h2{font-size:var(--t-xl); margin:0 0 4px; font-weight:700;}
+.ck-hero p{font-size:var(--t-sm); color:var(--ink-2); margin:0; line-height:1.45;}
+.pill{display:inline-block; background:var(--gold-tint); color:var(--gold); font-size:var(--t-xs); font-weight:700; padding:6px 12px; border-radius:20px; margin:4px 0 10px;}
+.ck-item{border-bottom:1px solid var(--line);}
+.ck-item:last-child{border-bottom:none;}
+.ck-row{display:flex; align-items:center; gap:6px;}
+.ck-main{flex:1; min-width:0; display:flex; align-items:flex-start; gap:14px; padding:15px 0; background:none; border:none; color:inherit; text-align:left; cursor:pointer; min-height:56px;}
+.ck-box{width:28px; height:28px; border-radius:9px; border:2px solid var(--surface-3); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; transition:background .15s ease, border-color .15s ease, transform .15s ease; color:transparent;}
+.ck-box .ic{width:16px; height:16px; stroke-width:3.2;}
+.ck-item.checked .ck-box{background:var(--gold); border-color:var(--gold); color:var(--on-gold); animation:popIn .3s ease;}
+.ck-txt{display:flex; flex-direction:column; gap:3px;}
+.ck-title{font-size:var(--t-md); font-weight:700; line-height:1.35;}
+.ck-note{font-size:var(--t-sm); color:var(--ink-3); line-height:1.4;}
+.ck-item.checked .ck-title{color:var(--ink-3); text-decoration:line-through;}
+.ck-info{width:40px; height:40px; border-radius:50%; border:none; background:none; color:var(--ink-3); cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.ck-info .ic{width:20px; height:20px;}
+.ck-item.open .ck-info{color:var(--gold);}
+.ck-tip{max-height:0; overflow:hidden; transition:max-height .28s ease;}
+.ck-item.open .ck-tip{max-height:160px;}
+.ck-tip div{margin:0 0 14px 42px; padding:12px 14px; background:var(--surface-2); border-radius:14px; font-size:var(--t-sm); color:var(--ink-2); line-height:1.5;}
+.empty{text-align:center; padding:40px 12px;}
+.empty-ico{width:84px; height:84px; margin:0 auto 18px; border-radius:28px; background:var(--surface); color:var(--gold); display:flex; align-items:center; justify-content:center;}
+.empty-ico .ic{width:38px; height:38px;}
+.empty h2{font-size:var(--t-xl); margin:0 0 8px;}
+.empty p{font-size:var(--t-md); color:var(--ink-2); line-height:1.5; margin:0 0 22px;}
 
-.progress-bar-wrap{
-  padding:10px 6.5% 0;
-  flex-shrink:0;
-}
-.progress-outer{height:8px; border-radius:4px; background:var(--navy-700); overflow:hidden;}
-.progress-inner{height:100%; background:linear-gradient(90deg,var(--gold-500),var(--gold-400)); border-radius:4px; transition:width .25s ease;}
-.progress-caption{font-size:calc(0.75em); color:var(--ink-500); margin-top:5px;}
+/* ---------- WhatsApp ---------- */
+.wa-hero{text-align:center; padding:24px 20px; background:linear-gradient(180deg, rgba(37,211,102,.16), var(--surface) 70%); margin-top:6px;}
+.wa-badge{width:68px; height:68px; border-radius:50%; margin:0 auto 14px; background:var(--green); color:#04210F; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 8px rgba(37,211,102,.14);}
+.wa-badge .ic{width:30px; height:30px;}
+.wa-hero h2{font-size:var(--t-xl); margin:0 0 8px; font-weight:700;}
+.wa-hero p{font-size:var(--t-md); color:var(--ink-2); line-height:1.5; margin:0 0 18px;}
+.steps{display:flex; flex-direction:column; gap:16px;}
+.step{display:flex; gap:14px; align-items:flex-start;}
+.step-n{width:30px; height:30px; border-radius:50%; background:var(--gold-tint); color:var(--gold); font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:var(--t-sm);}
 
-.category-pill{
-  display:inline-block;
-  background:rgba(201,154,18,0.14);
-  color:var(--gold-400);
-  font-size:calc(0.68em);
-  font-weight:700;
-  padding:4px 10px;
-  border-radius:20px;
-  margin-bottom:6px;
-  letter-spacing:0.2px;
-}
-.reset-link{
-  background:none;border:none;color:var(--ink-500);font-size:calc(0.74em);font-weight:700;
-  text-decoration:underline; cursor:pointer; padding:0; margin-top:10px;
-}
+/* ---------- Tab bar ---------- */
+.tabbar{display:flex; background:rgba(14,19,34,.94); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid var(--line); padding:8px 8px calc(10px + env(safe-area-inset-bottom, 0px)); flex-shrink:0;}
+.tabbar.hide{display:none;}
+.tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; color:var(--ink-3); font-size:var(--t-xs); font-weight:700; padding:2px; cursor:pointer;}
+.tab-ico{width:58px; height:32px; border-radius:16px; display:flex; align-items:center; justify-content:center; transition:background .2s ease, color .2s ease, transform .15s ease;}
+.tab:active .tab-ico{transform:scale(.92);}
+.tab.active{color:var(--gold);}
+.tab.active .tab-ico{background:var(--gold-tint);}
 
-/* ---------- WhatsApp / contato ---------- */
-.wa-card{
-  background:var(--navy-800);
-  border:1px solid var(--navy-700);
-  border-radius:18px;
-  padding:20px;
-  text-align:center;
-  margin-bottom:12px;
+/* ---------- Sheet ---------- */
+.sheet-backdrop{position:absolute; inset:0; background:rgba(5,8,16,.64); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:40;}
+.sheet-backdrop.open{opacity:1; pointer-events:auto;}
+.sheet{
+  position:absolute; left:0; right:0; bottom:0; z-index:41; max-height:88%; overflow-y:auto;
+  background:var(--surface); border-radius:30px 30px 0 0; padding:8px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  transform:translateY(105%); transition:transform .34s cubic-bezier(.2,.8,.2,1); outline:none;
 }
-.wa-icon{
-  width:52px;height:52px;border-radius:50%;
-  background:rgba(34,197,94,0.16);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 12px;
-}
-.wa-icon svg{width:26px;height:26px; stroke:var(--green-500);}
-.wa-title{font-size:calc(1em); font-weight:700; color:var(--ink-050); margin-bottom:6px;}
-.wa-body{font-size:calc(0.82em); color:var(--ink-300); line-height:1.5; margin-bottom:14px;}
-.wa-btn{
-  width:100%;
-  background:var(--green-500);
-  color:#04210F;
-  border:none;
-  border-radius:14px;
-  padding:14px;
-  font-weight:700;
-  font-size:calc(0.88em);
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  cursor:pointer;
-  min-height:48px;
-  transition:transform .1s ease;
-}
-.wa-btn:active{transform:scale(0.98);}
-.wa-btn svg{width:16px;height:16px; stroke:#04210F;}
+.sheet.open{transform:none;}
+.grab{width:46px; height:5px; border-radius:3px; background:var(--surface-3); margin:6px auto 16px; position:relative; touch-action:none;}
+.grab::before{content:""; position:absolute; inset:-14px -40px;}
+.sheet-ico{width:52px; height:52px; border-radius:18px; background:var(--gold-tint); color:var(--gold); display:flex; align-items:center; justify-content:center; margin-bottom:12px;}
+.sheet-title{font-size:var(--t-xl); font-weight:700; margin:0 0 6px;}
+.sheet-sub{font-size:var(--t-md); color:var(--ink-2); line-height:1.5; margin:0 0 6px;}
+.bul{margin:0 0 6px; padding-left:20px; color:var(--ink-2); line-height:1.6; font-size:var(--t-md);}
+.prof-head{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+.avatar-lg{width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:var(--on-gold); font-weight:700; font-size:24px; display:flex; align-items:center; justify-content:center;}
+.avatar-lg .ic{width:26px; height:26px;}
+.prof-name{font-size:var(--t-lg); font-weight:700;}
+.prof-sub{font-size:var(--t-sm); color:var(--ink-3);}
+.divider{height:1px; background:var(--line); margin:18px 0;}
+.scales{display:flex; flex-direction:column; gap:10px; margin-top:16px;}
+.scale-btn{display:flex; align-items:center; gap:16px; width:100%; min-height:64px; padding:12px 16px; border-radius:20px; border:1.5px solid transparent; background:var(--surface-2); color:var(--ink); cursor:pointer; text-align:left;}
+.scale-btn.selected{border-color:var(--gold); background:var(--gold-tint);}
+.scale-btn .sample{font-weight:700; width:56px; text-align:center; color:var(--gold);}
+.scale-btn .lab{font-size:var(--t-md); font-weight:700;}
 
-.info-card{
-  background:var(--navy-800);
-  border:1px solid var(--navy-700);
-  border-radius:16px;
-  padding:14px 16px;
-  display:flex;
-  align-items:center;
-  gap:13px;
-  margin-bottom:10px;
-  cursor:pointer;
-  min-height:48px;
-}
-.info-card svg{width:19px;height:19px; flex-shrink:0; stroke:var(--gold-400);}
-.info-title{font-size:calc(0.82em); font-weight:700; color:var(--ink-050);}
-.info-sub{font-size:calc(0.72em); color:var(--ink-500); margin-top:2px;}
-
-.footer-btn-zone{padding:14px 0 4px;}
-
+/* ---------- Toast / confetti ---------- */
 .toast{
-  position:absolute;
-  left:6.5%; right:6.5%; bottom:14%;
-  background:var(--navy-700);
-  border:1px solid var(--gold-500);
-  color:var(--ink-050);
-  font-size:12.5px;
-  font-weight:700;
-  padding:12px 14px;
-  border-radius:14px;
-  text-align:center;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .25s ease, transform .25s ease;
-  transform:translateY(6px);
-  z-index:30;
+  position:absolute; left:20px; right:20px; bottom:96px; z-index:70; text-align:center;
+  background:var(--surface-3); color:var(--ink); font-size:var(--t-sm); font-weight:700; line-height:1.4;
+  padding:13px 16px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.4);
+  opacity:0; transform:translateY(8px); pointer-events:none; transition:opacity .25s ease, transform .25s ease;
 }
-.toast.show{opacity:1; transform:translateY(0);}
+.toast.show{opacity:1; transform:none;}
+#confetti{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:60;}
 
-/* ---------- Contrato (gerar procuração + assinatura) ---------- */
-.contract-topbar{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 6.5% 6px;
-  flex-shrink:0;
-}
-.cancel-link{
-  background:none;border:none;color:var(--ink-500);font-size:calc(0.78em);font-weight:700;
-  cursor:pointer; padding:4px 0;
-}
-.form-field{margin-bottom:12px;}
-.form-label{display:block; font-size:calc(0.78em); font-weight:700; color:var(--ink-300); margin-bottom:6px;}
-.form-input, .form-textarea{
-  width:100%;
-  background:var(--navy-900);
-  border:1.5px solid var(--navy-700);
-  border-radius:12px;
-  padding:12px 14px;
-  color:var(--ink-050);
-  font-size:calc(0.9em);
-  font-family:inherit;
-}
-.form-input:focus, .form-textarea:focus{border-color:var(--gold-400); outline:none;}
-.form-textarea{resize:vertical; min-height:72px;}
-.form-hint{font-size:calc(0.7em); color:var(--ink-500); margin-top:4px;}
-
-.doc-choice-btn{
-  width:100%;
-  background:var(--navy-800);
-  border:1.5px solid var(--navy-700);
-  border-radius:14px;
-  padding:14px 15px;
-  color:var(--ink-050);
-  text-align:left;
-  cursor:pointer;
-  margin-bottom:10px;
-  min-height:48px;
-  transition:border-color .1s ease, background .1s ease;
-}
-.doc-choice-btn.selected{border-color:var(--gold-400); background:rgba(201,154,18,0.12);}
-.doc-choice-title{font-size:calc(0.88em); font-weight:700; margin-bottom:2px;}
-.doc-choice-sub{font-size:calc(0.72em); color:var(--ink-500);}
-
-.file-input-btn{
-  display:inline-flex; align-items:center; gap:8px;
-  background:var(--navy-700);
-  border:1.5px dashed var(--navy-600);
-  border-radius:12px;
-  padding:11px 14px;
-  color:var(--ink-050);
-  font-weight:700;
-  font-size:calc(0.82em);
-  cursor:pointer;
-  margin-top:8px;
-}
-.file-list{margin-top:10px; display:flex; flex-direction:column; gap:6px;}
-.file-chip{
-  display:flex; align-items:center; gap:8px;
-  background:var(--navy-900);
-  border:1px solid var(--navy-700);
-  border-radius:10px;
-  padding:8px 10px;
-  font-size:calc(0.76em);
-  color:var(--ink-300);
-}
-.file-chip svg{width:14px;height:14px; stroke:var(--gold-400); flex-shrink:0;}
-
-.review-card{
-  background:var(--navy-800);
-  border:1px solid var(--navy-700);
-  border-radius:16px;
-  padding:16px;
-  margin-bottom:14px;
-}
-.review-row{display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-bottom:1px solid var(--navy-700); font-size:calc(0.8em);}
-.review-row:last-child{border-bottom:none;}
-.review-label{color:var(--ink-500); font-weight:700;}
-.review-value{color:var(--ink-050); font-weight:700; text-align:right;}
-
-.contract-text{
-  background:var(--navy-900);
-  border:1px solid var(--navy-700);
-  border-radius:14px;
-  padding:14px;
-  max-height:130px;
-  overflow-y:auto;
-  font-size:calc(0.76em);
-  color:var(--ink-300);
-  line-height:1.55;
-  margin-bottom:12px;
-}
-.contract-text p{margin:0 0 8px;}
-.contract-text p:last-child{margin-bottom:0;}
-
-.agree-row{
-  display:flex; align-items:flex-start; gap:10px;
-  padding:10px 0;
-  cursor:pointer;
-}
-.agree-box{
-  width:22px;height:22px;border-radius:6px;
-  border:1.5px solid var(--navy-600);
-  flex-shrink:0; margin-top:1px;
-  display:flex;align-items:center;justify-content:center;
-}
-.agree-row.checked .agree-box{background:var(--gold-400); border-color:var(--gold-400);}
-.agree-row.checked .agree-box svg{width:13px;height:13px;stroke:#1F2A44;}
-.agree-text{font-size:calc(0.8em); color:var(--ink-300); line-height:1.4;}
-
-.sig-label-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
-.sig-wrap{
-  background:#F8FAFC;
-  border-radius:14px;
-  border:1.5px solid var(--navy-700);
-  overflow:hidden;
-  touch-action:none;
-}
-.sig-wrap canvas{width:100%; height:120px; display:block;}
-.sig-clear{background:none;border:none;color:var(--gold-400); font-size:calc(0.76em); font-weight:700; cursor:pointer; padding:0;}
-
-.success-wrap{
-  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; padding:8% 9%;
-}
-.success-icon{
-  width:76px; height:76px; border-radius:50%;
-  background:rgba(34,197,94,0.16);
-  display:flex; align-items:center; justify-content:center;
-  margin-bottom:18px;
-}
-.success-icon svg{width:38px;height:38px; stroke:var(--green-500);}
-.success-wrap h2{font-size:calc(1.25em); font-weight:700; color:var(--ink-050); margin-bottom:8px;}
-.success-wrap p{font-size:calc(0.88em); color:var(--ink-300); line-height:1.5; max-width:270px; margin-bottom:6px;}
-.protocol-badge{
-  display:inline-block;
-  background:var(--navy-800);
-  border:1px solid var(--navy-700);
-  color:var(--gold-400);
-  font-weight:700;
-  font-size:calc(0.8em);
-  padding:6px 14px;
-  border-radius:10px;
-  margin:10px 0 20px;
-  font-variant-numeric:tabular-nums;
-}
-.success-actions{width:100%; max-width:280px;}
+:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
 
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important; animation:none !important;}
 }
 
-/* ---- Real device: fill the screen instead of showing the desktop mockup ---- */
+/* ---------- Real device: fill the screen instead of showing the mockup ---------- */
 @media (max-width: 560px){
   html, body{height:100%;}
-  body{margin:0; background:#141A2B;}
+  body{margin:0; background:#0E1322;}
   .stage{padding:0; gap:0; min-height:100%;}
   .rig-copy{display:none;}
   .phone-wrap{width:100%;}
-  .phone{
-    width:100vw;
-    height:100vh;
-    height:100dvh;
-    border-radius:0;
-    padding:0;
-    box-shadow:none;
-  }
-  .screen{border-radius:0;}
-  .notch{display:none;}
+  .phone{width:100vw; height:100vh; height:100dvh; border-radius:0; padding:0; box-shadow:none; background:#0E1322;}
+  .screen{border-radius:0; padding-top:env(safe-area-inset-top, 0px);}
+  .notch, .statusbar{display:none;}
 }
 </style>
 
@@ -772,257 +392,48 @@ button{font-family:inherit;}
   <div class="rig-copy">
     <div class="eyebrow">Protótipo funcional</div>
     <h1>Direito Certo</h1>
-    <p>Núcleo de Orientação Previdenciária Popular. Toque nas abas e nos botões abaixo — o guia, o checklist, a geração de contrato e a navegação já funcionam de ponta a ponta neste arquivo.</p>
+    <p>Núcleo de Orientação Previdenciária Popular. Toque pelo app: o guia, o checklist, o perfil (sair e trocar de usuário) e o atendimento por WhatsApp funcionam de ponta a ponta.</p>
   </div>
 
   <div class="phone-wrap">
     <div class="phone">
       <div class="screen" id="app-screen">
         <div class="notch"></div>
+        <div class="statusbar"><span id="clock">9:41</span></div>
 
-        <!-- ===================== ONBOARDING ===================== -->
-        <div class="view active" id="view-onboard">
-          <div class="onboard">
-            <div class="onboard-badge">
-              <svg class="logo-mark" viewBox="0 0 100 100" fill="none">
-                <path d="M50 14 L82 26 V50 C82 70 68 84 50 92 C32 84 18 70 18 50 V26 Z" fill="#E0B62B"/>
-                <path d="M36 51 L46 61 L66 38" stroke="#141A2B" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
+        <div id="views">
+          <section class="view" id="view-onboard">
+            <div class="onb">
+              <div class="onb-badge">
+                <svg viewBox="0 0 100 100" fill="none" aria-hidden="true" style="width:100%;height:100%;display:block;">
+                  <path d="M50 14 L82 26 V50 C82 70 68 84 50 92 C32 84 18 70 18 50 V26 Z" fill="#E0B62B"/>
+                  <path d="M36 51 L46 61 L66 38" stroke="#141A2B" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+              </div>
+              <h1>Direito <span>Certo</span></h1>
+              <div class="onb-tag">descubra, organize, garanta</div>
+              <p class="onb-copy">Descubra em minutos qual pode ser o seu caso e saia com a lista certa de documentos — sem complicação.</p>
+              <div class="onb-form">
+                <label class="lbl" for="name-input">Como podemos te chamar?</label>
+                <input class="inp" id="name-input" type="text" maxlength="30" autocomplete="off" placeholder="Seu nome (opcional)">
+                <button class="btn btn-primary" id="btn-comecar">Começar</button>
+                <button class="btn btn-ghost" data-act="wa" data-arg="geral">Prefiro falar no WhatsApp</button>
+                <p class="fineprint">Seus dados ficam só neste aparelho. Ao sair, tudo é apagado.</p>
+              </div>
             </div>
-            <h2>Direito <span class="accent">Certo</span></h2>
-            <div class="tagline">descubra, organize, garanta</div>
-            <p>Descubra em minutos qual pode ser o seu caso e saia com a lista certa de documentos — sem complicação.</p>
-
-            <div class="name-field" id="name-field">
-              <input type="text" id="name-input" maxlength="30" placeholder="Como podemos te chamar? (opcional)" aria-label="Seu nome">
-            </div>
-
-            <div class="onboard-actions">
-              <button class="btn-primary" id="btn-comecar">Começar</button>
-              <button class="btn-ghost" onclick="DC.goTo('whatsapp')">Prefiro falar no WhatsApp</button>
-            </div>
-          </div>
+          </section>
+          <section class="view" id="view-home"></section>
+          <section class="view" id="view-guide"></section>
+          <section class="view" id="view-checklist"></section>
+          <section class="view" id="view-whatsapp"></section>
         </div>
 
-        <!-- ===================== HOME ===================== -->
-        <div class="view" id="view-home">
-          <div class="status-bar">
-            <span id="clock">9:41</span>
-            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
-              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
-              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
-            </div>
-          </div>
-          <div class="home-header">
-            <div>
-              <div class="greeting-eyebrow">OLÁ,</div>
-              <div class="greeting" id="home-greeting">tudo bem?</div>
-            </div>
-            <div class="avatar" id="home-avatar">?</div>
-          </div>
+        <nav class="tabbar hide" id="tabbar" aria-label="Navegação principal"></nav>
 
-          <div class="content">
-            <div class="cta-zone">
-              <button class="cta-btn" onclick="DC.startGuide()">
-                <div class="cta-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#1F2A44" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </div>
-                <div>
-                  <div class="cta-title">Descobrir meu caso</div>
-                  <div class="cta-sub">Responda algumas perguntas rápidas</div>
-                </div>
-              </button>
-            </div>
-
-            <div class="quick-row">
-              <div class="quick-card" onclick="DC.goTo('checklist')" role="button" tabindex="0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                <span>Checklist</span>
-              </div>
-              <div class="quick-card" onclick="DC.goTo('whatsapp')" role="button" tabindex="0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                <span>WhatsApp</span>
-              </div>
-              <div class="quick-card" onclick="DC.showToast('Mostrando plantões de atendimento perto de você…')" role="button" tabindex="0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Atendimento</span>
-              </div>
-            </div>
-
-            <div class="section-label">Como funciona</div>
-            <div class="step-list">
-              <div class="step-item">
-                <div class="step-num">1</div>
-                <div>
-                  <div class="step-name">Responda ao guia</div>
-                  <div class="step-meta">Perguntas simples sobre sua situação</div>
-                </div>
-              </div>
-              <div class="step-item">
-                <div class="step-num">2</div>
-                <div>
-                  <div class="step-name">Veja o que pode ser seu caso</div>
-                  <div class="step-meta">Categoria provável de benefício</div>
-                </div>
-              </div>
-              <div class="step-item">
-                <div class="step-num">3</div>
-                <div>
-                  <div class="step-name">Receba o checklist de documentos</div>
-                  <div class="step-meta">Leve pronto para o atendimento</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="tabbar" role="tablist">
-            <button class="tab active" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
-            <button class="tab" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
-            <button class="tab" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
-            <button class="tab" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
-          </div>
-        </div>
-
-        <!-- ===================== GUIDE / TRIAGEM ===================== -->
-        <div class="view" id="view-guide">
-          <div class="status-bar"><span>9:42</span>
-            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
-              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
-              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
-            </div>
-          </div>
-          <h1 class="page-title" style="padding:0 6.5%;">Qual pode ser o meu caso?</h1>
-          <p class="page-sub" style="padding:0 6.5%;">Responda com sinceridade — não pedimos nenhum documento agora.</p>
-
-          <div class="progress-track" id="progress-track"></div>
-
-          <div class="content" style="padding-top:0;">
-            <button class="back-link" id="guide-back" style="display:none;" onclick="DC.guideBack()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              Voltar
-            </button>
-            <div id="guide-body"></div>
-          </div>
-
-          <div class="tabbar">
-            <button class="tab" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
-            <button class="tab active" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
-            <button class="tab" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
-            <button class="tab" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
-          </div>
-        </div>
-
-        <!-- ===================== CHECKLIST ===================== -->
-        <div class="view" id="view-checklist">
-          <div class="status-bar"><span>9:43</span>
-            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
-              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
-              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
-            </div>
-          </div>
-          <div style="padding:0 6.5%;">
-            <div class="category-pill" id="checklist-pill">Sem categoria definida</div>
-            <h1 class="page-title">Checklist de documentos</h1>
-            <p class="page-sub" id="checklist-sub">Marque o que você já tem em mãos.</p>
-          </div>
-
-          <div class="progress-bar-wrap">
-            <div class="progress-outer"><div class="progress-inner" id="checklist-bar" style="width:0%;"></div></div>
-            <div class="progress-caption" id="checklist-caption">0 de 0 documentos reunidos</div>
-          </div>
-
-          <div class="content">
-            <div class="checklist-card" id="checklist-items"></div>
-
-            <div class="info-card" onclick="DC.goTo('whatsapp')" role="button" tabindex="0">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <div>
-                <div class="info-title">Faltou algum documento?</div>
-                <div class="info-sub">Fale com a gente no WhatsApp que te ajudamos a encontrar</div>
-              </div>
-            </div>
-
-            <div class="footer-btn-zone">
-              <button class="btn-primary" onclick="DC.startContract()">Quero gerar contrato para me representar</button>
-              <button class="btn-ghost" onclick="DC.goTo('whatsapp')">Levar esta lista ao atendimento</button>
-              <button class="reset-link" onclick="DC.restartFromChecklist()">Refazer o guia de triagem</button>
-            </div>
-          </div>
-
-          <div class="tabbar">
-            <button class="tab" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
-            <button class="tab" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
-            <button class="tab active" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
-            <button class="tab" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
-          </div>
-        </div>
-
-        <!-- ===================== WHATSAPP ===================== -->
-        <div class="view" id="view-whatsapp">
-          <div class="status-bar"><span>9:44</span>
-            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
-              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
-              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
-            </div>
-          </div>
-          <h1 class="page-title" style="padding:0 6.5%;">Fale com a gente</h1>
-          <p class="page-sub" style="padding:0 6.5%;">Atendimento humano para tirar dúvidas ou confirmar o seu caso.</p>
-
-          <div class="content" style="padding-top:0;">
-            <div class="wa-card">
-              <div class="wa-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-              </div>
-              <div class="wa-title">Conversa no WhatsApp</div>
-              <div class="wa-body">Fale com o time do Direito Certo — disponível para tirar dúvidas rápidas e agendar atendimento presencial.</div>
-              <button class="wa-btn" id="wa-open-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                Abrir conversa
-              </button>
-            </div>
-
-            <div class="info-card" onclick="DC.showToast('Plantões: CRAS, sindicatos e associações parceiras — em breve com agenda no app.')" role="button" tabindex="0">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <div>
-                <div class="info-title">Agendar atendimento presencial</div>
-                <div class="info-sub">Plantões no CRAS e em parceiros locais</div>
-              </div>
-            </div>
-
-            <div class="info-card" onclick="DC.showToast('Pontos de atendimento próximos: em breve com localização.')" role="button" tabindex="0">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <div>
-                <div class="info-title">Pontos de atendimento próximos</div>
-                <div class="info-sub">Veja unidades parceiras na sua região</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="tabbar">
-            <button class="tab" data-tab="home" onclick="DC.goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Início</button>
-            <button class="tab" data-tab="guide" onclick="DC.goTo('guide')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Meu caso</button>
-            <button class="tab" data-tab="checklist" onclick="DC.goTo('checklist')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Checklist</button>
-            <button class="tab active" data-tab="whatsapp" onclick="DC.goTo('whatsapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</button>
-          </div>
-        </div>
-
-        <!-- ===================== CONTRATO (gerar procuração + assinatura) ===================== -->
-        <div class="view" id="view-contract">
-          <div class="status-bar"><span>9:45</span>
-            <div class="fs-toggle" role="group" aria-label="Tamanho do texto">
-              <button class="fs-btn" aria-label="Diminuir texto" onclick="DC.changeFontScale(-1)">A-</button>
-              <button class="fs-btn" aria-label="Aumentar texto" onclick="DC.changeFontScale(1)">A+</button>
-            </div>
-          </div>
-          <div class="contract-topbar">
-            <h1 class="page-title" style="margin:0;">Gerar contrato</h1>
-            <button class="cancel-link" onclick="DC.cancelContract()">Cancelar</button>
-          </div>
-          <div class="progress-track" id="contract-progress"></div>
-          <div class="content" id="contract-body" style="padding-top:0;"></div>
-        </div>
-
-        <div class="toast" id="toast"></div>
+        <div class="sheet-backdrop" id="sheet-backdrop" data-act="close-sheet"></div>
+        <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1"></div>
+        <canvas id="confetti"></canvas>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
       </div>
     </div>
   </div>
@@ -1032,30 +443,84 @@ button{font-family:inherit;}
 (function(){
   "use strict";
 
-  var WHATSAPP_NUMBER = "5500000000000"; // TODO: trocar pelo número real do Direito Certo (DDI+DDD+número, só dígitos)
+  /* Link oficial do WhatsApp do atendimento (QR do projeto) */
+  var WHATSAPP_PHONE = "5547999355299";
+  var WHATSAPP_PHONE_FMT = "(47) 99935-5299";
+  var WHATSAPP_QR = "https://wa.me/qr/V3GLH6SB3QRKP1";
 
-  var LS = {
-    name: "dc_name",
-    seen: "dc_seen_onboarding",
-    fontScale: "dc_font_scale",
-    category: "dc_category",
-    checklistPrefix: "dc_checklist_",
-    contractDraft: "dc_contract_draft"
+  /* ---------------- Armazenamento local (com fallback em memória) ---------------- */
+  var memory = {};
+  var store = {
+    get: function(k){
+      try { var v = localStorage.getItem('dc_' + k); if(v !== null){ return v; } } catch(e){}
+      return memory[k] === undefined ? null : memory[k];
+    },
+    set: function(k, v){
+      memory[k] = String(v);
+      try { localStorage.setItem('dc_' + k, String(v)); } catch(e){}
+    },
+    remove: function(k){
+      delete memory[k];
+      try { localStorage.removeItem('dc_' + k); } catch(e){}
+    },
+    clearAll: function(){
+      memory = {};
+      try {
+        Object.keys(localStorage).filter(function(k){ return k.indexOf('dc_') === 0; })
+          .forEach(function(k){ localStorage.removeItem(k); });
+      } catch(e){}
+    }
   };
 
-  function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
-  function safeSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+  function $(id){ return document.getElementById(id); }
   function esc(s){
-    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
-      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function parseJSON(s, fallback){ try { return s ? JSON.parse(s) : fallback; } catch(e){ return fallback; } }
+  function buzz(ms){ try { if(navigator.vibrate){ navigator.vibrate(ms || 10); } } catch(e){} }
 
-  /* ---------------- Categorias e checklists (dados reais do fluxo previdenciário) ---------------- */
+  /* ---------------- Ícones ---------------- */
+  var ICONS = {
+    home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+    compass:'<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+    checksq:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+    chat:'<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+    chevR:'<polyline points="9 18 15 12 9 6"/>',
+    chevL:'<polyline points="15 18 9 12 15 6"/>',
+    x:'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+    user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
+    info:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+    pin:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+    file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>',
+    arrowR:'<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',
+    check:'<polyline points="20 6 9 17 4 12"/>',
+    help:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+    heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>',
+    leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+    users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    smile:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5"/><line x1="9" y1="9.5" x2="9" y2="9.51"/><line x1="15" y1="9.5" x2="15" y2="9.51"/>',
+    medical:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>',
+    pen:'<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+    shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>'
+  };
+  function ic(name, cls){
+    return '<svg class="ic' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
+  }
+  var CAT_ICON = {
+    aposentadoria_urbana:'checksq', aposentadoria_rural:'leaf', bpc_loas:'heart',
+    auxilio_doenca:'medical', auxilio_acidente:'heart', seguro_terceiro:'users', seguro_vida:'shield', combo:'shield', pensao_morte:'users', salario_maternidade:'smile', generico:'help'
+  };
+
+  /* ---------------- Categorias e documentos ---------------- */
   var CATEGORIES = {
     aposentadoria_urbana: {
       title: "Aposentadoria por Idade Urbana",
-      body: "Pelas suas respostas, esse é o caminho mais provável. Isso não substitui uma análise oficial do INSS, mas já ajuda você a se preparar.",
+      body: "Pelas suas respostas, esse é o caminho mais provável. Isso não substitui a análise oficial do INSS, mas já ajuda você a se preparar.",
       docs: [
         {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
         {id:"ctps", label:"CTPS completa"},
@@ -1080,7 +545,7 @@ button{font-family:inherit;}
     },
     bpc_loas: {
       title: "BPC/LOAS",
-      body: "Pelas suas respostas, você pode ter direito ao Benefício de Prestação Continuada. Ele não exige tempo de contribuição, mas depende de renda familiar e avaliação social ou médica.",
+      body: "Pelas suas respostas, você pode ter direito ao Benefício de Prestação Continuada. Ele não exige tempo de contribuição, mas depende da renda da família e de avaliação social ou médica.",
       docs: [
         {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
         {id:"comprovante", label:"Comprovante de residência"},
@@ -1109,9 +574,63 @@ button{font-family:inherit;}
         {id:"senha_gov", label:"Senha do GOV"}
       ]
     },
+    auxilio_acidente: {
+      title: "Auxílio-Acidente (INSS)",
+      short: "Auxílio-Acidente",
+      blurb: "Quando o acidente deixa sequela que reduz a sua capacidade de trabalho.",
+      body: "Pelas suas respostas, pode haver direito ao auxílio-acidente, um benefício do INSS pago quando fica sequela depois do acidente. A equipe confirma o seu tipo de contribuição e o laudo da sequela.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"ctps", label:"CTPS completa"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"laudos", label:"Laudos médicos", note:"De preferência mostrando a sequela"},
+        {id:"prontuario", label:"Prontuário médico", note:"Do hospital ou posto onde foi atendido"},
+        {id:"raiox", label:"Raio-X ou exames de imagem"},
+        {id:"relato", label:"Relato a próprio punho", note:"Como foi o acidente e o que mudou no seu trabalho"},
+        {id:"cat", label:"CAT – Comunicação de Acidente de Trabalho", note:"Se foi acidente de trabalho"},
+        {id:"boletim", label:"Boletim de ocorrência", note:"Se houve acidente de trânsito ou de trabalho"},
+        {id:"senha_gov", label:"Senha do GOV"}
+      ]
+    },
+    seguro_terceiro: {
+      title: "Indenização do causador do acidente (seguro de terceiros)",
+      short: "Indenização de terceiros",
+      blurb: "Quando outra pessoa ou veículo causou o acidente e pode ter que indenizar.",
+      body: "Pelas suas respostas, houve alguém que causou o acidente. Nesses casos pode existir direito a indenização pelo causador ou pelo seguro dele. A equipe analisa as provas com você.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"boletim", label:"Boletim de ocorrência", note:"Registro do acidente, se houve"},
+        {id:"dados_causador", label:"Dados de quem causou o acidente", note:"Nome, telefone, placa do veículo e seguradora, se souber"},
+        {id:"fotos", label:"Fotos e vídeos do acidente", note:"Do local, dos veículos e das lesões"},
+        {id:"testemunhas", label:"Contato de testemunhas", note:"Quem viu o que aconteceu"},
+        {id:"laudos", label:"Laudos médicos"},
+        {id:"prontuario", label:"Prontuário médico"},
+        {id:"raiox", label:"Raio-X ou exames de imagem"},
+        {id:"despesas", label:"Comprovantes de gastos", note:"Remédios, transporte, conserto, dias sem trabalhar"},
+        {id:"bombeiro", label:"Atendimento de Bombeiro ou SAMU", note:"Se houve resgate"},
+        {id:"relato", label:"Relato a próprio punho", note:"Como foi o acidente"}
+      ]
+    },
+    seguro_vida: {
+      title: "Seguro de Vida (invalidez ou doença)",
+      short: "Seguro de Vida",
+      blurb: "Seguro individual ou da empresa que pode pagar em caso de invalidez ou doença grave.",
+      body: "Pelas suas respostas, você pode ter um seguro de vida que paga em caso de invalidez ou doença. Pode ser um seguro individual ou o coletivo da empresa. Ter a apólice ajuda muito, mas a equipe também consegue buscar.",
+      docs: [
+        {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH"},
+        {id:"comprovante", label:"Comprovante de residência"},
+        {id:"apolice", label:"Apólice ou certificado do seguro", note:"Individual ou da empresa. Se não tiver, a equipe ajuda a pedir"},
+        {id:"pagamento_seguro", label:"Comprovante de pagamento do seguro", note:"Boleto, fatura ou desconto no contracheque"},
+        {id:"laudos", label:"Laudos médicos", note:"Com CID e indicação da invalidez ou doença"},
+        {id:"atestado", label:"Atestado médico"},
+        {id:"prontuario", label:"Prontuário médico"},
+        {id:"relato", label:"Relato a próprio punho", note:"O que aconteceu e como isso afeta o seu trabalho"}
+      ]
+    },
     pensao_morte: {
       title: "Pensão por Morte",
-      body: "Pelas suas respostas, você pode ter direito à pensão por morte como dependente. O grau de parentesco e a comprovação de dependência são o centro da análise.",
+      body: "Pelas suas respostas, você pode ter direito à pensão por morte como dependente. O parentesco e a comprovação de dependência são o centro da análise.",
       docs: [
         {id:"certidao_obito", label:"Certidão de óbito"},
         {id:"doc_pessoal", label:"Documento Pessoal – RG ou CNH", note:"Do requerente"},
@@ -1147,61 +666,110 @@ button{font-family:inherit;}
     }
   };
 
-  var RESULT_ICONS = {
-    aposentadoria_urbana: '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
-    aposentadoria_rural: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
-    bpc_loas: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>',
-    auxilio_doenca: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>',
-    pensao_morte: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
-    salario_maternidade: '<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5"/><line x1="9" y1="9.5" x2="9" y2="9.51"/><line x1="15" y1="9.5" x2="15" y2="9.51"/>',
-    generico: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+  var DOC_TIPS = {
+    doc_pessoal: "RG ou CNH com foto e dentro da validade. Leve também o número do CPF.",
+    ctps: "Leve todas as páginas: foto, dados pessoais e contratos de trabalho. Se for a carteira digital, baixe pelo app Carteira de Trabalho Digital.",
+    comprovante: "Conta de água, luz ou telefone, de preferência recente.",
+    carne: "Guias ou boletos pagos da contribuição (MEI ou autônomo). Eles também aparecem no extrato do Meu INSS.",
+    senha_gov: "Tenha em mãos o login e a senha da sua conta gov.br. Informe só à equipe, durante o atendimento — nunca em links ou mensagens de desconhecidos.",
+    notas_produtor: "Notas fiscais de venda da produção, blocos de produtor ou declarações do sindicato rural.",
+    notas_agricultor: "Notas fiscais de venda da produção, blocos de produtor ou declarações do sindicato rural.",
+    itr: "Documento do imposto da terra (ITR), se você é dono da propriedade.",
+    ppp: "Documento que a empresa fornece com o histórico de trabalho. Peça ao RH da empresa.",
+    rtm: "Se você tiver, leve. A equipe confirma com você se precisa.",
+    laudos: "Laudos dos médicos que acompanham você, com data, CID e carimbo.",
+    atestado: "Atestado recente, com CID e tempo de afastamento indicado.",
+    prontuario: "Peça no hospital ou posto onde foi atendido — você tem direito a uma cópia.",
+    raiox: "Exames de imagem com laudo escrito, se você tiver.",
+    relato: "Escreva com suas palavras o que aconteceu, quando e como isso impede você de trabalhar.",
+    cat: "Comunicação que a empresa faz em caso de acidente de trabalho. Peça ao RH.",
+    boletim: "Registro policial do acidente, se houve.",
+    bombeiro: "Ficha do atendimento ou resgate, se houve.",
+    dados_causador: "Anote o que você souber: nome, telefone, placa do veículo, seguradora. Mesmo pouco ajuda.",
+    fotos: "Fotos e vídeos do local, dos veículos e das lesões. Pode enviar pelo WhatsApp.",
+    testemunhas: "Nome e telefone de quem viu o acidente.",
+    despesas: "Notas e recibos de remédio, transporte, conserto e dias parados.",
+    apolice: "É o contrato do seguro. Pode estar no e-mail, com o corretor ou no RH da empresa. Se não achar, a equipe ajuda a pedir à seguradora.",
+    pagamento_seguro: "Boleto, fatura do cartão ou o desconto no contracheque que mostra o seguro.",
+    certidao_obito: "Certidão emitida pelo cartório. Leve o original ou uma cópia.",
+    certidao_casamento: "Certidões de casamento e/ou nascimento que comprovem o parentesco.",
+    vinculo: "Certidões ou declarações que comprovem união estável ou dependência.",
+    certidao_crianca: "Certidão de nascimento da criança ou termo de guarda/adoção.",
+    ctps_falecido: "CTPS e outros registros de trabalho da pessoa falecida, se existirem."
   };
 
+  var BENEFITS = [
+    {key:'aposentadoria_urbana', short:'Aposentadoria por idade', blurb:'Para quem já chegou na idade mínima e contribuiu para o INSS.',
+      who:['Trabalhadores de carteira assinada, MEI ou autônomos que contribuíram','Quem já atingiu a idade mínima exigida','É exigido um tempo mínimo de contribuição'],
+      start:{node:'idade_faixa', answers:{motivo:'idade', area:'urbano'}, trail:['Aposentadoria','Trabalho urbano']}},
+    {key:'aposentadoria_rural', short:'Aposentadoria rural', blurb:'Para quem trabalha ou trabalhou na roça, na pesca artesanal ou na terra.',
+      who:['Quem trabalha em lavoura, pesca artesanal ou economia familiar','Quem consegue comprovar o trabalho rural','Vale também para quem já teve outros tipos de trabalho'],
+      start:{node:'idade_faixa', answers:{motivo:'idade', area:'rural'}, trail:['Aposentadoria','Trabalho rural']}},
+    {key:'bpc_loas', short:'BPC/LOAS', blurb:'Um salário mínimo por mês para pessoa idosa ou com deficiência, com renda familiar baixa.',
+      who:['Pessoas com 65 anos ou mais e renda familiar baixa','Pessoas com deficiência e renda familiar baixa','Não é preciso ter contribuído para o INSS'],
+      start:null},
+    {key:'auxilio_doenca', short:'Auxílio-Doença', blurb:'Para quem não consegue trabalhar por um tempo, por doença ou acidente.',
+      who:['Quem contribui (ou contribuiu) para o INSS','Doença ou acidente que impede de trabalhar','Passa por perícia médica'],
+      start:{node:'saude_origem', answers:{motivo:'saude'}, trail:['Doença ou acidente']}},
+    {key:'auxilio_acidente', short:'Auxílio-Acidente', blurb:'Para quem ficou com sequela depois de um acidente.',
+      who:['Quem contribui (ou contribuiu) para o INSS','Acidente que deixou sequela ou perda de capacidade','Pode ser acidente de trabalho ou de outro tipo'],
+      start:{node:'acidente_tipo', answers:{motivo:'saude', origem:'acidente'}, trail:['Acidente']}},
+    {key:'seguro_terceiro', short:'Seguro de terceiros', blurb:'Indenização quando outra pessoa ou veículo causou o acidente.',
+      who:['Acidente causado por outra pessoa ou veículo','Vale para trânsito, trabalho, lazer e outros','Quanto mais provas, melhor'],
+      start:{node:'acidente_tipo', answers:{motivo:'saude', origem:'acidente'}, trail:['Acidente']}},
+    {key:'seguro_vida', short:'Seguro de Vida', blurb:'Seguro individual ou da empresa que pode pagar por invalidez ou doença.',
+      who:['Quem contratou seguro de vida por conta própria','Quem tem seguro coletivo pela empresa','Ter a apólice ajuda, mas não é obrigatório para começar'],
+      start:{node:'vida_tem', answers:{motivo:'saude', origem:'outro'}, trail:['Seguro de vida']}},
+    {key:'pensao_morte', short:'Pensão por morte', blurb:'Para dependentes de quem faleceu e era segurado do INSS ou aposentado.',
+      who:['Cônjuge, companheiro(a), filhos e outros dependentes','A pessoa falecida precisa ter sido segurada do INSS','Parentesco e dependência são avaliados'],
+      start:{node:'obito_parentesco', answers:{motivo:'obito'}, trail:['Perda de familiar']}},
+    {key:'salario_maternidade', short:'Salário-Maternidade', blurb:'Para quem teve um filho, adotou ou ganhou guarda para adoção.',
+      who:['Mães de recém-nascidos, adoção ou guarda para adoção','Quem contribui para o INSS ou é segurada especial rural','É pago por um período determinado'],
+      start:{node:'maternidade_situacao', answers:{motivo:'maternidade'}, trail:['Maternidade']}}
+  ];
+
   /* ---------------- Árvore de decisão da triagem ---------------- */
-  // Cada nó: pergunta + opções. Cada opção leva a outro nó (next) ou fecha com uma categoria (result).
+  var HINT = 'Pode responder com tranquilidade — ainda não pedimos nenhum documento.';
   var TREE = {
     start: {
-      label: "PERGUNTA 1",
+      progress: 8,
       title: "O que te trouxe até aqui?",
+      hint: "Escolha a opção que mais combina com você.",
       options: [
-        {icon:"👴", text:"Estou ficando mais velho(a) e quero saber se posso me aposentar", set:{motivo:"idade"}, next:"idade_area"},
-        {icon:"🩺", text:"Tive uma doença ou acidente que me impede de trabalhar", set:{motivo:"saude"}, next:"saude_acidente"},
-        {icon:"👪", text:"Um familiar que nos sustentava faleceu", set:{motivo:"obito"}, next:"obito_parentesco"},
-        {icon:"👶", text:"Tive ou vou ter um bebê e quero saber meus direitos", set:{motivo:"maternidade"}, next:"maternidade_situacao"},
-        {icon:"💬", text:"Não sei bem, quero conversar com alguém", result:"generico"}
+        {icon:"👴", tag:"Aposentadoria", text:"Estou ficando mais velho(a) e quero saber se posso me aposentar", set:{motivo:"idade"}, next:"idade_area"},
+        {icon:"🩺", tag:"Doença ou acidente", text:"Tive um acidente ou doença que me impede de trabalhar", set:{motivo:"saude"}, next:"saude_origem"},
+        {icon:"👪", tag:"Perda de familiar", text:"Um familiar que nos sustentava faleceu", set:{motivo:"obito"}, next:"obito_parentesco"},
+        {icon:"👶", tag:"Maternidade", text:"Tive ou vou ter um bebê e quero saber meus direitos", set:{motivo:"maternidade"}, next:"maternidade_situacao"},
+        {icon:"💬", tag:"Quero conversar", text:"Não sei bem, quero conversar com alguém", result:"generico"}
       ]
     },
     idade_area: {
-      label: "PERGUNTA 2",
-      title: "Seu trabalho é feito principalmente…",
+      progress: 28, title: "Seu trabalho é feito principalmente…", hint: HINT,
       options: [
-        {text:"Na roça, na pesca ou lidando com a terra (rural)", set:{area:"rural"}, next:"idade_faixa"},
-        {text:"Na cidade, no comércio ou na indústria (urbano)", set:{area:"urbano"}, next:"idade_faixa"}
+        {tag:"Trabalho rural", text:"Na roça, na pesca ou lidando com a terra (rural)", set:{area:"rural"}, next:"idade_faixa"},
+        {tag:"Trabalho urbano", text:"Na cidade, no comércio ou na indústria (urbano)", set:{area:"urbano"}, next:"idade_faixa"}
       ]
     },
     idade_faixa: {
-      label: "PERGUNTA 3",
-      title: "Qual é a sua faixa de idade?",
+      progress: 48, title: "Qual é a sua faixa de idade?", hint: HINT,
       options: [
-        {text:"Menos de 55 anos", set:{faixa:"menos55"}, next:"idade_contribuicao"},
-        {text:"Entre 55 e 64 anos", set:{faixa:"55a64"}, next:"idade_contribuicao"},
-        {text:"65 anos ou mais", set:{faixa:"65mais"}, next:"idade_contribuicao"}
+        {tag:"Menos de 55 anos", text:"Menos de 55 anos", set:{faixa:"menos55"}, next:"idade_contribuicao"},
+        {tag:"55 a 64 anos", text:"Entre 55 e 64 anos", set:{faixa:"55a64"}, next:"idade_contribuicao"},
+        {tag:"65 anos ou mais", text:"65 anos ou mais", set:{faixa:"65mais"}, next:"idade_contribuicao"}
       ]
     },
     idade_contribuicao: {
-      label: "PERGUNTA 4",
-      title: "Você já contribuiu para o INSS — carteira assinada, carnê ou como rural?",
+      progress: 70, title: "Você já contribuiu para o INSS — carteira assinada, carnê ou como rural?", hint: HINT,
       options: [
-        {text:"Sim, por muitos anos", set:{contrib:"muitos"}, next:"idade_resultado"},
-        {text:"Sim, mas por pouco tempo", set:{contrib:"pouco"}, next:"idade_resultado"},
-        {text:"Nunca contribuí", set:{contrib:"nunca"}, next:"idade_resultado"}
+        {tag:"Contribuiu por muitos anos", text:"Sim, por muitos anos", set:{contrib:"muitos"}, next:"idade_resultado"},
+        {tag:"Contribuiu por pouco tempo", text:"Sim, mas por pouco tempo", set:{contrib:"pouco"}, next:"idade_resultado"},
+        {tag:"Nunca contribuiu", text:"Nunca contribuí", set:{contrib:"nunca"}, next:"idade_resultado"}
       ]
     },
     idade_resultado: {
       compute: function(a){
         if(a.area === "rural"){
-          if(a.faixa === "menos55"){ return "generico"; }
-          return "aposentadoria_rural";
+          return a.faixa === "menos55" ? "generico" : "aposentadoria_rural";
         }
         if(a.faixa === "65mais"){
           return a.contrib === "nunca" ? "bpc_loas" : "aposentadoria_urbana";
@@ -1209,663 +777,751 @@ button{font-family:inherit;}
         return "generico";
       }
     },
-    saude_acidente: {
-      label: "PERGUNTA 2",
-      title: "Foi um acidente de trabalho ou de trajeto?",
+    saude_origem: {
+      progress: 14, title: "O problema de saúde veio de quê?", hint: HINT,
       options: [
-        {text:"Sim", set:{acidente:"sim"}, next:"saude_contribuicao"},
-        {text:"Não", set:{acidente:"nao"}, next:"saude_contribuicao"}
+        {icon:"💥", tag:"Acidente", text:"De um acidente", set:{origem:"acidente"}, next:"acidente_tipo"},
+        {icon:"🩺", tag:"Doença", text:"De uma doença", set:{origem:"doenca"}, next:"saude_contribuicao"}
+      ]
+    },
+    acidente_tipo: {
+      progress: 26, title: "Que tipo de acidente foi?", hint: HINT,
+      options: [
+        {icon:"🚗", tag:"Trânsito", text:"Acidente de trânsito (carro, moto, bicicleta, atropelamento)", set:{tipo:"transito"}, next:"acidente_causador"},
+        {icon:"🏭", tag:"Trabalho", text:"Acidente de trabalho ou no caminho do trabalho", set:{tipo:"trabalho"}, next:"acidente_causador"},
+        {icon:"⚽", tag:"Esportivo", text:"Acidente esportivo ou de lazer", set:{tipo:"esporte"}, next:"acidente_causador"},
+        {icon:"🏠", tag:"Doméstico", text:"Acidente doméstico (em casa)", set:{tipo:"domestico"}, next:"acidente_causador"},
+        {icon:"❔", tag:"Outro acidente", text:"Outro tipo de acidente", set:{tipo:"outro"}, next:"acidente_causador"}
+      ]
+    },
+    acidente_causador: {
+      progress: 38, title: "Alguém causou o acidente ou foi queda ou fato sozinho(a)?", hint: HINT,
+      options: [
+        {tag:"Teve causador", text:"Teve um causador (outra pessoa, motorista, empresa)", set:{causador:"terceiro"}, next:"acidente_fratura"},
+        {tag:"Sem causador", text:"Foi queda ou acidente sozinho(a), sem causador", set:{causador:"sozinho"}, next:"acidente_fratura"},
+        {tag:"Causador incerto", text:"Não sei dizer", set:{causador:"talvez"}, next:"acidente_fratura"}
+      ]
+    },
+    acidente_fratura: {
+      progress: 50, title: "Houve fratura ou sequela?", hint: "Sequela é perda de movimento, dor que ficou, cicatriz grande ou amputação.",
+      options: [
+        {tag:"Teve fratura", text:"Sim, teve fratura (osso quebrado)", set:{fratura:"fratura"}, next:"acid_contribuicao"},
+        {tag:"Ficou sequela", text:"Sem fratura, mas ficou sequela ou limitação", set:{fratura:"sequela"}, next:"acid_contribuicao"},
+        {tag:"Sem fratura", text:"Não, sem fratura nem sequela", set:{fratura:"nao"}, next:"acid_contribuicao"}
+      ]
+    },
+    acid_contribuicao: {
+      progress: 62, title: "Você já contribuiu para o INSS — carteira, carnê ou MEI?", hint: HINT,
+      options: [
+        {tag:"Contribui ou contribuiu há pouco", text:"Sim, contribuo atualmente ou contribuí recentemente", set:{contrib:"recente"}, next:"vida_tem"},
+        {tag:"Parou de contribuir há tempo", text:"Sim, mas parei de contribuir há muito tempo", set:{contrib:"antigo"}, next:"vida_tem"},
+        {tag:"Nunca contribuiu", text:"Nunca contribuí", set:{contrib:"nunca"}, next:"vida_tem"}
       ]
     },
     saude_contribuicao: {
-      label: "PERGUNTA 3",
-      title: "Você já contribuiu para o INSS — carteira, carnê ou MEI?",
+      progress: 45, title: "Você já contribuiu para o INSS — carteira, carnê ou MEI?", hint: HINT,
       options: [
-        {text:"Sim, contribuo atualmente ou contribuí recentemente", set:{contrib:"recente"}, next:"saude_resultado"},
-        {text:"Sim, mas parei de contribuir há muito tempo", set:{contrib:"antigo"}, next:"saude_resultado"},
-        {text:"Nunca contribuí", set:{contrib:"nunca"}, next:"saude_renda"}
+        {tag:"Contribui ou contribuiu há pouco", text:"Sim, contribuo atualmente ou contribuí recentemente", set:{contrib:"recente"}, next:"vida_tem"},
+        {tag:"Parou de contribuir há tempo", text:"Sim, mas parei de contribuir há muito tempo", set:{contrib:"antigo"}, next:"vida_tem"},
+        {tag:"Nunca contribuiu", text:"Nunca contribuí", set:{contrib:"nunca"}, next:"saude_renda"}
       ]
     },
     saude_renda: {
-      label: "PERGUNTA 4",
-      title: "A renda da sua família é baixa — até 1/4 de salário mínimo por pessoa?",
+      progress: 80, title: "A renda da sua família é baixa — até 1/4 de salário mínimo por pessoa?", hint: HINT,
       options: [
-        {text:"Sim", set:{renda:"baixa"}, result:"bpc_loas"},
-        {text:"Não", set:{renda:"outra"}, result:"generico"}
+        {tag:"Renda familiar baixa", text:"Sim", set:{renda:"baixa"}, result:"bpc_loas"},
+        {tag:"Renda não é baixa", text:"Não", set:{renda:"outra"}, result:"generico"}
+      ]
+    },
+    vida_tem: {
+      progress: 76, title: "Você tem seguro de vida?", hint: "Pode ser um que você contratou ou o da empresa onde trabalha ou trabalhava.",
+      options: [
+        {icon:"👤", tag:"Seguro individual", text:"Sim, individual (contratei por conta própria)", set:{vida:"individual"}, next:"vida_apolice"},
+        {icon:"🏢", tag:"Seguro da empresa", text:"Sim, da empresa onde trabalho ou trabalhava", set:{vida:"empresa"}, next:"vida_apolice"},
+        {icon:"👥", tag:"Seguro individual e da empresa", text:"Sim, tenho os dois", set:{vida:"ambos"}, next:"vida_apolice"},
+        {tag:"Sem seguro de vida", text:"Não tenho seguro de vida", set:{vida:"nao"}, next:"saude_resultado"},
+        {tag:"Seguro de vida incerto", text:"Não sei se tenho", set:{vida:"talvez"}, next:"saude_resultado"}
+      ]
+    },
+    vida_apolice: {
+      progress: 90, title: "Você tem a apólice (o contrato do seguro)?", hint: "Se não tiver, não tem problema: a equipe ajuda a pedir à seguradora.",
+      options: [
+        {tag:"Tem a apólice", text:"Sim, tenho a apólice ou o certificado", set:{apolice:"sim"}, next:"saude_resultado"},
+        {tag:"Sem a apólice", text:"Sei que existe, mas não tenho comigo", set:{apolice:"nao"}, next:"saude_resultado"},
+        {tag:"Apólice incerta", text:"Não sei onde está", set:{apolice:"talvez"}, next:"saude_resultado"}
       ]
     },
     saude_resultado: {
       compute: function(a){
-        return "auxilio_doenca";
+        var r = [], segurado = a.contrib && a.contrib !== "nunca";
+        if(a.origem === "outro"){
+          return a.vida && a.vida !== "nao" ? ["seguro_vida"] : "generico";
+        }
+        if(segurado){ r.push("auxilio_doenca"); }
+        if(a.origem === "acidente"){
+          if(segurado && (a.fratura === "fratura" || a.fratura === "sequela")){ r.push("auxilio_acidente"); }
+          if(a.causador === "terceiro" || (a.causador === "talvez" && a.tipo === "transito")){ r.push("seguro_terceiro"); }
+        }
+        if(a.vida && a.vida !== "nao"){ r.push("seguro_vida"); }
+        return r.length ? r : "generico";
       }
     },
     obito_parentesco: {
-      label: "PERGUNTA 2",
-      title: "Qual é a sua relação com a pessoa que faleceu?",
+      progress: 33, title: "Qual é a sua relação com a pessoa que faleceu?", hint: HINT,
       options: [
-        {text:"Sou cônjuge ou companheiro(a)", set:{parentesco:"conjuge"}, next:"obito_contribuia"},
-        {text:"Sou filho(a) menor de 21 anos ou inválido(a)", set:{parentesco:"filho"}, next:"obito_contribuia"},
-        {text:"Outro tipo de dependente", set:{parentesco:"outro"}, next:"obito_contribuia"}
+        {tag:"Cônjuge ou companheiro(a)", text:"Sou cônjuge ou companheiro(a)", set:{parentesco:"conjuge"}, next:"obito_contribuia"},
+        {tag:"Filho(a) menor ou inválido(a)", text:"Sou filho(a) menor de 21 anos ou inválido(a)", set:{parentesco:"filho"}, next:"obito_contribuia"},
+        {tag:"Outro dependente", text:"Outro tipo de dependente", set:{parentesco:"outro"}, next:"obito_contribuia"}
       ]
     },
     obito_contribuia: {
-      label: "PERGUNTA 3",
-      title: "A pessoa falecida contribuía para o INSS ou recebia algum benefício?",
+      progress: 70, title: "A pessoa falecida contribuía para o INSS ou recebia algum benefício?", hint: HINT,
       options: [
-        {text:"Sim", set:{contribuia:"sim"}, result:"pensao_morte"},
-        {text:"Não sei dizer", set:{contribuia:"talvez"}, result:"pensao_morte"},
-        {text:"Não, nunca contribuiu", set:{contribuia:"nao"}, result:"generico"}
+        {tag:"Falecido(a) contribuía", text:"Sim", set:{contribuia:"sim"}, result:"pensao_morte"},
+        {tag:"Não sei se contribuía", text:"Não sei dizer", set:{contribuia:"talvez"}, result:"pensao_morte"},
+        {tag:"Falecido(a) não contribuía", text:"Não, nunca contribuiu", set:{contribuia:"nao"}, result:"generico"}
       ]
     },
     maternidade_situacao: {
-      label: "PERGUNTA 2",
-      title: "Qual é a sua situação de trabalho?",
+      progress: 50, title: "Qual é a sua situação de trabalho?", hint: HINT,
       options: [
-        {text:"Trabalho com carteira assinada (CLT)", set:{mat:"clt"}, result:"salario_maternidade"},
-        {text:"Sou MEI, autônoma ou contribuinte individual", set:{mat:"individual"}, result:"salario_maternidade"},
-        {text:"Trabalho na área rural", set:{mat:"rural"}, result:"salario_maternidade"},
-        {text:"Não trabalho e nunca contribuí", set:{mat:"nenhum"}, result:"generico"}
+        {tag:"Carteira assinada", text:"Trabalho com carteira assinada (CLT)", set:{mat:"clt"}, result:"salario_maternidade"},
+        {tag:"MEI ou autônoma", text:"Sou MEI, autônoma ou contribuinte individual", set:{mat:"individual"}, result:"salario_maternidade"},
+        {tag:"Trabalho rural", text:"Trabalho na área rural", set:{mat:"rural"}, result:"salario_maternidade"},
+        {tag:"Sem contribuição", text:"Não trabalho e nunca contribuí", set:{mat:"nenhum"}, result:"generico"}
       ]
     }
   };
 
-  /* ---------------- Estado do app ---------------- */
-  var state = {
-    view: "onboard",
-    guideNode: "start",
-    guideAnswers: {},
-    guideHistory: [],
-    contract: {
-      step: 0,
-      data: { nome:"", cpf:"", telefone:"", nascimento:"", dataOcorrido:"", resumo:"", docModo:"", arquivos:[], concordo:false },
-      sigHasStroke:false
-    }
-  };
-
-  var els = {};
-
-  function qs(id){ return document.getElementById(id); }
-
-  function init(){
-    els.nameInput = qs("name-input");
-    els.homeGreeting = qs("home-greeting");
-    els.homeAvatar = qs("home-avatar");
-    els.progressTrack = qs("progress-track");
-    els.guideBody = qs("guide-body");
-    els.guideBack = qs("guide-back");
-    els.checklistPill = qs("checklist-pill");
-    els.checklistSub = qs("checklist-sub");
-    els.checklistItems = qs("checklist-items");
-    els.checklistBar = qs("checklist-bar");
-    els.checklistCaption = qs("checklist-caption");
-    els.toast = qs("toast");
-    els.waOpenBtn = qs("wa-open-btn");
-    els.clock = qs("clock");
-    els.contractBody = qs("contract-body");
-    els.contractProgress = qs("contract-progress");
-
-    var savedScale = parseFloat(safeGet(LS.fontScale) || "1");
-    applyFontScale(savedScale);
-
-    var savedName = safeGet(LS.name);
-    if(savedName){ els.nameInput.value = savedName; }
-
-    updateClock();
-    setInterval(updateClock, 30000);
-
-    qs("btn-comecar").addEventListener("click", onComecar);
-    els.waOpenBtn.addEventListener("click", openWhatsApp);
-
-    var seen = safeGet(LS.seen);
-    if(seen === "1"){
-      renderHomeGreeting();
-      goTo("home");
-    } else {
-      goTo("onboard");
-    }
+  /* ---------------- Estado ---------------- */
+  function freshGuide(){
+    return {node:'start', answers:{}, trail:[], history:[], mode:'idle', timers:[], busy:false, lastPct:0};
   }
+  var state = { view:'onboard', guide: freshGuide() };
 
-  function updateClock(){
-    var d = new Date();
-    var h = d.getHours(), m = d.getMinutes();
-    els.clock.textContent = h + ":" + (m < 10 ? "0"+m : m);
-  }
-
-  function onComecar(){
-    var name = (els.nameInput.value || "").trim();
-    if(name){ safeSet(LS.name, name); }
-    safeSet(LS.seen, "1");
-    renderHomeGreeting();
-    goTo("home");
-  }
-
-  function renderHomeGreeting(){
-    var name = safeGet(LS.name);
-    if(name){
-      els.homeGreeting.textContent = name;
-      els.homeAvatar.textContent = name.trim().charAt(0).toUpperCase();
-      els.homeAvatar.style.fontSize = "";
-    } else {
-      els.homeGreeting.textContent = "tudo bem?";
-      els.homeAvatar.textContent = "😊";
-      els.homeAvatar.style.fontSize = "16px";
-    }
-  }
-
-  function goTo(name){
-    document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
-    qs("view-" + name).classList.add("active");
-    document.querySelectorAll(".tab").forEach(function(t){ t.classList.remove("active"); });
-    document.querySelectorAll('.tab[data-tab="' + name + '"]').forEach(function(t){ t.classList.add("active"); });
-    state.view = name;
-    if(name === "checklist"){ renderChecklist(); }
-  }
-
+  /* ---------------- Utilidades de UI ---------------- */
+  var toastTimer = null;
   function showToast(msg){
-    els.toast.textContent = msg;
-    els.toast.classList.add("show");
-    clearTimeout(showToast._t);
-    showToast._t = setTimeout(function(){ els.toast.classList.remove("show"); }, 2600);
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3200);
   }
 
-  function changeFontScale(dir){
-    var current = parseFloat(safeGet(LS.fontScale) || "1");
-    var next = Math.min(1.3, Math.max(0.9, Math.round((current + dir*0.1) * 10) / 10));
-    applyFontScale(next);
-    safeSet(LS.fontScale, String(next));
+  function applyScale(v){ $('app-screen').style.setProperty('--fs', v); }
+
+  function ring(pct, size, label){
+    var r = 26, c = 2 * Math.PI * r;
+    return '<div class="ring" style="width:' + size + 'px;height:' + size + 'px">' +
+      '<svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ring-bg" cx="32" cy="32" r="' + r + '"/>' +
+      '<circle class="ring-fg" cx="32" cy="32" r="' + r + '" stroke-dasharray="' + c.toFixed(1) + '" stroke-dashoffset="' + c.toFixed(1) + '" data-pct="' + pct + '" data-c="' + c.toFixed(1) + '"/></svg>' +
+      '<span class="ring-num">' + label + '</span></div>';
   }
-  function applyFontScale(v){
-    qs("app-screen").style.setProperty("--fs-scale", v);
+  function animateRings(root){
+    Array.prototype.forEach.call(root.querySelectorAll('.ring-fg'), function(el){
+      var c = parseFloat(el.getAttribute('data-c')), p = parseFloat(el.getAttribute('data-pct'));
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        el.style.strokeDashoffset = (c * (1 - p / 100)).toFixed(1);
+      }); });
+    });
   }
 
-  /* ---------------- Guia / triagem ---------------- */
-  function startGuide(){
-    state.guideNode = "start";
-    state.guideAnswers = {};
-    state.guideHistory = [];
-    goTo("guide");
-    renderGuideNode();
+  function avatarBtn(){
+    var n = store.get('name');
+    var inner = n ? esc(n.trim().charAt(0).toUpperCase()) : ic('user');
+    return '<button class="avatar-btn" data-act="profile" aria-label="Perfil e troca de usuário">' + inner + '</button>';
+  }
+  function topbar(title){
+    return '<div class="topbar">' + avatarBtn() +
+      '<div class="tb-title">' + esc(title) + '</div>' +
+      '<button class="iconbtn" data-act="textsize" aria-label="Tamanho do texto"><span class="aa">Aa</span></button></div>';
   }
 
-  function restartFromChecklist(){
-    startGuide();
+  /* ---------------- Confete ---------------- */
+  function confetti(){
+    try {
+      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+      var cv = $('confetti'), box = $('app-screen').getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = box.width * dpr; cv.height = box.height * dpr;
+      var ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);
+      var colors = ['#E0B62B','#F6D96E','#25D366','#F4F6FB','#C99A12'];
+      var parts = [], i;
+      for(i = 0; i < 90; i++){
+        var a = -Math.PI / 2 + (Math.random() - .5) * 1.6, sp = 6 + Math.random() * 8;
+        parts.push({x: box.width / 2 + (Math.random() - .5) * 60, y: box.height * .32, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+          w: 6 + Math.random() * 6, h: 4 + Math.random() * 5, r: Math.random() * 6, vr: (Math.random() - .5) * .4,
+          c: colors[(Math.random() * colors.length) | 0], life: 0});
+      }
+      var frames = 0;
+      (function tick(){
+        ctx.clearRect(0, 0, box.width, box.height);
+        parts.forEach(function(p){
+          p.vy += .22; p.vx *= .992; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+          ctx.globalAlpha = Math.max(0, 1 - p.life / 110);
+          ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+        });
+        frames++;
+        if(frames < 115){ requestAnimationFrame(tick); } else { ctx.clearRect(0, 0, box.width, box.height); }
+      })();
+    } catch(e){}
   }
 
+  /* ---------------- Sheets ---------------- */
+  function openSheet(html){
+    var s = $('sheet');
+    s.style.transform = '';
+    s.innerHTML = html;
+    s.scrollTop = 0;
+    $('sheet-backdrop').classList.add('open');
+    s.classList.add('open');
+    s.setAttribute('aria-hidden', 'false');
+    try { s.focus({preventScroll:true}); } catch(e){}
+  }
+  function closeSheet(){
+    var s = $('sheet');
+    s.style.transform = '';
+    s.classList.remove('open');
+    $('sheet-backdrop').classList.remove('open');
+    s.setAttribute('aria-hidden', 'true');
+  }
+  function sheetOpen(){ return $('sheet').classList.contains('open'); }
+
+  function initSheetDrag(){
+    var s = $('sheet'), startY = null, dy = 0;
+    s.addEventListener('touchstart', function(e){
+      if(e.target.closest && e.target.closest('.grab')){ startY = e.touches[0].clientY; dy = 0; s.style.transition = 'none'; }
+    }, {passive:true});
+    s.addEventListener('touchmove', function(e){
+      if(startY === null){ return; }
+      dy = Math.max(0, e.touches[0].clientY - startY);
+      s.style.transform = 'translateY(' + dy + 'px)';
+    }, {passive:true});
+    s.addEventListener('touchend', function(){
+      if(startY === null){ return; }
+      s.style.transition = '';
+      if(dy > 90){ closeSheet(); } else { s.style.transform = ''; }
+      startY = null;
+    });
+  }
+
+  function openProfile(){
+    var name = store.get('name') || '';
+    openSheet('<div class="grab"></div>' +
+      '<div class="prof-head"><div class="avatar-lg">' + (name ? esc(name.trim().charAt(0).toUpperCase()) : ic('user')) + '</div>' +
+      '<div><div class="prof-name">' + (name ? esc(name) : 'Visitante') + '</div><div class="prof-sub">Seus dados ficam só neste aparelho.</div></div></div>' +
+      '<label class="lbl" for="prof-name">Seu nome</label>' +
+      '<input class="inp" id="prof-name" type="text" maxlength="30" autocomplete="off" value="' + esc(name) + '" placeholder="Como podemos te chamar?">' +
+      '<button class="btn btn-soft" data-act="save-name">Salvar nome</button>' +
+      '<div class="divider"></div>' +
+      '<button class="btn btn-danger" data-act="signout-ask">' + ic('logout') + 'Sair e trocar de usuário</button>' +
+      '<p class="fineprint">Ao sair, apagamos nome, respostas e checklist deste aparelho para a próxima pessoa começar do zero.</p>');
+  }
+  function askSignOut(){
+    var name = store.get('name');
+    openSheet('<div class="grab"></div>' +
+      '<div class="sheet-ico" style="background:var(--red-tint);color:var(--red)">' + ic('logout') + '</div>' +
+      '<h2 class="sheet-title">Sair' + (name ? ' de ' + esc(name) : '') + '?</h2>' +
+      '<p class="sheet-sub">Vamos apagar o nome, as respostas do guia e o checklist deste aparelho. A próxima pessoa começa do zero.</p>' +
+      '<div style="height:16px"></div>' +
+      '<button class="btn btn-danger" data-act="signout-confirm">Sim, sair e apagar</button>' +
+      '<button class="btn btn-ghost" data-act="close-sheet">Cancelar</button>');
+  }
+  function signOut(){
+    clearTimers();
+    store.clearAll();
+    state.guide = freshGuide();
+    applyScale(1);
+    closeSheet();
+    $('name-input').value = '';
+    activate('onboard');
+    showToast('Pronto! Seus dados foram apagados. Pode entrar com outro usuário.');
+  }
+  function saveName(){
+    var inp = $('prof-name'); if(!inp){ return; }
+    var v = inp.value.trim();
+    if(v){ store.set('name', v); } else { store.remove('name'); }
+    closeSheet();
+    refreshView();
+    showToast(v ? 'Nome atualizado.' : 'Nome removido.');
+  }
+
+  var SCALES = [{v:1, l:'Normal', s:'16px'}, {v:1.15, l:'Grande', s:'20px'}, {v:1.3, l:'Muito grande', s:'25px'}];
+  function openTextSize(){
+    var cur = parseFloat(store.get('font_scale') || '1');
+    var btns = SCALES.map(function(o){
+      return '<button class="scale-btn' + (o.v === cur ? ' selected' : '') + '" data-act="set-scale" data-arg="' + o.v + '">' +
+        '<span class="sample" style="font-size:' + o.s + '">Aa</span><span class="lab">' + o.l + '</span></button>';
+    }).join('');
+    openSheet('<div class="grab"></div><h2 class="sheet-title">Tamanho do texto</h2><p class="sheet-sub">Escolha o que fica mais confortável para ler.</p><div class="scales">' + btns + '</div>');
+  }
+
+  function openPresencial(){
+    openSheet('<div class="grab"></div><div class="sheet-ico">' + ic('pin') + '</div>' +
+      '<h2 class="sheet-title">Atendimento presencial</h2>' +
+      '<p class="sheet-sub">Fazemos plantões em CRAS, sindicatos e associações parceiras. Os dias e locais são combinados com a nossa equipe, pelo WhatsApp.</p>' +
+      '<div style="height:16px"></div>' +
+      '<button class="btn btn-wa" data-act="wa" data-arg="presencial">' + ic('chat') + 'Combinar pelo WhatsApp</button>');
+  }
+
+  function openBenefit(key){
+    var b = null; BENEFITS.forEach(function(x){ if(x.key === key){ b = x; } });
+    if(!b){ return; }
+    var who = b.who.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('');
+    openSheet('<div class="grab"></div><div class="sheet-ico">' + ic(CAT_ICON[key]) + '</div>' +
+      '<h2 class="sheet-title">' + esc(catOf(key).title) + '</h2>' +
+      '<p class="sheet-sub">' + esc(b.blurb) + '</p>' +
+      '<h3 class="sec sm">Quem costuma ter direito</h3><ul class="bul">' + who + '</ul>' +
+      '<p class="fineprint">Informação geral — não substitui a análise oficial do INSS.</p>' +
+      '<div style="height:12px"></div>' +
+      '<button class="btn btn-primary" data-act="start-benefit" data-arg="' + key + '">Descobrir se é o meu caso</button>' +
+      '<button class="btn btn-ghost" data-act="wa" data-arg="duvida">Tirar dúvida com a equipe</button>');
+  }
+
+  /* ---------------- WhatsApp (contratação só no atendimento humano) ---------------- */
+  var TOPICS = {
+    contratar: 'Quero seguir com a contratação e fazer o contrato pelo atendimento.',
+    duvida: 'Quero tirar uma dúvida sobre o meu caso.',
+    documentos: 'Quero ajuda com a lista de documentos.',
+    presencial: 'Quero agendar um atendimento presencial.',
+    geral: 'Gostaria de falar com um atendente.'
+  };
+  function catsList(){
+    var k = store.get('category');
+    if(k === 'combo'){ return parseJSON(store.get('cats'), []).filter(function(x){ return CATEGORIES[x]; }); }
+    return k && CATEGORIES[k] ? [k] : [];
+  }
+  function catOf(key){
+    if(key !== 'combo'){ return CATEGORIES[key]; }
+    var list = catsList(); if(!list.length){ return null; }
+    var seen = {}, docs = [];
+    list.forEach(function(k){ CATEGORIES[k].docs.forEach(function(d){ if(!seen[d.id]){ seen[d.id] = 1; docs.push(d); } }); });
+    return {title: list.length + ' caminhos possíveis para o seu caso',
+      body: 'Pelas suas respostas, encontramos mais de um direito que pode existir no seu caso. A equipe confirma com você quais fazem sentido.',
+      docs: docs, list: list};
+  }
+  function checklistProgress(key){
+    var cat = catOf(key); if(!cat){ return null; }
+    var saved = parseJSON(store.get('checklist_' + key), {});
+    var done = cat.docs.filter(function(d){ return !!saved[d.id]; }).length;
+    return {done: done, total: cat.docs.length};
+  }
+  function buildMessage(topic){
+    var name = store.get('name'), key = store.get('category');
+    var lines = ['Olá! Vim pelo app Direito Certo.'];
+    if(name){ lines.push('Meu nome é ' + name + '.'); }
+    if(key && catOf(key) && key !== 'generico'){
+      var cl = catsList();
+      lines.push('Meu caso provável: ' + (key === 'combo' ? cl.map(function(k){ return CATEGORIES[k].short || CATEGORIES[k].title; }).join(', ') : catOf(key).title) + '.');
+      var p = checklistProgress(key);
+      if(p && p.done){ lines.push('Já reuni ' + p.done + ' de ' + p.total + ' documentos.'); }
+    }
+    lines.push(TOPICS[topic] || TOPICS.geral);
+    return lines.join('\n');
+  }
+  function copyText(text){
+    try {
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        return navigator.clipboard.writeText(text).then(function(){ return true; }, function(){ return false; });
+      }
+    } catch(e){}
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = document.execCommand('copy'); document.body.removeChild(ta);
+      return Promise.resolve(!!ok);
+    } catch(e2){ return Promise.resolve(false); }
+  }
+  function openWhatsApp(topic){
+    var msg = buildMessage(topic);
+    copyText(msg).then(function(ok){
+      showToast(ok ? 'Abrindo o WhatsApp… A mensagem também foi copiada.' : 'Abrindo o WhatsApp…');
+    });
+    var url = 'https://wa.me/' + WHATSAPP_PHONE + '?text=' + encodeURIComponent(msg);
+    try { window.open(url, '_blank', 'noopener'); } catch(e){}
+  }
+
+  /* ---------------- Navegação ---------------- */
+  var TABS = [
+    {id:'home', label:'Início', icon:'home'},
+    {id:'guide', label:'Meu caso', icon:'compass'},
+    {id:'checklist', label:'Checklist', icon:'checksq'},
+    {id:'whatsapp', label:'WhatsApp', icon:'chat'}
+  ];
+  function buildTabbar(){
+    $('tabbar').innerHTML = TABS.map(function(t){
+      return '<button class="tab" data-tab="' + t.id + '" data-act="go" data-arg="' + t.id + '"><span class="tab-ico">' + ic(t.icon) + '</span><span>' + t.label + '</span></button>';
+    }).join('');
+  }
+
+  function activate(name){
+    state.view = name;
+    Array.prototype.forEach.call(document.querySelectorAll('.view'), function(v){ v.classList.remove('active'); });
+    var el = $('view-' + name);
+    el.classList.add('active');
+    el.classList.remove('view-in'); void el.offsetWidth; el.classList.add('view-in');
+    $('tabbar').classList.toggle('hide', name === 'onboard');
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(t){
+      t.classList.toggle('active', t.getAttribute('data-tab') === name);
+    });
+    if(name === 'home'){ renderHome(); }
+    else if(name === 'checklist'){ renderChecklist(); }
+    else if(name === 'whatsapp'){ renderWhatsApp(); }
+    var sc = el.querySelector('.scroll'); if(sc){ sc.scrollTop = 0; }
+  }
+  function go(name){
+    if(sheetOpen()){ closeSheet(); }
+    if(name === 'guide'){ enterGuide(); } else { activate(name); }
+  }
+  function refreshView(){
+    if(state.view === 'home'){ renderHome(); }
+    else if(state.view === 'checklist'){ renderChecklist(); }
+    else if(state.view === 'whatsapp'){ renderWhatsApp(); }
+  }
+
+  /* ---------------- Home ---------------- */
+  function renderHome(){
+    var v = $('view-home'), name = store.get('name'), key = store.get('category');
+    var cat = key ? catOf(key) : null, prog = key ? checklistProgress(key) : null;
+    var h = '<div class="topbar">' + avatarBtn() + '<div class="tb-spacer"></div>' +
+      '<button class="iconbtn" data-act="textsize" aria-label="Tamanho do texto"><span class="aa">Aa</span></button>' +
+      '<button class="iconbtn" data-act="wa" data-arg="geral" aria-label="Ajuda no WhatsApp">' + ic('help') + '</button></div>';
+    h += '<div class="scroll stagger">';
+    h += '<div class="greet" style="--i:0"><h1>' + (name ? 'Olá, ' + esc(name) : 'Olá!') + '</h1><p>Vamos garantir o que é seu direito.</p></div>';
+
+    if(cat){
+      h += '<div class="hero" style="--i:1"><span class="hero-kicker">SEU CASO PROVÁVEL</span>' +
+        '<span class="hero-title">' + esc(cat.title) + '</span>' +
+        '<div class="hero-actions"><button class="hero-btn" data-act="go" data-arg="checklist">Ver documentos</button>' +
+        '<button class="hero-btn light" data-act="start-guide">Refazer guia</button></div></div>';
+    } else {
+      h += '<button class="hero" style="--i:1" data-act="start-guide"><span class="hero-kicker">COMECE POR AQUI</span>' +
+        '<span class="hero-title">Descobrir meu caso</span>' +
+        '<span class="hero-sub">Responda algumas perguntas rápidas e veja o que pode ser seu.</span>' +
+        '<span class="hero-go">' + ic('arrowR') + '</span></button>';
+    }
+
+    h += '<div class="shortcuts" style="--i:2">' +
+      '<button class="sc" data-act="go" data-arg="guide"><span class="sc-ico">' + ic('compass') + '</span>Meu caso</button>' +
+      '<button class="sc" data-act="go" data-arg="checklist"><span class="sc-ico">' + ic('checksq') + '</span>Documentos</button>' +
+      '<button class="sc wa" data-act="go" data-arg="whatsapp"><span class="sc-ico">' + ic('chat') + '</span>WhatsApp</button>' +
+      '<button class="sc" data-act="wa" data-arg="contratar"><span class="sc-ico">' + ic('pen') + '</span>Contratar</button>' +
+      '<button class="sc" data-act="presencial"><span class="sc-ico">' + ic('pin') + '</span>Presencial</button></div>';
+
+    if(prog){
+      var pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
+      h += '<button class="card progress-card" style="--i:3" data-act="go" data-arg="checklist">' +
+        ring(pct, 64, prog.done + '/' + prog.total) +
+        '<span class="r-main"><span class="r-title" style="display:block">Seus documentos</span>' +
+        '<span class="r-sub" style="display:block">' + prog.done + ' de ' + prog.total + ' reunidos. Toque para continuar.</span></span>' +
+        ic('chevR', 'chev') + '</button>';
+    }
+
+    h += '<div style="--i:4"><h2 class="sec">Descubra mais</h2><div class="carousel">';
+    BENEFITS.forEach(function(b){
+      h += '<button class="bcard" data-act="benefit" data-arg="' + b.key + '"><span class="b-ico">' + ic(CAT_ICON[b.key]) + '</span>' +
+        '<span class="b-title">' + esc(b.short) + '</span><span class="b-sub">' + esc(b.blurb) + '</span>' +
+        '<span class="b-more">Saiba mais ' + ic('arrowR') + '</span></button>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="card contract-card" style="--i:5"><div class="cc-top"><span class="r-ico">' + ic('pen') + '</span>' +
+      '<span class="r-main"><span class="r-title" style="display:block">Quer contratar?</span>' +
+      '<span class="r-sub" style="display:block">O contrato é feito só no atendimento humano, direto pelo WhatsApp.</span></span></div>' +
+      '<button class="btn btn-wa slim" data-act="wa" data-arg="contratar">' + ic('chat') + 'Chamar a equipe</button></div>';
+
+    h += '<div class="foot" style="--i:6"><button class="linkbtn" data-act="signout-ask">' +
+      (name ? 'Não é ' + esc(name) + '? Trocar de usuário' : 'Trocar de usuário') + '</button>' +
+      '<p class="fineprint">O Direito Certo orienta e organiza. Quem decide é o INSS. Seus dados ficam só neste aparelho.</p></div>';
+    h += '</div>';
+
+    v.innerHTML = h;
+    animateRings(v);
+  }
+
+  /* ---------------- Guia (triagem) ---------------- */
+  function clearTimers(){
+    state.guide.timers.forEach(function(t){ clearTimeout(t); });
+    state.guide.timers = [];
+  }
+
+  function enterGuide(){
+    var g = state.guide;
+    activate('guide');
+    if(g.mode === 'question'){ renderQuestion('none'); }
+    else if(g.mode === 'analyzing'){ renderAnalyzing(); }
+    else if(store.get('category')){ g.mode = 'result'; renderResult(false); }
+    else { startGuide(); }
+  }
+
+  function startGuide(opts){
+    var g = state.guide;
+    clearTimers();
+    g.node = (opts && opts.node) || 'start';
+    g.answers = (opts && opts.answers) ? clone(opts.answers) : {};
+    g.trail = (opts && opts.trail) ? opts.trail.slice() : [];
+    g.history = []; g.mode = 'question'; g.lastPct = 0; g.busy = false;
+    if(sheetOpen()){ closeSheet(); }
+    activate('guide');
+    renderQuestion('rise');
+  }
+  function startBenefit(key){
+    var b = null; BENEFITS.forEach(function(x){ if(x.key === key){ b = x; } });
+    startGuide(b && b.start ? b.start : null);
+  }
+
+  function renderQuestion(dir){
+    var g = state.guide, node = TREE[g.node], v = $('view-guide');
+    var pct = node.progress || 10, from = g.lastPct || 0;
+    g.busy = false;
+    var opts = node.options.map(function(o, i){
+      return '<button class="opt" data-act="pick" data-arg="' + i + '">' + (o.icon ? '<span class="o-ico">' + o.icon + '</span>' : '') +
+        '<span class="o-txt">' + o.text + '</span>' + ic('chevR', 'o-chev') + '</button>';
+    }).join('');
+    var cls = dir === 'back' ? 'enter-left' : dir === 'next' ? 'enter-right' : dir === 'rise' ? 'rise' : '';
+    v.innerHTML = '<div class="flow-top"><button class="iconbtn" data-act="g-back" aria-label="Voltar">' + ic('chevL') + '</button>' +
+      '<div class="flow-bar"><i id="g-bar" style="width:' + from + '%"></i></div>' +
+      '<button class="iconbtn" data-act="g-close" aria-label="Fechar o guia">' + ic('x') + '</button></div>' +
+      '<div class="scroll"><div class="' + cls + '"><div class="q-kicker">PERGUNTA ' + (g.history.length + 1) + '</div>' +
+      '<h1 class="q-title">' + node.title + '</h1><p class="q-hint">' + (node.hint || '') + '</p>' + opts + '</div></div>';
+    g.lastPct = pct;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      var b = $('g-bar'); if(b){ b.style.width = pct + '%'; }
+    }); });
+  }
+
+  function pick(idx){
+    var g = state.guide; if(g.busy || g.mode !== 'question'){ return; }
+    var node = TREE[g.node], opt = node.options[idx]; if(!opt){ return; }
+    g.busy = true; buzz(10);
+    var btn = $('view-guide').querySelectorAll('.opt')[idx]; if(btn){ btn.classList.add('selected'); }
+    setTimeout(function(){
+      g.history.push({node: g.node, answers: clone(g.answers)});
+      g.trail.push(opt.tag);
+      if(opt.set){ for(var k in opt.set){ g.answers[k] = opt.set[k]; } }
+      if(opt.result){ finishGuide(opt.result); return; }
+      g.node = opt.next;
+      var n = TREE[g.node];
+      if(n.compute){ finishGuide(n.compute(g.answers)); return; }
+      renderQuestion('next');
+    }, 280);
+  }
   function guideBack(){
-    if(state.guideHistory.length === 0){ return; }
-    state.guideNode = state.guideHistory.pop();
-    renderGuideNode();
+    var g = state.guide;
+    if(g.history.length === 0){ g.mode = 'idle'; go('home'); return; }
+    var h = g.history.pop();
+    g.node = h.node; g.answers = h.answers; g.trail.pop();
+    renderQuestion('back');
   }
 
-  function totalStepsEstimate(){
-    return 4;
-  }
-
-  function renderProgress(stepIndex){
-    var total = totalStepsEstimate();
-    els.progressTrack.innerHTML = "";
-    for(var i=0;i<total;i++){
-      var dot = document.createElement("div");
-      dot.className = "progress-dot" + (i < stepIndex ? " done" : "");
-      els.progressTrack.appendChild(dot);
-    }
-  }
-
-  function renderGuideNode(){
-    var node = TREE[state.guideNode];
-
-    if(node.compute){
-      var cat = node.compute(state.guideAnswers);
-      showGuideResult(cat);
-      return;
-    }
-
-    els.guideBack.style.display = state.guideHistory.length > 0 ? "flex" : "none";
-    renderProgress(state.guideHistory.length);
-
-    var html = '<div class="q-card step-enter">' +
-      '<div class="q-label">' + node.label + '</div>' +
-      '<div class="q-title">' + node.title + '</div>';
-
-    node.options.forEach(function(opt, i){
-      html += '<button class="opt-btn' + (opt.icon ? '' : '') + '" data-idx="' + i + '">' +
-        (opt.icon ? '<span class="opt-icon">' + opt.icon + '</span>' : '') +
-        '<span class="opt-text">' + opt.text + '</span></button>';
+  function finishGuide(catKey){
+    var g = state.guide;
+    g.mode = 'analyzing';
+    var keys = Array.isArray(catKey) ? catKey : [catKey];
+    if(keys.length > 1){ store.set('category', 'combo'); store.set('cats', JSON.stringify(keys)); }
+    else { store.set('category', keys[0]); store.set('cats', JSON.stringify(keys)); }
+    store.set('trail', JSON.stringify(g.trail));
+    renderAnalyzing();
+    var msgs = ['Buscando o caminho mais provável…', 'Separando os seus documentos…'];
+    msgs.forEach(function(m, i){
+      g.timers.push(setTimeout(function(){ var el = $('an-msg'); if(el){ el.textContent = m; } }, 520 * (i + 1)));
     });
-    html += '</div>';
-    els.guideBody.innerHTML = html;
-
-    Array.prototype.forEach.call(els.guideBody.querySelectorAll(".opt-btn"), function(btn){
-      btn.addEventListener("click", function(){
-        var opt = node.options[parseInt(btn.getAttribute("data-idx"), 10)];
-        btn.classList.add("selected");
-        if(opt.set){
-          for(var k in opt.set){ state.guideAnswers[k] = opt.set[k]; }
-        }
-        state.guideHistory.push(state.guideNode);
-        setTimeout(function(){
-          if(opt.result){
-            showGuideResult(opt.result);
-          } else {
-            state.guideNode = opt.next;
-            renderGuideNode();
-          }
-        }, 260);
-      });
-    });
+    g.timers.push(setTimeout(function(){
+      g.mode = 'result';
+      if(state.view === 'guide'){ renderResult(true); }
+    }, 1650));
   }
 
-  function showGuideResult(catKey){
-    var cat = CATEGORIES[catKey] || CATEGORIES.generico;
-    safeSet(LS.category, catKey);
-    renderProgress(totalStepsEstimate());
-    els.guideBack.style.display = "none";
+  function renderAnalyzing(){
+    $('view-guide').innerHTML = '<div class="analyzing"><div class="orb"><span></span><span></span><div class="orb-core">' + ic('shield') + '</div></div>' +
+      '<h2 id="an-msg">Analisando suas respostas…</h2><p>Só um instante.</p>' +
+      '<div class="skel"><i></i><i></i><i></i></div></div>';
+  }
 
-    var iconPath = RESULT_ICONS[catKey] || RESULT_ICONS.generico;
-    var html = '<div class="result-card step-enter">' +
-      '<div class="result-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + iconPath + '</svg></div>' +
-      '<div class="result-label">RESULTADO PROVÁVEL</div>' +
-      '<div class="result-title">' + cat.title + '</div>' +
-      '<div class="result-body">' + cat.body + '</div>' +
-      '<button class="btn-primary" id="btn-ver-checklist">Ver checklist de documentos</button>' +
-      '<button class="btn-ghost" id="btn-gerar-contrato">Quero gerar contrato para me representar</button>' +
-      '<button class="btn-ghost" onclick="DC.goTo(\'whatsapp\')">Falar com um atendente</button>' +
+  function renderResult(celebrate){
+    var key = store.get('category') || 'generico', cat = catOf(key) || CATEGORIES.generico;
+    var g = state.guide, v = $('view-guide');
+    var trail = g.trail && g.trail.length ? g.trail : parseJSON(store.get('trail'), []);
+    var isGen = key === 'generico';
+    var chips = trail.length ? '<div class="chips">' + trail.map(function(t){ return '<span class="chip">' + esc(t) + '</span>'; }).join('') + '</div>' : '';
+
+    var h = '<div class="flow-top"><button class="iconbtn" data-act="go" data-arg="home" aria-label="Voltar ao início">' + ic('chevL') + '</button>' +
+      '<div class="flow-bar"><i style="width:100%"></i></div><button class="iconbtn" data-act="redo" aria-label="Refazer o guia">' + ic('compass') + '</button></div>';
+    h += '<div class="scroll"><div class="res">' +
+      '<div class="res-burst"><svg class="ringsvg" viewBox="0 0 100 100" aria-hidden="true"><circle class="burst-ring" cx="50" cy="50" r="44"/></svg>' +
+      '<div class="burst-core">' + ic(CAT_ICON[key] || 'help') + '</div></div>' +
+      '<div class="res-kicker">' + (isGen ? 'VAMOS CONVERSAR' : 'RESULTADO PROVÁVEL') + '</div>' +
+      '<h1 class="res-title">' + esc(cat.title) + '</h1>' +
+      '<p class="res-body">' + esc(cat.body) + '</p>' + chips +
+      (key === 'combo' ? '<div class="card"><div class="r-title" style="margin-bottom:4px">Caminhos possíveis</div>' + cat.list.map(function(k){ var c = CATEGORIES[k]; return '<div class="row" style="cursor:default"><span class="r-ico">' + ic(CAT_ICON[k]) + '</span><span class="r-main"><span class="r-title" style="display:block">' + esc(c.short || c.title) + '</span><span class="r-sub" style="display:block">' + esc(c.blurb || '') + '</span></span></div>'; }).join('') + '</div>' : '') +
+      '<div class="card"><div class="r-title" style="margin-bottom:4px">O que acontece agora</div>' +
+      '<button class="row" data-act="go" data-arg="checklist"><span class="r-ico">' + ic('checksq') + '</span><span class="r-main"><span class="r-title" style="display:block">Separe seus documentos</span><span class="r-sub" style="display:block">Use o checklist do seu caso</span></span>' + ic('chevR', 'chev') + '</button>' +
+      '<button class="row" data-act="go" data-arg="whatsapp"><span class="r-ico">' + ic('chat') + '</span><span class="r-main"><span class="r-title" style="display:block">Converse com a equipe</span><span class="r-sub" style="display:block">Atendimento humano no WhatsApp</span></span>' + ic('chevR', 'chev') + '</button>' +
+      '<div class="row" style="cursor:default"><span class="r-ico">' + ic('pen') + '</span><span class="r-main"><span class="r-title" style="display:block">Contrato com a equipe</span><span class="r-sub" style="display:block">Feito só no atendimento humano, direto na conversa</span></span></div></div>' +
+      '<p class="fineprint">Isso não substitui a análise oficial do INSS.</p>' +
+      '</div></div>';
+    h += '<div class="sticky-cta">' +
+      (isGen
+        ? '<button class="btn btn-wa" data-act="wa" data-arg="geral">' + ic('chat') + 'Falar com um atendente</button><button class="btn btn-ghost" data-act="go" data-arg="checklist">Ver documentos básicos</button>'
+        : '<button class="btn btn-primary" data-act="go" data-arg="checklist">Ver checklist de documentos</button><button class="btn btn-wa" data-act="wa" data-arg="contratar">' + ic('chat') + 'Quero contratar pelo WhatsApp</button>') +
       '</div>';
-    els.guideBody.innerHTML = html;
-    qs("btn-ver-checklist").addEventListener("click", function(){ goTo("checklist"); });
-    qs("btn-gerar-contrato").addEventListener("click", function(){ startContract(); });
+    v.innerHTML = h;
+    if(celebrate && !isGen){ buzz([12, 40, 12]); setTimeout(confetti, 350); }
   }
 
   /* ---------------- Checklist ---------------- */
-  function getChecklistState(catKey){
-    try {
-      var raw = localStorage.getItem(LS.checklistPrefix + catKey);
-      return raw ? JSON.parse(raw) : {};
-    } catch(e){ return {}; }
-  }
-  function setChecklistState(catKey, data){
-    safeSet(LS.checklistPrefix + catKey, JSON.stringify(data));
+  function getChecklist(key){ return parseJSON(store.get('checklist_' + key), {}); }
+  function setChecklist(key, data){ store.set('checklist_' + key, JSON.stringify(data)); }
+  function ckMessage(done, total){
+    if(done === 0){ return 'Vamos começar! Marque o que você já tem em casa.'; }
+    if(done === total){ return 'Tudo pronto! Agora é só chamar a equipe.'; }
+    if(done / total < .5){ return 'Bom começo! Continue marcando.'; }
+    return 'Quase lá! Faltam poucos documentos.';
   }
 
   function renderChecklist(){
-    var catKey = safeGet(LS.category) || "aposentadoria_urbana";
-    var cat = CATEGORIES[catKey] || CATEGORIES.aposentadoria_urbana;
-    var savedState = getChecklistState(catKey);
+    var v = $('view-checklist'), key = store.get('category');
+    if(!key){
+      v.innerHTML = topbar('Documentos') + '<div class="scroll"><div class="empty rise"><div class="empty-ico">' + ic('checksq') + '</div>' +
+        '<h2>Ainda não sabemos o seu caso</h2><p>Responda ao guia rápido e a gente monta a lista certa de documentos para você.</p>' +
+        '<button class="btn btn-primary" data-act="start-guide">Descobrir meu caso</button></div></div>';
+      return;
+    }
+    var cat = catOf(key), saved = getChecklist(key), total = cat.docs.length;
+    var done = cat.docs.filter(function(d){ return !!saved[d.id]; }).length;
+    var pct = Math.round(done / total * 100);
 
-    els.checklistPill.textContent = cat.title;
-    els.checklistSub.textContent = "Marque o que você já tem em mãos.";
-    els.checklistItems.innerHTML = "";
+    var items = cat.docs.map(function(d){
+      var tip = DOC_TIPS[d.id];
+      return '<div class="ck-item' + (saved[d.id] ? ' checked' : '') + '" data-id="' + d.id + '">' +
+        '<div class="ck-row"><button class="ck-main" data-act="toggle" data-arg="' + d.id + '" role="checkbox" aria-checked="' + (saved[d.id] ? 'true' : 'false') + '">' +
+        '<span class="ck-box">' + ic('check') + '</span><span class="ck-txt"><span class="ck-title">' + esc(d.label) + '</span>' +
+        (d.note ? '<span class="ck-note">' + esc(d.note) + '</span>' : '') + '</span></button>' +
+        (tip ? '<button class="ck-info" data-act="tip" data-arg="' + d.id + '" aria-label="Como conseguir este documento">' + ic('info') + '</button>' : '') + '</div>' +
+        (tip ? '<div class="ck-tip"><div>' + esc(tip) + '</div></div>' : '') + '</div>';
+    }).join('');
 
-    cat.docs.forEach(function(doc){
-      var checked = !!savedState[doc.id];
-      var item = document.createElement("div");
-      item.className = "check-item" + (checked ? " checked" : "");
-      item.setAttribute("role", "checkbox");
-      item.setAttribute("aria-checked", checked ? "true" : "false");
-      item.tabIndex = 0;
-      item.innerHTML = '<div class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-        '<div><div class="check-text">' + doc.label + '</div>' +
-        (doc.note ? '<div class="check-note">' + doc.note + '</div>' : '') +
-        '</div>';
-      function toggle(){
-        var isChecked = item.classList.toggle("checked");
-        item.setAttribute("aria-checked", isChecked ? "true" : "false");
-        savedState[doc.id] = isChecked;
-        setChecklistState(catKey, savedState);
-        updateChecklistProgress(cat, savedState);
-      }
-      item.addEventListener("click", toggle);
-      item.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggle(); } });
-      els.checklistItems.appendChild(item);
-    });
-
-    updateChecklistProgress(cat, savedState);
+    v.innerHTML = topbar('Documentos') +
+      '<div class="scroll stagger">' +
+      '<div style="--i:0"><span class="pill">' + esc(cat.title) + '</span></div>' +
+      '<div class="ck-hero" style="--i:1">' + ring(pct, 76, '<span id="ck-pct">' + pct + '%</span>') +
+      '<div><h2 id="ck-count">' + done + ' de ' + total + ' reunidos</h2><p id="ck-msg">' + ckMessage(done, total) + '</p></div></div>' +
+      '<div class="card" style="--i:2;padding:4px 16px">' + items + '</div>' +
+      '<p class="fineprint" style="--i:3">Toque no documento para marcar. Toque no <b>i</b> para ver como conseguir.</p></div>' +
+      '<div class="sticky-cta"><button class="btn btn-wa" data-act="wa" data-arg="contratar">' + ic('chat') + 'Quero contratar pelo WhatsApp</button>' +
+      '<button class="btn btn-ghost" data-act="wa" data-arg="documentos">Faltou algum documento? Peça ajuda</button></div>';
+    animateRings(v);
   }
 
-  function updateChecklistProgress(cat, savedState){
-    var total = cat.docs.length;
-    var done = cat.docs.filter(function(d){ return !!savedState[d.id]; }).length;
-    var pct = total ? Math.round(done/total*100) : 0;
-    els.checklistBar.style.width = pct + "%";
-    els.checklistCaption.textContent = done + " de " + total + " documentos reunidos";
+  function toggleDoc(id){
+    var key = store.get('category'), cat = catOf(key); if(!cat){ return; }
+    var saved = getChecklist(key), total = cat.docs.length;
+    var wasAll = cat.docs.every(function(d){ return !!saved[d.id]; });
+    saved[id] = !saved[id]; setChecklist(key, saved); buzz(8);
+    var item = $('view-checklist').querySelector('.ck-item[data-id="' + id + '"]');
+    if(item){
+      item.classList.toggle('checked', !!saved[id]);
+      var b = item.querySelector('.ck-main'); if(b){ b.setAttribute('aria-checked', saved[id] ? 'true' : 'false'); }
+    }
+    var done = cat.docs.filter(function(d){ return !!saved[d.id]; }).length;
+    var pct = Math.round(done / total * 100);
+    var fg = $('view-checklist').querySelector('.ring-fg');
+    if(fg){ var c = parseFloat(fg.getAttribute('data-c')); fg.style.strokeDashoffset = (c * (1 - pct / 100)).toFixed(1); }
+    var e1 = $('ck-pct'), e2 = $('ck-count'), e3 = $('ck-msg');
+    if(e1){ e1.textContent = pct + '%'; }
+    if(e2){ e2.textContent = done + ' de ' + total + ' reunidos'; }
+    if(e3){ e3.textContent = ckMessage(done, total); }
+    if(done === total && !wasAll){ confetti(); buzz([12, 40, 12]); showToast('Tudo pronto! Agora é só chamar a equipe.'); }
+  }
+  function toggleTip(id){
+    var item = $('view-checklist').querySelector('.ck-item[data-id="' + id + '"]');
+    if(item){ item.classList.toggle('open'); }
   }
 
-  /* ---------------- WhatsApp ---------------- */
-  function currentCategory(){
-    var catKey = safeGet(LS.category);
-    return catKey ? CATEGORIES[catKey] : null;
+  /* ---------------- Aba WhatsApp ---------------- */
+  function renderWhatsApp(){
+    var v = $('view-whatsapp');
+    v.innerHTML = topbar('Atendimento') + '<div class="scroll stagger">' +
+      '<div class="card wa-hero" style="--i:0"><div class="wa-badge">' + ic('chat') + '</div>' +
+      '<h2>Fale com a nossa equipe</h2>' +
+      '<p>Atendimento humano no WhatsApp para tirar dúvidas, confirmar o seu caso e fazer o seu contrato.</p>' +
+      '<button class="btn btn-wa" data-act="wa" data-arg="geral">' + ic('chat') + 'Abrir WhatsApp</button>' +
+      '<p class="wa-num">Se não abrir, chame direto no <b>' + WHATSAPP_PHONE_FMT + '</b></p></div>' +
+      '<h2 class="sec" style="--i:1">Como funciona a contratação</h2>' +
+      '<div class="card steps" style="--i:2">' +
+      '<div class="step"><span class="step-n">1</span><span class="r-main"><span class="r-title" style="display:block">Você chama no WhatsApp</span><span class="r-sub" style="display:block">Ao tocar no botão, copiamos uma mensagem com o seu caso. É só colar na conversa.</span></span></div>' +
+      '<div class="step"><span class="step-n">2</span><span class="r-main"><span class="r-title" style="display:block">A equipe confirma seu caso</span><span class="r-sub" style="display:block">Um atendente conversa com você e confere os documentos.</span></span></div>' +
+      '<div class="step"><span class="step-n">3</span><span class="r-main"><span class="r-title" style="display:block">Contrato no atendimento</span><span class="r-sub" style="display:block">O contrato é feito só pelo atendimento humano, direto na conversa.</span></span></div></div>' +
+      '<h2 class="sec" style="--i:3">Assuntos rápidos</h2>' +
+      '<div class="card" style="--i:4;padding:4px 18px">' +
+      '<button class="row" data-act="wa" data-arg="contratar"><span class="r-ico">' + ic('pen') + '</span><span class="r-main"><span class="r-title" style="display:block">Quero contratar</span><span class="r-sub" style="display:block">Fazer o contrato com a equipe</span></span>' + ic('chevR', 'chev') + '</button>' +
+      '<button class="row" data-act="wa" data-arg="duvida"><span class="r-ico">' + ic('help') + '</span><span class="r-main"><span class="r-title" style="display:block">Tirar uma dúvida</span><span class="r-sub" style="display:block">Perguntar sobre o seu caso</span></span>' + ic('chevR', 'chev') + '</button>' +
+      '<button class="row" data-act="wa" data-arg="documentos"><span class="r-ico">' + ic('file') + '</span><span class="r-main"><span class="r-title" style="display:block">Ajuda com documentos</span><span class="r-sub" style="display:block">Enviar ou conferir a lista</span></span>' + ic('chevR', 'chev') + '</button>' +
+      '<button class="row" data-act="presencial"><span class="r-ico">' + ic('pin') + '</span><span class="r-main"><span class="r-title" style="display:block">Atendimento presencial</span><span class="r-sub" style="display:block">CRAS, sindicatos e parceiros</span></span>' + ic('chevR', 'chev') + '</button></div>' +
+      '<p class="fineprint" style="--i:5">Nada é assinado dentro do app. O contrato é feito apenas pelo atendimento humano.</p></div>';
   }
 
-  function openWhatsApp(){
-    var cat = currentCategory();
-    var msg = "Olá! Estou usando o app Direito Certo" + (cat ? (" e meu caso provável é: " + cat.title) : "") + ".";
-    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
-    window.open(url, "_blank", "noopener");
-  }
-
-  /* ---------------- Contrato: dados básicos, caso, documentos, revisão e assinatura ---------------- */
-  var CONTRACT_TOTAL_STEPS = 4;
-
-  function startContract(){
-    state.contract.step = 0;
-    goTo("contract");
-    renderContractStep();
-  }
-
-  function cancelContract(){
-    goTo(safeGet(LS.category) ? "checklist" : "home");
-  }
-
-  function renderContractProgress(){
-    els.contractProgress.innerHTML = "";
-    for(var i=0;i<CONTRACT_TOTAL_STEPS;i++){
-      var dot = document.createElement("div");
-      dot.className = "progress-dot" + (i < state.contract.step ? " done" : "");
-      els.contractProgress.appendChild(dot);
+  /* ---------------- Eventos ---------------- */
+  function handle(act, arg){
+    switch(act){
+      case 'go': go(arg); break;
+      case 'profile': openProfile(); break;
+      case 'textsize': openTextSize(); break;
+      case 'wa': if(sheetOpen()){ closeSheet(); } openWhatsApp(arg || 'geral'); break;
+      case 'benefit': openBenefit(arg); break;
+      case 'start-guide': startGuide(); break;
+      case 'start-benefit': startBenefit(arg); break;
+      case 'redo': startGuide(); break;
+      case 'pick': pick(parseInt(arg, 10)); break;
+      case 'g-back': guideBack(); break;
+      case 'g-close': state.guide.mode = 'idle'; clearTimers(); go('home'); break;
+      case 'toggle': toggleDoc(arg); break;
+      case 'tip': toggleTip(arg); break;
+      case 'close-sheet': closeSheet(); break;
+      case 'presencial': openPresencial(); break;
+      case 'save-name': saveName(); break;
+      case 'signout-ask': askSignOut(); break;
+      case 'signout-confirm': signOut(); break;
+      case 'set-scale':
+        store.set('font_scale', arg); applyScale(parseFloat(arg)); openTextSize(); break;
     }
   }
 
-  function contractGoStep(delta){
-    state.contract.step += delta;
-    renderContractStep();
-  }
+  function init(){
+    store.remove('contract_draft'); /* versão antiga guardava dados de contrato no aparelho */
+    applyScale(parseFloat(store.get('font_scale') || '1'));
+    buildTabbar();
+    initSheetDrag();
 
-  function renderContractStep(){
-    renderContractProgress();
-    var d = state.contract.data;
-    var step = state.contract.step;
-
-    if(step === 0){ renderContractPessoal(d); return; }
-    if(step === 1){ renderContractCaso(d); return; }
-    if(step === 2){ renderContractDocumentos(d); return; }
-    if(step === 3){ renderContractRevisao(d); return; }
-    renderContractSucesso(d);
-  }
-
-  function renderContractPessoal(d){
-    els.contractBody.innerHTML =
-      '<p class="page-sub">Passo 1 de 4 — seus dados básicos.</p>' +
-      '<div class="q-card step-enter">' +
-        '<div class="form-field"><label class="form-label" for="c-nome">Nome completo</label>' +
-          '<input class="form-input" id="c-nome" type="text" placeholder="Seu nome completo" value="' + esc(d.nome) + '"></div>' +
-        '<div class="form-field"><label class="form-label" for="c-cpf">CPF</label>' +
-          '<input class="form-input" id="c-cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" value="' + esc(d.cpf) + '"></div>' +
-        '<div class="form-field"><label class="form-label" for="c-tel">Telefone / WhatsApp</label>' +
-          '<input class="form-input" id="c-tel" type="tel" placeholder="(00) 00000-0000" value="' + esc(d.telefone) + '"></div>' +
-        '<div class="form-field"><label class="form-label" for="c-nasc">Data de nascimento (opcional)</label>' +
-          '<input class="form-input" id="c-nasc" type="date" value="' + esc(d.nascimento) + '"></div>' +
-      '</div>' +
-      '<button class="btn-primary" id="c-continuar">Continuar</button>';
-
-    qs("c-continuar").addEventListener("click", function(){
-      d.nome = qs("c-nome").value.trim();
-      d.cpf = qs("c-cpf").value.trim();
-      d.telefone = qs("c-tel").value.trim();
-      d.nascimento = qs("c-nasc").value;
-      if(!d.nome || !d.telefone){
-        showToast("Preencha ao menos nome e telefone para continuar.");
-        return;
-      }
-      contractGoStep(1);
+    $('app-screen').addEventListener('click', function(e){
+      var t = e.target.closest ? e.target.closest('[data-act]') : null;
+      if(!t){ return; }
+      handle(t.getAttribute('data-act'), t.getAttribute('data-arg'));
     });
-  }
-
-  function renderContractCaso(d){
-    var cat = currentCategory();
-    els.contractBody.innerHTML =
-      '<p class="page-sub">Passo 2 de 4 — sobre o seu caso.</p>' +
-      '<div class="q-card step-enter">' +
-        (cat
-          ? '<div class="category-pill">' + esc(cat.title) + '</div>'
-          : '<div class="form-hint" style="margin-bottom:10px;">Você ainda não fez o guia de triagem — sem problema, nossa equipe identifica com você.</div>') +
-        '<div class="form-field"><label class="form-label" for="c-data-ocorrido">Data aproximada do ocorrido (opcional)</label>' +
-          '<input class="form-input" id="c-data-ocorrido" type="date" value="' + esc(d.dataOcorrido) + '"></div>' +
-        '<div class="form-field"><label class="form-label" for="c-resumo">Conte rapidamente o que aconteceu (opcional)</label>' +
-          '<textarea class="form-textarea" id="c-resumo" placeholder="Ex: sofri um acidente de trabalho em...">' + esc(d.resumo) + '</textarea></div>' +
-      '</div>' +
-      '<button class="back-link" style="padding-left:0;" id="c-voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Voltar</button>' +
-      '<button class="btn-primary" id="c-continuar">Continuar</button>';
-
-    qs("c-voltar").addEventListener("click", function(){ contractGoStep(-1); });
-    qs("c-continuar").addEventListener("click", function(){
-      d.dataOcorrido = qs("c-data-ocorrido").value;
-      d.resumo = qs("c-resumo").value.trim();
-      contractGoStep(1);
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && sheetOpen()){ closeSheet(); }
     });
-  }
 
-  function renderContractDocumentos(d){
-    els.contractBody.innerHTML =
-      '<p class="page-sub">Passo 3 de 4 — seus documentos.</p>' +
-      '<button class="doc-choice-btn' + (d.docModo === "agora" ? " selected" : "") + '" id="c-doc-agora">' +
-        '<div class="doc-choice-title">Enviar meus documentos agora</div>' +
-        '<div class="doc-choice-sub">Escolha os arquivos do seu aparelho</div></button>' +
-      '<button class="doc-choice-btn' + (d.docModo === "depois" ? " selected" : "") + '" id="c-doc-depois">' +
-        '<div class="doc-choice-title">Prefiro enviar depois pelo WhatsApp</div>' +
-        '<div class="doc-choice-sub">A equipe te ajuda a reunir tudo com calma</div></button>' +
-      '<div id="c-file-zone" style="display:' + (d.docModo === "agora" ? "block" : "none") + ';">' +
-        '<label class="file-input-btn" for="c-file-input">' +
-          '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' +
-          'Escolher arquivos</label>' +
-        '<input type="file" id="c-file-input" multiple style="display:none;">' +
-        '<div class="file-list" id="c-file-list"></div>' +
-        '<div class="form-hint">Esses arquivos ficam só no seu aparelho — no próximo passo você os anexa direto na conversa do WhatsApp.</div>' +
-      '</div>' +
-      '<button class="back-link" style="padding-left:0; margin-top:10px;" id="c-voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Voltar</button>' +
-      '<button class="btn-primary" id="c-continuar">Continuar</button>';
-
-    function renderFileList(){
-      var list = qs("c-file-list");
-      list.innerHTML = "";
-      d.arquivos.forEach(function(name){
-        var chip = document.createElement("div");
-        chip.className = "file-chip";
-        chip.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>' + esc(name) + '</span>';
-        list.appendChild(chip);
-      });
+    var nameInput = $('name-input');
+    function start(){
+      var n = nameInput.value.trim();
+      if(n){ store.set('name', n); }
+      store.set('seen_onboarding', '1');
+      activate('home');
     }
-    renderFileList();
+    $('btn-comecar').addEventListener('click', start);
+    nameInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ start(); } });
 
-    qs("c-doc-agora").addEventListener("click", function(){
-      d.docModo = "agora";
-      renderContractDocumentos(d);
-    });
-    qs("c-doc-depois").addEventListener("click", function(){
-      d.docModo = "depois";
-      d.arquivos = [];
-      renderContractDocumentos(d);
-    });
-    var fileInput = qs("c-file-input");
-    if(fileInput){
-      fileInput.addEventListener("change", function(e){
-        var names = Array.prototype.map.call(e.target.files, function(f){ return f.name; });
-        d.arquivos = names;
-        renderFileList();
-      });
-    }
-    qs("c-voltar").addEventListener("click", function(){ contractGoStep(-1); });
-    qs("c-continuar").addEventListener("click", function(){
-      if(!d.docModo){
-        showToast("Escolha uma das opções de documentos para continuar.");
-        return;
-      }
-      contractGoStep(1);
-    });
+    function tickClock(){ var d = new Date(), m = d.getMinutes(); $('clock').textContent = d.getHours() + ':' + (m < 10 ? '0' + m : m); }
+    tickClock(); setInterval(tickClock, 30000);
+
+    activate(store.get('seen_onboarding') === '1' ? 'home' : 'onboard');
   }
 
-  var sigCanvas, sigCtx, sigDrawing = false;
-
-  function renderContractRevisao(d){
-    var cat = currentCategory();
-    els.contractBody.innerHTML =
-      '<p class="page-sub">Passo 4 de 4 — revise e assine.</p>' +
-      '<div class="review-card step-enter">' +
-        '<div class="review-row"><span class="review-label">Nome</span><span class="review-value">' + esc(d.nome) + '</span></div>' +
-        '<div class="review-row"><span class="review-label">CPF</span><span class="review-value">' + esc(d.cpf || "—") + '</span></div>' +
-        '<div class="review-row"><span class="review-label">Telefone</span><span class="review-value">' + esc(d.telefone) + '</span></div>' +
-        '<div class="review-row"><span class="review-label">Caso</span><span class="review-value">' + esc(cat ? cat.title : "A definir com a equipe") + '</span></div>' +
-        '<div class="review-row"><span class="review-label">Documentos</span><span class="review-value">' + (d.docModo === "agora" ? (d.arquivos.length + " arquivo(s) selecionado(s)") : "Enviarei pelo WhatsApp") + '</span></div>' +
-      '</div>' +
-      '<div class="contract-text">' +
-        '<p><strong>Procuração e autorização de representação — Direito Certo</strong></p>' +
-        '<p>Pelo presente instrumento, o(a) requerente acima identificado(a) autoriza a equipe do Direito Certo / ReVive Assessoria a analisar seu caso previdenciário, reunir a documentação necessária e representá-lo(a) junto ao INSS e órgãos correlatos, conforme os termos que serão confirmados no atendimento humano.</p>' +
-        '<p>Esta assinatura eletrônica é um registro de intenção coletado neste protótipo. A formalização definitiva do contrato acontece com a equipe, pelo WhatsApp ou presencialmente.</p>' +
-      '</div>' +
-      '<div class="agree-row" id="c-agree" role="checkbox" aria-checked="' + (d.concordo ? "true" : "false") + '" tabindex="0">' +
-        '<div class="agree-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-        '<div class="agree-text">Li e estou de acordo com os termos acima.</div>' +
-      '</div>' +
-      '<div class="sig-label-row"><label class="form-label" style="margin:0;">Assine com o dedo ou o mouse</label><button class="sig-clear" id="c-sig-clear">Limpar</button></div>' +
-      '<div class="sig-wrap"><canvas id="c-sig-canvas"></canvas></div>' +
-      '<button class="back-link" style="padding-left:0; margin-top:10px;" id="c-voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Voltar</button>' +
-      '<button class="btn-primary" id="c-assinar">Assinar e enviar</button>';
-
-    var agreeRow = qs("c-agree");
-    function toggleAgree(){
-      d.concordo = !d.concordo;
-      agreeRow.classList.toggle("checked", d.concordo);
-      agreeRow.setAttribute("aria-checked", d.concordo ? "true" : "false");
-    }
-    if(d.concordo){ agreeRow.classList.add("checked"); }
-    agreeRow.addEventListener("click", toggleAgree);
-    agreeRow.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggleAgree(); } });
-
-    setupSignaturePad();
-    qs("c-sig-clear").addEventListener("click", clearSignature);
-    qs("c-voltar").addEventListener("click", function(){ contractGoStep(-1); });
-    qs("c-assinar").addEventListener("click", function(){
-      if(!d.concordo){ showToast("Marque que você concorda com os termos."); return; }
-      if(!state.contract.sigHasStroke){ showToast("Falta assinar no campo acima."); return; }
-      contractGoStep(1);
-    });
-  }
-
-  function setupSignaturePad(){
-    sigCanvas = qs("c-sig-canvas");
-    state.contract.sigHasStroke = false;
-    var wrap = sigCanvas.parentElement;
-    function resize(){
-      var rect = wrap.getBoundingClientRect();
-      var ratio = window.devicePixelRatio || 1;
-      sigCanvas.width = rect.width * ratio;
-      sigCanvas.height = 120 * ratio;
-      sigCtx = sigCanvas.getContext("2d");
-      sigCtx.scale(ratio, ratio);
-      sigCtx.lineWidth = 2.4;
-      sigCtx.lineCap = "round";
-      sigCtx.strokeStyle = "#1F2A44";
-    }
-    resize();
-
-    function pos(e){
-      var rect = sigCanvas.getBoundingClientRect();
-      var p = e.touches ? e.touches[0] : e;
-      return { x: p.clientX - rect.left, y: p.clientY - rect.top };
-    }
-    function start(e){
-      sigDrawing = true;
-      state.contract.sigHasStroke = true;
-      var p = pos(e);
-      sigCtx.beginPath();
-      sigCtx.moveTo(p.x, p.y);
-      e.preventDefault();
-    }
-    function move(e){
-      if(!sigDrawing){ return; }
-      var p = pos(e);
-      sigCtx.lineTo(p.x, p.y);
-      sigCtx.stroke();
-      e.preventDefault();
-    }
-    function end(){ sigDrawing = false; }
-
-    sigCanvas.addEventListener("mousedown", start);
-    sigCanvas.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", end);
-    sigCanvas.addEventListener("touchstart", start, {passive:false});
-    sigCanvas.addEventListener("touchmove", move, {passive:false});
-    sigCanvas.addEventListener("touchend", end);
-  }
-
-  function clearSignature(){
-    if(!sigCtx){ return; }
-    sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-    state.contract.sigHasStroke = false;
-  }
-
-  function generateProtocol(){
-    var n = Math.floor(100000 + Math.random()*899999);
-    return "DC-" + n;
-  }
-
-  function renderContractSucesso(d){
-    var protocol = generateProtocol();
-    safeSet(LS.contractDraft, JSON.stringify({ data:d, protocol: protocol, quando: new Date().toISOString() }));
-
-    els.contractBody.innerHTML =
-      '<div class="success-wrap step-enter">' +
-        '<div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-        '<h2>Deu certo! Contrato assinado.</h2>' +
-        '<p>Nossa equipe vai analisar seu caso e entrar em contato pelo WhatsApp em breve.</p>' +
-        '<div class="protocol-badge">Protocolo ' + protocol + '</div>' +
-        '<div class="success-actions">' +
-          '<button class="btn-primary" id="c-abrir-whatsapp">Abrir WhatsApp com meus dados</button>' +
-          '<button class="btn-ghost" id="c-voltar-inicio">Voltar ao início</button>' +
-        '</div>' +
-      '</div>';
-
-    qs("c-abrir-whatsapp").addEventListener("click", function(){
-      openContractWhatsApp(d, protocol);
-    });
-    qs("c-voltar-inicio").addEventListener("click", function(){
-      state.contract = { step:0, data:{ nome:"", cpf:"", telefone:"", nascimento:"", dataOcorrido:"", resumo:"", docModo:"", arquivos:[], concordo:false }, sigHasStroke:false };
-      goTo("home");
-    });
-  }
-
-  function openContractWhatsApp(d, protocol){
-    var cat = currentCategory();
-    var lines = [
-      "Olá! Assinei o contrato de representação pelo app Direito Certo.",
-      "Protocolo: " + protocol,
-      "Nome: " + d.nome,
-      d.cpf ? ("CPF: " + d.cpf) : null,
-      "Telefone: " + d.telefone,
-      cat ? ("Caso provável: " + cat.title) : null,
-      d.dataOcorrido ? ("Data do ocorrido: " + d.dataOcorrido) : null,
-      d.resumo ? ("Resumo: " + d.resumo) : null,
-      d.docModo === "agora" ? ("Vou anexar aqui " + d.arquivos.length + " documento(s).") : "Vou enviar meus documentos nesta conversa."
-    ].filter(Boolean);
-    var msg = lines.join("\n");
-    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
-    window.open(url, "_blank", "noopener");
-  }
-
-  /* ---------------- expose API used by inline handlers ---------------- */
-  window.DC = {
-    goTo: goTo,
-    startGuide: startGuide,
-    guideBack: guideBack,
-    restartFromChecklist: restartFromChecklist,
-    showToast: showToast,
-    changeFontScale: changeFontScale,
-    startContract: startContract,
-    cancelContract: cancelContract
-  };
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
-
-  try{
-    if(window.claude && window.claude.hot){
-      window.claude.hot.snapshot(function(){ return {}; });
-    }
-  } catch(e){}
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
 })();
 </script>
-
-</body>
-</html>
+</body></html>
